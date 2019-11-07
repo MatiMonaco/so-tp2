@@ -6,6 +6,7 @@
 #include "idtLoader.h"
 #include <kbDriver.h>
 #include <video_vm.h>
+#include <screenDriver.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -88,7 +89,7 @@ int main()
 	
 	init_VM_Driver();
 	pintarPantalla();
-	
+	drawCharAt('q',0x000000,0xFFFFFF);
 	/*
 	load_idt();
 	ncPrint("[Kernel Main]");
