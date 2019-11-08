@@ -89,7 +89,7 @@ int main()
 	
 	init_VM_Driver();
 	pintarPantalla();
-	drawCharAt('q',0x000000,0xFFFFFF);
+	drawChar('q',0x000000,0xFFFFFF);
 	/*
 	load_idt();
 	ncPrint("[Kernel Main]");
