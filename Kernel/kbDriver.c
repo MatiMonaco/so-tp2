@@ -1,9 +1,9 @@
 #include <kbDriver.h>
 #include <stdint.h>
 
-static isPressed(uint8_t scanCode);
-static addKeyToBuffer(char ascii);
-static checkCapslock(char ascii);
+static int isPressed(uint8_t scanCode);
+static void addKeyToBuffer(char ascii);
+static void checkCapslock(char ascii);
 
 char buffer[BUFFER_SIZE] = {0};
 
@@ -62,7 +62,7 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
 			addKeyToBuffer(ascii); 
 	}
 
-	static checkCapslock(char ascii){
+	static void  checkCapslock(char ascii){
 
 		if(CAPSLOCK_ON){
 			char dif = 'a' - 'A';
