@@ -19,7 +19,7 @@ void _irq05Handler(void);
 
 void _exception0Handler(void);
 
-void _int80Handler(void);
+void _syscallHandler(void);
 
 void _cli(void);
 
