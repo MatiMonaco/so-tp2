@@ -1,6 +1,5 @@
 #include <time.h>
 #include <stdint.h>
-#include <naiveconsole.h>
 #include <kbDriver.h>
 
 static void int_20();
@@ -13,7 +12,7 @@ void irqDispatcher(uint64_t irq) {
 }
 
 void int_21(){
-	fillBuffer();
+	keyboardHandler();
 }
 
 void int_20() {

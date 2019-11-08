@@ -12,14 +12,13 @@ GLOBAL _irq02Handler
 GLOBAL _irq03Handler
 GLOBAL _irq04Handler
 GLOBAL _irq05Handler
-
 GLOBAL _exception0Handler
 
-GLOBAL _int80Handler
+GLOBAL _syscallHandler
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
-EXTERN int80Dispatcher
+EXTERN syscallDispatcher
 
 SECTION .text
 
@@ -73,11 +72,11 @@ SECTION .text
 	iretq
 %endmacro
 
-%macro int80Handler 1
+%macro syscallHandler 1
 	pushState
 
 	mov rdi, %1
-	call int80Dispatcher
+	call syscallDispatcher
 
 	popState
 	iretq
@@ -155,8 +154,8 @@ _exception0Handler:
 	exceptionHandler 0
 
 ; Int 80
-_int80Handler:
-	int80Handler rdi
+_syscallHandler:
+	syscallHandler rdi
 
 haltcpu:
 	cli
