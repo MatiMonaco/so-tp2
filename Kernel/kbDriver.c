@@ -32,7 +32,7 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
 
 	void keyboardHandler(){
 	
-		uint8_t scancode = getKey();
+		uint8_t scancode = getKeyScancode();
 		char ascii;
 		if(isPressed(scancode)){
 			switch(scancode){
@@ -45,16 +45,16 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
 					break;
 				default:
 					if(SHIFT_ON){
-						ascii = keysWithShift[scanCode];
+						ascii = keysWithShift[scancode];
 			
 					} else {
-						ascii = keys[scanCode];
+						ascii = keys[scancode];
 						
 					}
 					break;
 				
 			}
-		}else if (scanCode == LEFT_SHIFT_RELEASE || scanCode == RIGHT_SHIFT_RELEASE){
+		}else if (scancode == LEFT_SHIFT_RELEASE || scancode == RIGHT_SHIFT_RELEASE){
 					SHIFT_ON = 0;
 					return;
 		}
@@ -76,7 +76,7 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
 		
 	}
 
-	static addKeyToBuffer(char ascii){
+	static void addKeyToBuffer(char ascii){
 		buffer[writeIndex++] = ascii;
 		if(writeIndex > BUFFER_SIZE){
 			writeIndex = 0;
@@ -96,8 +96,8 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
 	}
 
 	
-	static isPressed(uint8_t scanCode){
-		return !(scancode & 0x80h);
+	static int isPressed(uint8_t scancode){
+		return !(scancode & 0x80);
 	}
 	
 	int getKeyScancode(){
