@@ -80,7 +80,7 @@ unsigned int getScreenWidth(){
 	return SCREEN_WIDTH;
 }
 
-void drawChar(int x, int y, char character, int fontColor, int backgroundColor){
+void drawCharAt(int x, int y, char character, int fontColor, int backgroundColor){
 	int aux_x = x;
 	int aux_y = y;
 	char bitIsPresent;

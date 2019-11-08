@@ -1,1 +1,1 @@
-void drawCharAt(char character,int fontColor, int backgroundColor);
+void drawChar(char character,int fontColor, int backgroundColor);

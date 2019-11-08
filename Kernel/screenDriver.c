@@ -5,7 +5,7 @@ static int y = 0;
 
 static void scrollDown();
 
-void drawCharAt(char character, int fontColor, int backgroundColor){
+void drawChar(char character, int fontColor, int backgroundColor){
     if(x == getScreenWidth()){
         if(y == getScreenHeight()){
             scrollDown();
@@ -15,7 +15,7 @@ void drawCharAt(char character, int fontColor, int backgroundColor){
             y++;
         }
     }
-    drawChar(x,y,character,fontColor,backgroundColor);
+    drawCharAt(x,y,character,fontColor,backgroundColor);
 }
 
 void scrollDown(){
