@@ -47,17 +47,3 @@ int getKey(){
     return kbFlag();
 }
 
-int fillBuffer(){
-    int teclahex=getKey();
-	int teclahexant = -1;
-	if(teclahex & 0x80){
-
-	}
-	else{
-		if(pos >= BUFFER_SIZE){
-			pos = 0;
-		}
-		buffer[pos++] = keyboard[teclahex];
-	}
-    return 0;
-}
