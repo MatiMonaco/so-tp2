@@ -42,7 +42,7 @@ static unsigned char keyboard[128] =
     0,	/* F12 Key */
     0,	/* All other keys are undefined */
 };
-
+//adsssssssssssssssssssssssssssss
 int getKey(){
     return kbFlag();
 }
