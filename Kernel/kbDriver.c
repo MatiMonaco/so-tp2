@@ -10,7 +10,7 @@ char buffer[BUFFER_SIZE] = {0};
 uint8_t readIndex = 0;
 uint8_t writeIndex = 0;
 uint8_t SHIFT_ON = 0;
-uint7_t CAPSLOCK_ON = 0;
+uint8_t CAPSLOCK_ON = 0;
 
 
 
