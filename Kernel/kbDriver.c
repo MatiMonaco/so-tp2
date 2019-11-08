@@ -3,7 +3,7 @@
 
 static isPressed(uint8_t scanCode);
 static addKeyToBuffer(char ascii);
-
+static checkCapslock(char ascii);
 
 char buffer[BUFFER_SIZE] = {0};
 
@@ -30,35 +30,52 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
  CAPSLOCK,F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, NUM_LOCK,SCROLL_LOCK,HOME, UP, REPAG, '-', LEFT,
  0, RIGHT, '+', END, DOWN,AVPAG, INSERT, SUPR, 0, 0, '>', F11, F12 };
 
-void keyboardHandler(){
+	void keyboardHandler(){
 	
-	uint8_t scancode = getKey();
-	char ascii;
-	if(isPressed(scancode)){
-		switch(scancode){
-			case LEFT_SHIFT_PRESS:
-			case RIGHT_SHIFT_PRESS:
-				SHIFT_ON =  1;
-				break;
-			case CAPSLOCK_PRESS:
-				CAPSLOCK_ON = !CAPSLOCK_ON;
-				break;
-			default:
-				if(SHIFT_ON){
-					ascii = keysWithShift[scanCode];
+		uint8_t scancode = getKey();
+		char ascii;
+		if(isPressed(scancode)){
+			switch(scancode){
+				case LEFT_SHIFT_PRESS:
+				case RIGHT_SHIFT_PRESS:
+					SHIFT_ON =  1;
+					break;
+				case CAPSLOCK_PRESS:
+					CAPSLOCK_ON = !CAPSLOCK_ON;
+					break;
+				default:
+					if(SHIFT_ON){
+						ascii = keysWithShift[scanCode];
 			
-				} else {
-					ascii = keys[scanCode];
-				}
-				break;
+					} else {
+						ascii = keys[scanCode];
+						
+					}
+					break;
 				
+			}
+		}else if (scanCode == LEFT_SHIFT_RELEASE || scanCode == RIGHT_SHIFT_RELEASE){
+					SHIFT_ON = 0;
+					return;
 		}
-	}else if (scanCode == LEFT_SHIFT_RELEASE || scanCode == RIGHT_SHIFT_RELEASE){
-                SHIFT_ON = 0;
-				return;
+			checkCapslock(ascii);
+			addKeyToBuffer(ascii); 
 	}
-        addKeyToBuffer(ascii); 
-}
+
+	static checkCapslock(char ascii){
+
+		if(CAPSLOCK_ON){
+			char dif = 'a' - 'A';
+			if(ascii >= 'A' && ascii<='Z'){
+				ascii += dif;
+			}else if(ascii >='a' && ascii <= 'z'){
+				ascii -= dif;
+			}
+		}	
+
+		
+	}
+
 	static addKeyToBuffer(char ascii){
 		buffer[writeIndex++] = ascii;
 		if(writeIndex > BUFFER_SIZE){
