@@ -10,3 +10,10 @@ callSyscall:
     mov rsp,rbp
     pop rbp
     ret
+    
+    
+getAllRegisters:
+	mov rax, 5
+	int 80h
+
+	ret
