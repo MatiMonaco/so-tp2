@@ -2,7 +2,7 @@
 #include <screenDriver.h>
 static uint64_t isPressed(uint8_t scanCode);
 static void addKeyToBuffer(char ascii);
-static void checkCapslock(char ascii);
+static void checkCapslock(char* ascii);
 
 
 char buffer[BUFFER_SIZE] = {0};
@@ -31,7 +31,7 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
  0, RIGHT, '+', END, DOWN,AVPAG, INSERT, SUPR, 0, 0, '>', F11, F12 };
 
 void keyboardHandler(){
-	drawChar('a',0xFFFFFF,0x000000);
+
 	uint8_t scancode = getKeyScancode();
 	char ascii;
 	if(isPressed(scancode)){
@@ -41,7 +41,7 @@ void keyboardHandler(){
 				SHIFT_ON =  1;
 				break;
 			case CAPSLOCK_PRESS:
-				CAPSLOCK_ON = !CAPSLOCK_ON;
+				CAPSLOCK_ON = (CAPSLOCK_ON == 1) ? 0:1;
 				break;
 			default:
 				if(SHIFT_ON){
@@ -50,26 +50,30 @@ void keyboardHandler(){
 				} else {
 					ascii = keys[scancode];						
 				}
+					checkCapslock(&ascii);
+					addKeyToBuffer(ascii); 
 				break;
 				
 		}
-		addKeyToBuffer(ascii); 
+	
+	
 	}else if (scancode == LEFT_SHIFT_RELEASE || scancode == RIGHT_SHIFT_RELEASE){
 				SHIFT_ON = 0;
 				return;
 	}
-	//	checkCapslock(ascii);
 		
+		return;
 }
 
-	static void  checkCapslock(char ascii){
+	static void  checkCapslock(char* ascii){
 
 		if(CAPSLOCK_ON){
+	
 			char dif = 'a' - 'A';
-			if(ascii >= 'A' && ascii<='Z'){
-				ascii += dif;
-			}else if(ascii >='a' && ascii <= 'z'){
-				ascii -= dif;
+			if(*ascii >= 'A' && *ascii<='Z'){
+				*ascii += dif;
+			}else if(*ascii >='a' && *ascii <= 'z'){
+				*ascii -= dif;
 			}
 		}	
 
@@ -78,22 +82,23 @@ void keyboardHandler(){
 
 	static void addKeyToBuffer(char ascii){
 		buffer[writeIndex++] = ascii;
-		drawChar(ascii,0xFFFFFF,0x000000);
+		
 		if(writeIndex > BUFFER_SIZE){
 			writeIndex = 0;
 		}
 		if(writeIndex == readIndex){
 			readIndex++;
 		}
+		
 	}
 
 	char getKeyASCII(){
 		char ascii = 0;
-		if(readIndex != writeIndex){
+		if(hasKeysToRead()){
 			ascii = buffer[readIndex++];
-				drawChar(ascii,0xFFFFFF,0x000000);
+
 		}
-		drawChar(ascii,0xFFFFFF,0x000000);
+	
 		return ascii;
 
 	}
