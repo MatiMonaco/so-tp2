@@ -3,7 +3,7 @@
 void initShell(){
 
 	while(1){
-	putchar('a');
+		printf("hola");
 		
 	}
 		
