@@ -11,7 +11,7 @@ void syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3, vo
             break;
 
 		case READ:
-			 write((uint64_t)param1,(char*) param2,(uint64_t) param3);//
+			 read((uint64_t)param1,(char*) param2,(uint64_t) param3);//
 		break;
     }
     /*
