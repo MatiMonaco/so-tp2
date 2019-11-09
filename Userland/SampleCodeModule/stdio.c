@@ -6,12 +6,12 @@ void putchar(char c){
 }
 char getchar(){
 	char c;
-	callSyscall(READ,(char *)&c,(uint64_t)1);
+	callSyscall(READ,(char *)&c,(uint64_t)1,0,0,0,0);
 	return c;
 }
 
 void printf(const char* buffer){
-	callSyscall(WRITE,(uint64_t)1,(const char*)buffer,(uint64_t)strlen(buffer));
+	callSyscall(WRITE,(uint64_t)1,(const char*)buffer,(uint64_t)strlen(buffer),0,0,0);
 }
 
 void scanf(char*buffer){
