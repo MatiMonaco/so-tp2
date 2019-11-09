@@ -2,8 +2,12 @@
 #include <stdio.h>
 void initShell(){
 
+	char c;
+	printf("Buenas");
 	while(1){
-	putchar('a');
+		while((c = getchar()) != '\n'){
+			putchar(c);
+		}
 		
 	}
 		

@@ -35,7 +35,7 @@ uint64_t read(uint64_t fd,char * buffer,uint64_t count){
 	switch(fd){
         case STDOUT:
 				while(count > 0){
-				getKeyASCII(buffer);
+				*buffer = getKeyASCII();
 				buffer++;
 				count--;
 			}
