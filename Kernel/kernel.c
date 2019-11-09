@@ -89,9 +89,9 @@ int main()
 	init_VM_Driver();
 	
 		load_idt();
-	/*
-
-	ncPrint("[Kernel Main]");
+	
+	((EntryPoint)sampleCodeModuleAddress)();
+	/*ncPrint("[Kernel Main]");
 	ncNewline();
 	GetCurrTime();
 	ncNewline();
@@ -99,7 +99,7 @@ int main()
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);
 	ncNewline();
 	ncPrint("  Calling the sample code module returned: ");
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
+	ncPrintHex();
 	ncNewline();
 	ncNewline();
 
