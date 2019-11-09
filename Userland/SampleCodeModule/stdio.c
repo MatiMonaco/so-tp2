@@ -7,7 +7,7 @@ void putchar(char c){
 char getchar(){
 	char c;
 
-	while(callSyscall(READ,(void*)1,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0) == 0);
+	while(callSyscall(READ,(void*)0,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0) == 0);
 	return c;
 }
 
@@ -25,5 +25,9 @@ void scanf(char*buffer){
 	}
 	*buffer = '\0';
 
+}
+
+void perror(const char * buffer){
+	callSyscall(WRITE,(void*)2,(void*)buffer,(void*)strlen(buffer),(void*)0,(void*)0,(void*)0);
 }
 

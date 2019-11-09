@@ -1,13 +1,12 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef COMMANDS_H
+#define COMMANDS_H
 #define COMMAND_MAX_LENGHT 100
 
 
-#define HELP 0
-#define INFOREG 1
-#define PRINTMEM 2
-#define TIME 3
-#define ARACNOID 4
+struct commandStruct{
+	char * name;
+	void (*f) (void);
+};
 
 
 void inforeg();

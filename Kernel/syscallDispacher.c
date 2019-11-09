@@ -15,9 +15,9 @@ uint64_t syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3
 			 return read((uint64_t)param1,(char*) param2,(uint64_t) param3);//
 		break;
 		    
-	    case INFOREG:
+	   /* case INFOREG:
             printRegisters();
-            break;
+            break;*/
     }
     /*
     void (*functions[])(void*,void*,void*,void*,void*,void*) = {};

@@ -47,7 +47,7 @@ void * memcpy(void * destination, const void * source, uint64_t length)
 
 	return destination;
 }
-
+/*
 void printRegisters(){
 		printString("Registro RAX: ");
 		ncPrintBin(getRegister(RAX));
@@ -109,3 +109,4 @@ void printRegisters(){
 		ncPrintBin(Register(R15));
 		printChar('\n');
 }
+*/

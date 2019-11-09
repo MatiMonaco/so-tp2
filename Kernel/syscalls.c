@@ -22,7 +22,7 @@ uint64_t write(uint64_t fd, const char* buffer,uint64_t count){
             break;
         case STDERR:
           while(count > 0){
-		  if(*buffer != '\0'){
+				 if(*buffer != '\0'){
 						drawChar(*buffer,0xFF0000,0xFFFFFF);
 				}
 				
@@ -39,7 +39,7 @@ uint64_t write(uint64_t fd, const char* buffer,uint64_t count){
 
 uint64_t read(uint64_t fd,char * buffer,uint64_t count){
 	switch(fd){
-        case STDOUT:
+        case STDIN:
 				
 				while(count > 0){
 				char c = getKeyASCII();

@@ -3,7 +3,10 @@
 #include <string.h>
 #include <commands.h>
 static void clearBuffer(char * buffer);
+static void commandDispacher(char* command);
+static void commandNotFound();
 
+static struct commandStruct commands[] = {{"help",&help},{"inforeg",&inforeg},{"printmem",&printmem},{"aracnoid",&aracnoid},{0,0}};
 
 void initShell(){
 
@@ -11,8 +14,6 @@ void initShell(){
  printf("\nTerminal:\n\nPlease type 'help' to find out about our commands\n\n\n");
 	while(1){
 		printf("$> ");
-		char c;
-		uint8_t i = 0;
 		clearBuffer(command);
 		scanf(command);
 		putchar('\n');
@@ -22,9 +23,17 @@ void initShell(){
 }
 
 static void commandDispacher(char* command){
-	switch(command){
-		
+	for(int i = 0; commands[i].name != 0; i++){
+		if(strcmp(commands[i].name,command) == 0){
+			*(commands[i].f);
+		}
 	}
+	
+}
+
+
+static void commandNotFound(){
+	perror("shell: command not found\n");
 }
 
 static void clearBuffer(char * buffer){
