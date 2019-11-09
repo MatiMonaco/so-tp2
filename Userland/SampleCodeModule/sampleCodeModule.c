@@ -4,7 +4,3 @@ int main() {
 	initShell();
 	return 0;
 }
-
-void initShell(){
-	while(1){};
-}
