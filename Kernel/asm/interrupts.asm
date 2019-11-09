@@ -145,10 +145,10 @@ _exception0Handler:
 
 ; Int 80
 _syscallHandler:
-	pushState
+;pushState
 	call syscallDispatcher
 
-	popState
+;	popState
 	iretq
 
 haltcpu:

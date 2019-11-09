@@ -42,8 +42,11 @@ uint64_t read(uint64_t fd,char * buffer,uint64_t count){
         case STDOUT:
 				
 				while(count > 0){
-
-				*buffer = getKeyASCII();
+				char c = getKeyASCII();
+				if(c == -1){
+					return 0;
+				}
+				*buffer = c;
 				buffer++;
 				count--;
 				}
@@ -51,6 +54,6 @@ uint64_t read(uint64_t fd,char * buffer,uint64_t count){
 		default:
 			break;
     }
-    return 0;
+    return 1;
 	
 }
