@@ -1,9 +1,12 @@
 #include <shell.h>
 #include <stdio.h>
 void initShell(){
-
+printf("hola");
 	while(1){
-		printf("hola");
+		char c;
+		while((c = getchar()) != '\n'){
+			putchar(c);
+		}
 		
 	}
 		
