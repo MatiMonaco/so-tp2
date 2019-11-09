@@ -1,6 +1,7 @@
 #include <video_vm.h>
 #include <screenDriver.h>
 #include <font.h>
+#include <lib.h>
 
 unsigned int x = 0;
 unsigned int y = 0;
@@ -68,13 +69,7 @@ void drawStringWithColor(const char *string, int fontColor, int backgroundColor)
 
 void scrollDown(){
 	char* start = getFrameBuffer();
-	int g = getScreenHeight();
-	for(int i = 0; i < getScreenWidth(); i++){
-		drawCharAt(i,100,' ',0xFFFFFF,0x000000);
-	}
-	/*
-	char * secondLine = (char*)(screenData->framebuffer + 100);
-	int size = screenData->width * (screenData->height - 1);
+	char * secondLine = start + (getScreenWidth() * getScreenBPP());
+	int size = getScreenWidth() * (getScreenHeight() - 1) * getScreenBPP();
 	memcpy(start,secondLine,size);
-	*/
 }

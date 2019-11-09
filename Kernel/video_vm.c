@@ -73,6 +73,9 @@ unsigned int getScreenWidth(){
 	return SCREEN_WIDTH;
 }
 
+unsigned int getScreenBPP(){
+	return SCREEN_bPP;
+}
 void drawCharAt(int x, int y, char character, int fontColor, int backgroundColor){
 	int aux_x = x;
 	int aux_y = y;
