@@ -21,6 +21,7 @@ void scanf(char*buffer){
 		*buffer = c;
 		buffer++;
 	}
+	*buffer = '\0';
 
 }
 
