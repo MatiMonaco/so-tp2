@@ -5,8 +5,6 @@
 unsigned int x = 0;
 unsigned int y = 0;
 
-static void scrollDown();
-
 void drawChar(char character, int fontColor, int backgroundColor){
     if(x == getScreenWidth()){
         if(y == getScreenHeight()){
@@ -27,11 +25,6 @@ void drawChar(char character, int fontColor, int backgroundColor){
     	drawCharAt(x,y,character,fontColor,backgroundColor);
 		x += CHAR_WIDTH;
 	}
-}
-
-void scrollDown(){
-	char * screen = getFrameBuffer();
-	
 }
 
 void newline(){
@@ -70,4 +63,17 @@ void drawStringWithColor(const char *string, int fontColor, int backgroundColor)
 		drawChar(*string,fontColor,backgroundColor);
 		string++;
 	}
+}
+
+void scrollDown(){
+	char* start = getFrameBuffer();
+	int g = getScreenHeight();
+	for(int i = 0; i < getScreenWidth(); i++){
+		drawCharAt(i,100,' ',0xFFFFFF,0x000000);
+	}
+	/*
+	char * secondLine = (char*)(screenData->framebuffer + 100);
+	int size = screenData->width * (screenData->height - 1);
+	memcpy(start,secondLine,size);
+	*/
 }
