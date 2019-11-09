@@ -30,37 +30,36 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
  CAPSLOCK,F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, NUM_LOCK,SCROLL_LOCK,HOME, UP, REPAG, '-', LEFT,
  0, RIGHT, '+', END, DOWN,AVPAG, INSERT, SUPR, 0, 0, '>', F11, F12 };
 
-	void keyboardHandler(){
+void keyboardHandler(){
 	
-		uint8_t scancode = getKeyScancode();
-		char ascii;
-		if(isPressed(scancode)){
-			switch(scancode){
-				case LEFT_SHIFT_PRESS:
-				case RIGHT_SHIFT_PRESS:
-					SHIFT_ON =  1;
-					break;
-				case CAPSLOCK_PRESS:
-					CAPSLOCK_ON = !CAPSLOCK_ON;
-					break;
-				default:
-					if(SHIFT_ON){
-						ascii = keysWithShift[scancode];
-			
-					} else {
-						ascii = keys[scancode];
-						
-					}
-					break;
+	uint8_t scancode = getKeyScancode();
+	char ascii;
+	if(isPressed(scancode)){
+		switch(scancode){
+			case LEFT_SHIFT_PRESS:
+			case RIGHT_SHIFT_PRESS:
+				SHIFT_ON =  1;
+				break;
+			case CAPSLOCK_PRESS:
+				CAPSLOCK_ON = !CAPSLOCK_ON;
+				break;
+			default:
+				if(SHIFT_ON){
+					ascii = keysWithShift[scancode];
+		
+				} else {
+					ascii = keys[scancode];						
+				}
+				break;
 				
-			}
-		}else if (scancode == LEFT_SHIFT_RELEASE || scancode == RIGHT_SHIFT_RELEASE){
-					SHIFT_ON = 0;
-					return;
 		}
-			checkCapslock(ascii);
-			addKeyToBuffer(ascii); 
+	}else if (scancode == LEFT_SHIFT_RELEASE || scancode == RIGHT_SHIFT_RELEASE){
+				SHIFT_ON = 0;
+				return;
 	}
+		checkCapslock(ascii);
+		addKeyToBuffer(ascii); 
+}
 
 	static void  checkCapslock(char ascii){
 
@@ -105,5 +104,4 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
 	}
 
 
-}
 
