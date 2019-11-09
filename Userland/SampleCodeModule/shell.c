@@ -3,7 +3,9 @@
 void initShell(){
 
 	while(1){
-		putchar('a');
+	putchar('a');
+		
 	}
+		
 	
 }
