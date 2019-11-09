@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdint.h>
 uint64_t strlen(const char * s){
 	uint64_t size = 0;
 	while(*s){
