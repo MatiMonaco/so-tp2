@@ -21,7 +21,8 @@ void drawChar(char character, int fontColor, int backgroundColor){
 }
 
 void scrollDown(){
-
+	char * screen = getFrameBuffer();
+	
 }
 
 void newline(){

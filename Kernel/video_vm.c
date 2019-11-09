@@ -61,7 +61,9 @@ void drawPixel(unsigned int x, unsigned int y, int color)
     screen[where + 2] = (color >> 16) & 255;  // RED
 }
 
-
+char * getFrameBuffer(){
+	return screenData->framebuffer;
+}
 
 unsigned int getScreenHeight(){
 	return SCREEN_HEIGHT;
