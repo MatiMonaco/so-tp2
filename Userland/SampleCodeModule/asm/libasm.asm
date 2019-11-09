@@ -1,3 +1,18 @@
+GLOBAL getRegister
+GLOBAL getAllRegisters
+
+
+
+
+getAllRegisters:
+	mov rax, 5
+	int 80h
+
+	ret
+
+
+
+
 getRegister:
     push rbp
     mov rbp, rsp
