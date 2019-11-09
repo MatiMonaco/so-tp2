@@ -2,11 +2,11 @@
 #include <string.h>
 #include <callSyscall.h>
 void putchar(char c){
-	callSyscall(WRITE,(void*) 1,(void*)c,(void*)1,(void*)0,(void*)0,(void*)0);
+	callSyscall(WRITE,(void*) 1,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0);
 }
 char getchar(){
 	char c;
-	callSyscall((void*)READ,(void*)c,(void*)1,(void*)0,(void*)0,(void*)0,(void*)0);
+	callSyscall(READ,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0,(void*)0);
 	return c;
 }
 
