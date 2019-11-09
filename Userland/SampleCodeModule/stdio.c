@@ -2,16 +2,16 @@
 #include <string.h>
 #include <callSyscall.h>
 void putchar(char c){
-	callSyscall(WRITE,1,&c,1,0,0,0);
+	callSyscall(WRITE,(void*) 1,(void*)c,(void*)1,(void*)0,(void*)0,(void*)0);
 }
 char getchar(){
 	char c;
-	callSyscall(READ,&c,1,0,0,0,0);
+	callSyscall((void*)READ,(void*)c,(void*)1,(void*)0,(void*)0,(void*)0,(void*)0);
 	return c;
 }
 
 void printf(const char* buffer){
-	callSyscall(WRITE,1,buffer,strlen(buffer),0,0,0);
+	callSyscall(WRITE,(void*)1,(void*)buffer,(void*)strlen(buffer),(void*)0,(void*)0,(void*)0);
 }
 
 void scanf(char*buffer){
