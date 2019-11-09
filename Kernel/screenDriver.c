@@ -13,7 +13,7 @@ void drawChar(char character, int fontColor, int backgroundColor){
             scrollDown();
         }
         else{
-            y++;
+            y += CHAR_HEIGHT;
         }
 		x = 0;
     }
@@ -24,7 +24,8 @@ void drawChar(char character, int fontColor, int backgroundColor){
 		deleteChar();
 	}
 	else{
-    	drawCharAt(x++,y,character,fontColor,backgroundColor);
+    	drawCharAt(x,y,character,fontColor,backgroundColor);
+		x += CHAR_WIDTH;
 	}
 }
 
@@ -38,7 +39,7 @@ void newline(){
 		scrollDown();
 	}
 	else{
-		y++;
+		y += CHAR_HEIGHT;
 	}
 	x = 0;
 }
@@ -47,11 +48,11 @@ void deleteChar(){
 	if(y != 0 || x != 0){
 		if(x == 0){
 			x = getScreenWidth();
-			y--;
+			y -= CHAR_HEIGHT;
 			drawCharAt(x,y,' ',0xFFFFFF,0x000000);
 		}
 		else{
-			x--;
+			x -= CHAR_WIDTH;
 			drawCharAt(x,y,' ',0xFFFFFF,0x000000);
 		}
 	}

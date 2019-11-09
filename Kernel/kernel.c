@@ -87,9 +87,7 @@ void * initializeKernelBinary()
 int main()
 {
 	init_VM_Driver();
-	
-		load_idt();
-	
+	load_idt();
 	((EntryPoint)sampleCodeModuleAddress)();
 	/*ncPrint("[Kernel Main]");
 	ncNewline();
