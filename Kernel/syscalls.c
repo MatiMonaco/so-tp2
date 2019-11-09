@@ -11,7 +11,7 @@ uint64_t write(uint64_t fd, const char* buffer,uint64_t count){
         case STDOUT:
             
 			while(count > 0){
-				drawChar(*buffer,0x000000,0xFFFFFF);
+				drawChar(*buffer,0xFFFFFF,0x000000);
 				buffer++;
 				count--;
 			}
@@ -19,7 +19,7 @@ uint64_t write(uint64_t fd, const char* buffer,uint64_t count){
             break;
         case STDERR:
           while(count > 0){
-				drawChar(*buffer,#FF0000,0x000000);
+				drawChar(*buffer,#FF0000,0xFFFFFF);
 				buffer++;
 				count--;
 			}
