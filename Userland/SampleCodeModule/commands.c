@@ -8,6 +8,6 @@ void  inforeg(){
 */
 
 void help(){
-	printf("Help:\n");
+	printf("Help:\n1 - inforeg : prints on screen the current values of every register\n2 - printmem  arg1 : recieves as arg1 a pointer pointing to a memory direction and does 32 bytes memory dump starting from the direction received as an argument\n3 - aracnoid : starts the game Aracnoid\n ");
 }
 
