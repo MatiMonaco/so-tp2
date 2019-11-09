@@ -2,8 +2,8 @@
 #define KEYBOARD_H
 #include <stdint.h>
 
-uint64_t kbFlag();
-uint64_t getKeyScancode();
+uint8_t kbFlag();
+uint8_t getKeyScancode();
 uint64_t hasKeysToRead();
 void keyboardHandler();
 char getKeyASCII();

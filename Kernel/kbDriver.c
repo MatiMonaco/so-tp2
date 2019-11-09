@@ -1,6 +1,5 @@
 #include <kbDriver.h>
-
-
+#include <screenDriver.h>
 static uint64_t isPressed(uint8_t scanCode);
 static void addKeyToBuffer(char ascii);
 static void checkCapslock(char ascii);
@@ -32,7 +31,7 @@ static unsigned char keysWithShift[] = { 0, ESC, '!', '@', '#', '$', '%','^', '&
  0, RIGHT, '+', END, DOWN,AVPAG, INSERT, SUPR, 0, 0, '>', F11, F12 };
 
 void keyboardHandler(){
-	
+	drawChar('a',0xFFFFFF,0x000000);
 	uint8_t scancode = getKeyScancode();
 	char ascii;
 	if(isPressed(scancode)){
@@ -54,12 +53,13 @@ void keyboardHandler(){
 				break;
 				
 		}
+		addKeyToBuffer(ascii); 
 	}else if (scancode == LEFT_SHIFT_RELEASE || scancode == RIGHT_SHIFT_RELEASE){
 				SHIFT_ON = 0;
 				return;
 	}
 	//	checkCapslock(ascii);
-		addKeyToBuffer(ascii); 
+		
 }
 
 	static void  checkCapslock(char ascii){
@@ -78,6 +78,7 @@ void keyboardHandler(){
 
 	static void addKeyToBuffer(char ascii){
 		buffer[writeIndex++] = ascii;
+		drawChar(ascii,0xFFFFFF,0x000000);
 		if(writeIndex > BUFFER_SIZE){
 			writeIndex = 0;
 		}
@@ -87,10 +88,12 @@ void keyboardHandler(){
 	}
 
 	char getKeyASCII(){
-		char ascii = 'a';
+		char ascii = 0;
 		if(readIndex != writeIndex){
 			ascii = buffer[readIndex++];
+				drawChar(ascii,0xFFFFFF,0x000000);
 		}
+		drawChar(ascii,0xFFFFFF,0x000000);
 		return ascii;
 
 	}
