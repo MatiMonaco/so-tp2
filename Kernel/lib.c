@@ -51,7 +51,7 @@ void * memcpy(void * destination, const void * source, uint64_t length)
 void printRegisters(){
 		printString("Registro RAX: ");
 		ncPrintBin(getRegister(RAX));
-		printChar('\n');
+		printchar('\n');
 
 		printString("Registro RBX: ");
 		ncPrintBin(getRegister(RBX));
