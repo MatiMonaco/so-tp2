@@ -1,7 +1,7 @@
-GLOBAL syscall
+GLOBAL callSyscall
 section .text
 
-syscall:
+callSyscall:
     push rbp
     mov rbp,rsp
     

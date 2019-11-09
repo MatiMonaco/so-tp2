@@ -61,15 +61,6 @@ void drawPixel(unsigned int x, unsigned int y, int color)
     screen[where + 2] = (color >> 16) & 255;  // RED
 }
 
-void pintarPantalla(){
-	int white = 0xFFFFFF;
-	int i,j;
-	for(i = 0; i < SCREEN_WIDTH; i++){
-		for(j = 0; j < SCREEN_HEIGHT;j++){
-			drawPixel(i,j,white);
-		}
-	}
-}
 
 
 unsigned int getScreenHeight(){

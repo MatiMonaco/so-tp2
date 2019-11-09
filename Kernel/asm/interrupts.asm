@@ -72,16 +72,6 @@ SECTION .text
 	iretq
 %endmacro
 
-%macro syscallHandler 1
-	pushState
-
-	mov rdi, %1
-	call syscallDispatcher
-
-	popState
-	iretq
-%endmacro
-
 %macro exceptionHandler 1
 	pushState
 
@@ -155,7 +145,11 @@ _exception0Handler:
 
 ; Int 80
 _syscallHandler:
-	syscallHandler rdi
+	pushState
+	call syscallDispatcher
+
+	popState
+	iretq
 
 haltcpu:
 	cli

@@ -1,10 +1,10 @@
 #include <stdint.h>
 #include <syscalls.h>
 
-void syscallDispatcher(uint64_t rax, void* rdi, void* rsi, void* rdx, void* r10, void* r9, void* r8){
-    switch(rax){
+void syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3, void* param4, void* param5, void* param6){
+    switch(id){
         case 1:
-            write((uint64_t)rdi,(const char*) rsi,(uint64_t) rdx);
+            write((uint64_t)param1,(const char*) param2,(uint64_t) param3);//
             break;
     }
     /*
