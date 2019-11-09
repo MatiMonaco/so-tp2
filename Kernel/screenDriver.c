@@ -17,15 +17,9 @@ void drawChar(char character, int fontColor, int backgroundColor){
         }
 		x = 0;
     }
-	if(c == '\n'){
-		newline();
-	}
-	else if(c == '\b'){
-		deleteChar();
-	}
-	else{
+	
     	drawCharAt(x++,y,character,fontColor,backgroundColor);
-	}
+
 }
 
 void scrollDown(){

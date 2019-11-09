@@ -2,9 +2,10 @@
 #include <stdio.h>
 void initShell(){
 
-	
-		putchar('a');
-		putchar('b');
-		putchar('c');
+	while(1){
+	putchar('a');
+		
+	}
+		
 	
 }
