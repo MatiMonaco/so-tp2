@@ -1,8 +1,9 @@
 #include <shell.h>
 #include <stdio.h>
 #include <string.h>
+#include <commands.h>
 static void clearBuffer(char * buffer);
-static uint8_t inforeg();
+
 
 void initShell(){
 
@@ -13,13 +14,17 @@ void initShell(){
 		char c;
 		uint8_t i = 0;
 		clearBuffer(command);
-		while((c = getchar()) != '\n'){
-			command[i++] = c;
-			putchar(c);
-		}
-		printf(command);
+		scanf(command);
+		putchar('\n');
+		commandDispacher(command);
 	}
 		
+}
+
+static void commandDispacher(char* command){
+	switch(command){
+		
+	}
 }
 
 static void clearBuffer(char * buffer){
@@ -27,8 +32,4 @@ static void clearBuffer(char * buffer){
 		*buffer = 0;
 		buffer++;
 	}
-}
-static uint8_t inforeg(){
-    getAllRegisters();
-    return 0;
 }

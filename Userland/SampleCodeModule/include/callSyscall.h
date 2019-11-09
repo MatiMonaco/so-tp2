@@ -6,4 +6,5 @@
 #define WRITE 4
 
 uint64_t callSyscall(uint64_t id,void* param1,void* param2,void* param3,void* param4,void* param5,void* param6);
+
 #endif
