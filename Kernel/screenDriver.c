@@ -17,10 +17,10 @@ void drawChar(char character, int fontColor, int backgroundColor){
         }
 		x = 0;
     }
-	if(c == '\n'){
+	if(character == '\n'){
 		newline();
 	}
-	else if(c == '\b'){
+	else if(character == '\b'){
 		deleteChar();
 	}
 	else{
