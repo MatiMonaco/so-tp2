@@ -5,6 +5,7 @@
 unsigned int x = 0;
 unsigned int y = 0;
 
+static void scrollDown();
 void drawChar(char character, int fontColor, int backgroundColor){
     if(x == getScreenWidth()){
         if(y == getScreenHeight()){

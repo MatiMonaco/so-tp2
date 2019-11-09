@@ -7,5 +7,4 @@ unsigned int getScreenHeight();
 unsigned int getScreenWidth();
 void drawCharAt(int x, int y, char character, int fontColor, int backgroundColor);
 char * getFrameBuffer();
-void scrollDown();
 #endif
