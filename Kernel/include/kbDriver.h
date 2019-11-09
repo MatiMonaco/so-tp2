@@ -1,10 +1,13 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
+#include <stdint.h>
 
-int kbFlag();
-int getKeyScancode();
+uint64_t kbFlag();
+uint64_t getKeyScancode();
+uint64_t hasKeysToRead();
 void keyboardHandler();
 char getKeyASCII();
+
 
 #define BUFFER_SIZE 256
 

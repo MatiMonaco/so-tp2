@@ -1,9 +1,10 @@
 #include <kbDriver.h>
-#include <stdint.h>
 
-static int isPressed(uint8_t scanCode);
+
+static uint64_t isPressed(uint8_t scanCode);
 static void addKeyToBuffer(char ascii);
 static void checkCapslock(char ascii);
+
 
 char buffer[BUFFER_SIZE] = {0};
 
@@ -57,7 +58,7 @@ void keyboardHandler(){
 				SHIFT_ON = 0;
 				return;
 	}
-		checkCapslock(ascii);
+	//	checkCapslock(ascii);
 		addKeyToBuffer(ascii); 
 }
 
@@ -86,7 +87,7 @@ void keyboardHandler(){
 	}
 
 	char getKeyASCII(){
-		char ascii = 0;
+		char ascii = 'a';
 		if(readIndex != writeIndex){
 			ascii = buffer[readIndex++];
 		}
@@ -94,12 +95,16 @@ void keyboardHandler(){
 
 	}
 
+	uint64_t hasKeysToRead(){
+		return readIndex != writeIndex;
+	}
+
 	
-	static int isPressed(uint8_t scancode){
-		return !(scancode & 0x80);
+	static uint64_t isPressed(uint8_t scancode){
+		return (scancode & 0x80) == 0;
 	}
 	
-	int getKeyScancode(){
+	uint8_t getKeyScancode(){
 	   return kbFlag();
 	}
 
