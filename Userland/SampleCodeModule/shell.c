@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 static void clearBuffer(char * buffer);
-static int inforeg();
+static uint8_t inforeg();
 
 void initShell(){
 
@@ -11,7 +11,8 @@ void initShell(){
 	while(1){
 		printf("$> ");
 		char c;
-		int i = 0;
+		uint8_t i = 0;
+		clearBuffer(command);
 		while((c = getchar()) != '\n'){
 			command[i++] = c;
 			putchar(c);
@@ -19,7 +20,6 @@ void initShell(){
 		printf(command);
 	}
 		
-	
 }
 
 static void clearBuffer(char * buffer){
@@ -27,9 +27,8 @@ static void clearBuffer(char * buffer){
 		*buffer = 0;
 		buffer++;
 	}
-	
-static int inforeg(){
+}
+static uint8_t inforeg(){
     getAllRegisters();
     return 0;
-}
 }

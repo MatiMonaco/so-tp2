@@ -19,7 +19,9 @@ void scanf(char*buffer){
 	char c;
 	while((c = getchar()) != '\n'){
 		*buffer = c;
+		putchar(*buffer);
 		buffer++;
+		
 	}
 	*buffer = '\0';
 
