@@ -8,6 +8,19 @@ void  inforeg(){
 */
 
 void help(){
-	printf("Help:\n");
+	printf("help:\n");
 }
 
+void inforeg(){
+printf("inforeg:\n");
+}
+
+void printmem(){
+printf("printmem:\n");
+}
+void time(){
+printf("time:\n");
+}
+void aracnoid(){
+printf("aracnoid:\n");
+}

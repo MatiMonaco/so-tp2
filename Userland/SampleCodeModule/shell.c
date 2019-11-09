@@ -25,9 +25,11 @@ void initShell(){
 static void commandDispacher(char* command){
 	for(int i = 0; commands[i].name != 0; i++){
 		if(strcmp(commands[i].name,command) == 0){
-			*(commands[i].f);
+			commands[i].f();
+			return;
 		}
 	}
+	commandNotFound();
 	
 }
 

@@ -3,9 +3,11 @@
 #define COMMAND_MAX_LENGHT 100
 
 
+typedef   void (*Commandf) (void);
+
 struct commandStruct{
 	char * name;
-	void (*f) (void);
+	Commandf f;
 };
 
 
