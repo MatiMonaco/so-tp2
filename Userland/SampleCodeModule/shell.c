@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 static void clearBuffer(char * buffer);
+static int inforeg();
 
 void initShell(){
 
@@ -26,4 +27,9 @@ static void clearBuffer(char * buffer){
 		*buffer = 0;
 		buffer++;
 	}
+	
+static int inforeg(){
+    getAllRegisters();
+    return 0;
+}
 }
