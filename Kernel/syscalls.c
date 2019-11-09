@@ -23,7 +23,7 @@ uint64_t write(uint64_t fd, const char* buffer,uint64_t count){
         case STDERR:
           while(count > 0){
 				 if(*buffer != '\0'){
-						drawChar(*buffer,0xFF0000,0xFFFFFF);
+						drawChar(*buffer,0xFF0000,0x000000);
 				}
 				
 				buffer++;

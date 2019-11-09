@@ -6,7 +6,7 @@ static void clearBuffer(char * buffer);
 static void commandDispacher(char* command);
 static void commandNotFound();
 
-static struct commandStruct commands[] = {{"help",&help},{"inforeg",&inforeg},{"printmem",&printmem},{"aracnoid",&aracnoid},{0,0}};
+static struct commandStruct commands[] = {{"help",&help},{"inforeg",&inforeg},{"printmem",&printmem},{"aracnoid",&aracnoid},{"time",&time},{0,0}};
 
 void initShell(){
 
@@ -25,9 +25,11 @@ void initShell(){
 static void commandDispacher(char* command){
 	for(int i = 0; commands[i].name != 0; i++){
 		if(strcmp(commands[i].name,command) == 0){
-			*(commands[i].f);
+			commands[i].f();
+			return;
 		}
 	}
+	commandNotFound();
 	
 }
 
