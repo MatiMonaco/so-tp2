@@ -17,7 +17,7 @@ void drawChar(char character, int fontColor, int backgroundColor){
         }
 		x = 0;
     }
-    drawCharAt(x,y,character,fontColor,backgroundColor);
+    drawCharAt(x++,y,character,fontColor,backgroundColor);
 }
 
 void scrollDown(){
