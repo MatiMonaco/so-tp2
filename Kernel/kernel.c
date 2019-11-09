@@ -86,11 +86,11 @@ void * initializeKernelBinary()
 
 int main()
 {
-	
 	init_VM_Driver();
-	drawChar('q',0xFFFFFF,0x000000);
+	
+		load_idt();
 	/*
-	load_idt();
+
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	GetCurrTime();

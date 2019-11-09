@@ -7,6 +7,6 @@
     "\\Userland\\SampleCodeModule\\asm",
     "\\Userland\\SampleCodeModule\\include"
   ],
-  "SelectedNode": "\\Kernel",
+  "SelectedNode": "\\Userland\\SampleCodeModule\\stdio.c",
   "PreviewInSolutionExplorer": false
 }
