@@ -6,7 +6,7 @@ static void clearBuffer(char * buffer);
 static void commandDispacher(char* command);
 static void commandNotFound();
 
-static struct commandStruct commands[] = {{"help",&help},{"inforeg",&inforeg},{"printmem",&printmem},{"aracnoid",&aracnoid},{0,0}};
+static struct commandStruct commands[] = {{"help",&help},{"inforeg",&inforeg},{"printmem",&printmem},{"aracnoid",&aracnoid},{"time",&time},{0,0}};
 
 void initShell(){
 
