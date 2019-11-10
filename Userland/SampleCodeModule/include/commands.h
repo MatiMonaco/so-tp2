@@ -21,12 +21,13 @@ struct commandStruct{
 
 #define COMMAND_MAX_LENGHT 100
 
-void printMem(uint32_t address);
+void printMem(uint64_t address);
 void infoReg();
 void time();
 void aracnoid();
 void exit();
 void zeroDivException();
 void invalidopCodeException();
+uint64_t getRegister(uint64_t reg);
 
 #endif

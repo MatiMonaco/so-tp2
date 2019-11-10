@@ -127,7 +127,7 @@ void printBin(uint64_t value){
 	printBase(value, 2);
 }
 
-void printBase(uint64_t value, uint32_t base){
+void printBase(uint64_t value, uint64_t base){
 	static char buffer[64] = { '0' };
     intToBase(value, buffer, base);
     printf(buffer);

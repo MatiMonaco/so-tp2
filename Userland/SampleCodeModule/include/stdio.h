@@ -11,5 +11,5 @@ void perror(const char* buffer);
 void printBin(uint64_t value);
 void printDec(uint64_t value);
 void printBin(uint64_t value);
-void printBase(uint64_t value, uint32_t base);
+void printBase(uint64_t value, uint64_t base);
 #endif
