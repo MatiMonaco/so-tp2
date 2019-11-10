@@ -4,6 +4,7 @@
 
 #define READ 3
 #define WRITE 4
+#define ERROR -1
 
 uint64_t syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3, void* param4, void* param5, void* param6){
     switch(id){
@@ -15,7 +16,7 @@ uint64_t syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3
 			 return read((uint64_t)param1,(char*) param2,(uint64_t) param3);//
 		break;
 		    
-	 
+		return ERROR;
     }
     /*
     void (*functions[])(void*,void*,void*,void*,void*,void*) = {};

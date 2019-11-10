@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <string.h>
-#include <libc.h>
+#include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
 #include "idtLoader.h"
