@@ -55,12 +55,6 @@ getRegister:
 		mov rsp,rbp
 		pop rbp
 		ret
-
-
-printMemASM:
-	push rbp
-	mov rbp,rsp
-	mov al,byte[rdi]
 	
     .getRBX:
         mov rax, rbx
