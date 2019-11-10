@@ -12,6 +12,7 @@ char getchar(){
 	char c;
 
 	while(callSyscall(READ,(void*)0,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0) == 0);
+	putchar(c);
 	return c;
 }
 /*
@@ -69,19 +70,19 @@ int scanf(char* format, ...){
   int i = 0;
   char c;
   int reading = 1;
-  void * loadValue;
-  int valuesLoaded = 0;
+  void * parameter;
+  int parametersLoaded = 0;
   int number = 0;
 
-  while((c = getchar()) != '\n' && c != 0){
+  while((c = getchar()) != '\n'){
     if(!reading && c == format[0])
       reading = 1;
     if(reading){
       if(format[i] == '%'){
-        loadValue = va_arg(arg,void *);
+        parameter = va_arg(arg,void *);
         switch(format[i+1]){
             case 'c' :
-              *(char *)loadValue = c;
+              *(char *)parameter = c;
               break;
             case 'd' :
               do{
@@ -89,17 +90,17 @@ int scanf(char* format, ...){
                 number += (c - '0');
               }while((c = getchar()) >= '0' && c <= '9');
 
-              *(int *)loadValue = number;
+              *(int *)parameter = number;
               number = 0;
               break;
             case 's':
               do{
-                *(char *)loadValue = c;
-                loadValue++;
-              }while((c = getchar()) != ' ' && c != '\n' && c != 0);
+                *(char *)parameter = c;
+                parameter++;
+              }while((c = getchar()) != ' ' && c != '\n');
               break;
         }
-        valuesLoaded++;
+        parametersLoaded++;
       }
       else if(c != format[i]){
         reading = 0;
@@ -108,7 +109,7 @@ int scanf(char* format, ...){
       i++;
     }
   }
-  return valuesLoaded;
+  return parametersLoaded;
 }
 void perror(const char * buffer){
 	callSyscall(WRITE,(void*)2,(void*)buffer,(void*)strlen(buffer),(void*)0,(void*)0,(void*)0);

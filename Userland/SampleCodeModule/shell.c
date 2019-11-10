@@ -22,33 +22,26 @@ static struct commandStruct commands[] = {{EXIT,"exit","Exits shell"},
 void initShell(){
 
 	char entry[COMMAND_MAX_LENGHT] ={0};
+	char parameter[COMMAND_MAX_LENGHT] = {0};
  printf("\nTerminal:\n\nPlease type 'help' to find out about our commands\n\n\n");
  
 	while(1){
 		printf("$> ");
 		clearBuffer(entry);
-		scanEntry(entry);
+		scanf("%s %s",entry,parameter);
+		printf("%s\n",entry);
 		//commandDispacher(entry);
 	}
 		
 }
 
-static void scanEntry(char * buffer){
-		char c;
-		while((c = getchar()) != '\n'){
-			*buffer = c;
-			putchar(*buffer);
-			buffer++;
-		}
-		
-		putchar('\n');
-}
 static void commandDispacher(char* buffer){
 	char  command[COMMAND_MAX_LENGHT];
-	char parameter[COMMAND_MAX_LENGHT];
+	
 
 	
-	scanf("%s %s",command,parameter);
+	
+
 	uint64_t id = getCommandId(command);
 	switch(id){
 
