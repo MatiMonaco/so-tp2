@@ -4,9 +4,10 @@
 #include <commands.h>
 
 static void clearBuffer(char * buffer);
-static void commandDispacher(char* command);
+static void scanEntry(char * buffer);
+static void commandDispacher(char* buffer);
 static void commandNotFound();
-static int64_t getCommandId(char * command);
+static int64_t getCommandId(char * buffer);
 static void help();
 
 static struct commandStruct commands[] = {{EXIT,"exit","Exits shell"},
@@ -20,20 +21,34 @@ static struct commandStruct commands[] = {{EXIT,"exit","Exits shell"},
 
 void initShell(){
 
-	char command[COMMAND_MAX_LENGHT] ={0};
+	char entry[COMMAND_MAX_LENGHT] ={0};
  printf("\nTerminal:\n\nPlease type 'help' to find out about our commands\n\n\n");
+ 
 	while(1){
 		printf("$> ");
-		clearBuffer(command);
-		scanf("%s",command);
-		putchar('\n');
-		commandDispacher(command);
+		clearBuffer(entry);
+		scanEntry(entry);
+		//commandDispacher(entry);
 	}
 		
 }
 
-static void commandDispacher(char* command){
+static void scanEntry(char * buffer){
+		char c;
+		while((c = getchar()) != '\n'){
+			*buffer = c;
+			putchar(*buffer);
+			buffer++;
+		}
+		
+		putchar('\n');
+}
+static void commandDispacher(char* buffer){
+	char  command[COMMAND_MAX_LENGHT];
+	char parameter[COMMAND_MAX_LENGHT];
+
 	
+	scanf("%s %s",command,parameter);
 	uint64_t id = getCommandId(command);
 	switch(id){
 
@@ -66,7 +81,7 @@ static void commandDispacher(char* command){
 		break;
 
 		case ZERODIVEX:
-			divisionByZero();
+			zeroDivException();
 		break;
 
 		default:
@@ -79,10 +94,10 @@ static void commandDispacher(char* command){
 	
 }
 
-static int64_t getCommandId(char * command){
+static int64_t getCommandId(char * buffer){
 	
 	for(int i = 0; strcmp(commands[i].name,"") != 0;i++){
-		if(strcmp(commands[i].name,command) == 0){
+		if(strcmp(commands[i].name,buffer) == 0){
 			return commands[i].id;
 
 		}
@@ -92,17 +107,7 @@ static int64_t getCommandId(char * command){
 }	
 
 static void help(){
-	printf("\n\n********  Help Menu  ********\n\n");
-  printf("  * clear     :       Clears screen\n");
-  printf("  * opcodeex :       Executes Invalid OP Code Interruption\n");
-  printf("  * zerodivex   :       Executes Zero Division Interruption\n");
-  printf("  * exit      :       Exits shell\n");
-  printf("  * time      :       Displays current time\n");
-  printf("  * aracnoid  :       Iniciates aracnoid, press 'space' to leave\n");
-  printf("  * printmem address  :       Performs a 32-byte memory dump from the address received as an argument\n");
-  printf("  * inforeg   :       Prints the value of all the registers\n");
-
-  printf("\n  Any other command will be taken as invalid\n\n");
+	
 }
 
 

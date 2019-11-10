@@ -15,9 +15,11 @@ uint64_t syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3
 		case READ:
 			 return read((uint64_t)param1,(char*) param2,(uint64_t) param3);//
 		break;
-		    
-		return ERROR;
+		default:
+			return ERROR;
+		break;
     }
+
     /*
     void (*functions[])(void*,void*,void*,void*,void*,void*) = {};
     (*functions[rax])(rdi,rsi,rdx,r10,r9,r8);

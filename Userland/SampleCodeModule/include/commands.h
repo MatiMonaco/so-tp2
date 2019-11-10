@@ -5,8 +5,8 @@
 
 struct commandStruct{
 	uint64_t id;
-	char name[25];
-	char* desc[50];
+	char* name;
+	char* desc;
 	
 };
 #define HELP 0
