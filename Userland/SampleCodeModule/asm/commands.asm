@@ -1,8 +1,9 @@
+GLOBAL printRegisters
+GLOBAL printMemASM
 
 GLOBAL getRegister
 
 EXTERN printBin
-
 section .txt:
 		
 
@@ -51,6 +52,16 @@ getRegister:
     .getRAX:
         jmp .exit
 
+		mov rsp,rbp
+		pop rbp
+		ret
+
+
+printMemASM:
+	push rbp
+	mov rbp,rsp
+	mov al,byte[rdi]
+	
     .getRBX:
         mov rax, rbx
         jmp .exit
