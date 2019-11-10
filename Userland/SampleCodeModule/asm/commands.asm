@@ -53,7 +53,7 @@ getRegister:
 		mov rsp,rbp
 		pop rbp
 		ret
-
+	
     .getRBX:
         mov rax, rbx
         jmp .exit
@@ -117,7 +117,7 @@ printMemASM:
 	mov rdi,0
 	mov dil,al
 	call printBin
-	
+
 	mov rsp,rbp
 	pop rbp
 	ret

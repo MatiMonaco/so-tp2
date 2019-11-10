@@ -22,7 +22,7 @@ struct commandStruct{
 #define COMMAND_MAX_LENGHT 100
 
 void printMemASM(uint64_t address);
-void printMem(uint64_t* address)
+void printMem(uint64_t* address);
 void infoReg();
 void time();
 void aracnoid();
