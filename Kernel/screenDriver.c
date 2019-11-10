@@ -7,7 +7,12 @@ unsigned int x = 0;
 unsigned int y = 0;
 
 static void scrollDown();
-
+char* intToBase(int num, char* str, int base);
+void reverse(char str[], int length);
+void drawDec(uint64_t value);
+void drawHexa(uint64_t value);
+void drawBin(uint64_t value);
+void drawBase(uint64_t value, uint32_t base);
 
 void drawChar(char character, int fontColor, int backgroundColor){
     if(x == getScreenWidth()){
