@@ -1,12 +1,13 @@
 #include <stdint.h>
 #include <string.h>
-#include <lib.h>
+#include <libc.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
 #include "idtLoader.h"
 #include <kbDriver.h>
 #include <video_vm.h>
 #include <screenDriver.h>
+#include <rtc.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -88,6 +89,8 @@ int main()
 {
 	init_VM_Driver();
 	load_idt();
+	initRTC();
+	displayDateTime();
 	((EntryPoint)sampleCodeModuleAddress)();
 	/*ncPrint("[Kernel Main]");
 	ncNewline();
