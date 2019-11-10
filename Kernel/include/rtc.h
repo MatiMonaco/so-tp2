@@ -1,5 +1,15 @@
-int getCurrSecs();
-int getCurrMins();
-int getCurrHs();
+#include <stdint.h>
 
-void GetCurrTime();
+uint64_t initRTC();
+void initRTCc();
+uint64_t getCurrSecs();
+uint64_t getCurrMins();
+uint64_t getCurrHs();
+uint64_t getCurrDay();
+uint64_t getCurrMonth();
+uint64_t getCurrYear();
+
+void getCurrTime();
+
+void getCurrDate();
+void displayDateTime();

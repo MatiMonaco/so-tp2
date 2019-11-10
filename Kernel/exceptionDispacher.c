@@ -1,4 +1,4 @@
-
+#include <screenDriver.h>
 #define ZERO_EXCEPTION_ID 0
 #define INVALID_CODE_ID 6
 
@@ -12,7 +12,7 @@ switch(exception_id)
 	            drawString("INVALID OPERATION EXCEPTION");
 		    break;
 	}
-	printRegisters();
+	//printRegisters();
 }
 
 
