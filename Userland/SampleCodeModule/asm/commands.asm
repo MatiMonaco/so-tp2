@@ -11,35 +11,35 @@ getRegister:
    
  
     cmp rdi, 0
-    je getRAX
+    je .getRAX
     cmp rdi, 1
-    je getRBX
+    je .getRBX
     cmp rdi, 2
-    je getRCX
+    je .getRCX
     cmp rdi, 3
-    je getRDX
+    je .getRDX
     cmp rdi, 4
-    je getRBP
+    je .getRBP
     cmp rdi, 5
-    je getRDI
+    je .getRDI
     cmp rdi, 6
-    je getRSI
+    je .getRSI
     cmp rdi, 7
-    je getR8
+    je .getR8
     cmp rdi, 8
-    je getR9
+    je .getR9
     cmp rdi, 9
-    je getR10
+    je .getR10
     cmp rdi, 10
-    je getR11
+    je .getR11
     cmp rdi, 11
-    je getR12
+    je .getR12
     cmp rdi, 12
-    je getR13
+    je .getR13
     cmp rdi, 13
-    je getR14
+    je .getR14
     cmp rdi, 14
-    je getR15
+    je .getR15
   
 
     .exit:
@@ -48,7 +48,7 @@ getRegister:
         ret
 
     .getRAX:
-        jmp _exit
+        jmp .exit
 
 		mov rsp,rbp
 		pop rbp

@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <rtc.h>
 #include <screenDriver.h>
-#include <libc.h>
+#include <lib.h>
 
 void displayDateTime(){
 	getCurrDate();

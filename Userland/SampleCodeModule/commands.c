@@ -8,7 +8,8 @@ void  inforeg(){
     return 0;
 }
 */
-
+static enum Registers{RAX,RBX,RCX,RDX,RBP,RDI,RSI,R8,R9,R10,R11,R12,R13,R14,R15};
+static const char* regNames[] = {"RAX","RBX","RCX","RDX","RBP","RDI","RSI","R8","R9","R10","R11","R12","R13","R14","R15"};
 
 
 void infoReg(){
@@ -29,7 +30,7 @@ void infoReg(){
 		putchar('\n');
 
 		printf("Registro RBP: ");
-		drawBin(getRegister(RBP));
+		printBin(getRegister(RBP));
 		putchar('\n');
 
 		printf("Registro RDI: ");
@@ -69,7 +70,7 @@ void infoReg(){
 		putchar('\n');
 
 		printf("Registro R15: ");
-		printBin(Register(R15));
+		printBin(getRegister(R15));
 		putchar('\n');
 }
 
