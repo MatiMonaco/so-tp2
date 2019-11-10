@@ -2,6 +2,7 @@
 #include <screenDriver.h>
 #include <font.h>
 #include <lib.h>
+#include <stdint.h>
 
 unsigned int x = 0;
 unsigned int y = 0;
@@ -13,6 +14,7 @@ void drawDec(uint64_t value);
 void drawHexa(uint64_t value);
 void drawBin(uint64_t value);
 void drawBase(uint64_t value, uint32_t base);
+void swap ( char *str1, char *str2 );
 
 void drawChar(char character, int fontColor, int backgroundColor){
     if(x == getScreenWidth()){
@@ -101,7 +103,7 @@ void drawBase(uint64_t value, uint32_t base){
 }
 
 
-void swap ( int *str1, int *str2 ) {
+void swap ( char *str1, char *str2 ) {
   int tmp;
   tmp = *str1;
   *str1 = *str2;
@@ -115,7 +117,7 @@ void reverse(char str[], int length)
     int end = length -1; 
     while (start < end) 
     { 
-        swap(*(str+start), *(str+end)); 
+        swap(str+start, str+end); 
         start++; 
         end--; 
     } 
