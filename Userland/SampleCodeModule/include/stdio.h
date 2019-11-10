@@ -1,8 +1,14 @@
 #ifndef STDIO_H
 #define STDIO_H
-void printf(const char* buffer);
+#include <stdarg.h>
+//void printf(const char* buffer);
+void printf(const char* format, ...);
 void putchar(char letter);
 char getchar();
-void scanf(char*buffer);
+int scanf(char* format, ...);
 void perror(const char* buffer);
+void printBin(uint64_t value);
+void printDec(uint64_t value);
+void printBin(uint64_t value);
+void printBase(uint64_t value, uint32_t base);
 #endif

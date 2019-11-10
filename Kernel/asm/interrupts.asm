@@ -143,6 +143,10 @@ _irq05Handler:
 _exception0Handler:
 	exceptionHandler 0
 
+;Invalid Operation Code Exception
+_exception6Handler:
+	exceptionHandler 6
+
 ; Int 80
 _syscallHandler:
 ;pushState

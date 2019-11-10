@@ -1,4 +1,5 @@
 #include <commands.h>
+#include <exceptionsTest.h>
 #include <stdio.h>
 
 /*
@@ -10,15 +11,25 @@ void  inforeg(){
 
 
 void inforeg(){
-printf("inforeg:\n");
+	printf("inforeg:\n");
 }
 
 void printmem(uint32_t address){
-printf("printmem:\n");
+	printf("printmem:\n");
 }
 void time(){
-printf("time:\n");
+	printf("time:\n");
 }
 void aracnoid(){
-printf("aracnoid:\n");
+	printf("aracnoid:\n");
+}
+
+void invalidopCodeException(){
+	invalidOpCode();
+}
+
+void zeroDivException(){
+	divisionByZero();
+}
+void exit(){
 }

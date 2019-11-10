@@ -2,11 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Kernel",
+    "\\Kernel\\asm",
     "\\Userland",
     "\\Userland\\SampleCodeModule",
     "\\Userland\\SampleCodeModule\\asm",
     "\\Userland\\SampleCodeModule\\include"
   ],
-  "SelectedNode": "\\Userland\\SampleCodeModule\\stdio.c",
+  "SelectedNode": "\\Userland\\SampleCodeModule\\include\\commands.h",
   "PreviewInSolutionExplorer": false
 }
