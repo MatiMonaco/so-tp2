@@ -29,5 +29,6 @@ void aracnoid();
 void exit();
 void zeroDivException();
 void invalidopCodeException();
+uint64_t getRegister(uint64_t reg);
 
 #endif

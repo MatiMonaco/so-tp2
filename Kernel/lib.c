@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include <libc.h>
+#include <lib.h>
 void * memset(void * destination, int32_t c, uint64_t length)
 {
 	uint8_t chr = (uint8_t)c;
@@ -47,68 +47,6 @@ void * memcpy(void * destination, const void * source, uint64_t length)
 	}
 
 	return destination;
-}
-
-void printRegisters(){
-	/*	drawString("Registro RAX: ");
-		drawBin(getRegister(RAX));
-		newLine();
-
-		drawString("Registro RBX: ");
-		drawBin(getRegister(RBX));
-		newLine();
-
-		drawString("Registro RCX: ");
-		drawBin(getRegister(RCX));
-		newLine();
-
-		drawString("Registro RDX: ");
-		drawBin(getRegister(RDX));
-		newLine();
-
-		drawString("Registro RBP: ");
-		drawBin(getRegister(RBP));
-		newLine();
-
-		drawString("Registro RDI: ");
-		drawBin(getRegister(RDI));
-		newLine();
-
-		drawString("Registro RSI: ");
-		drawBin(getRegister(RSI));
-		newLine();
-
-		drawString("Registro R8: ");
-		drawBin(getRegister(R8));
-		newLine();
-
-		drawString("Registro R9: ");
-		drawBin(getRegister(R9));
-		newLine();
-
-		drawString("Registro R10: ");
-		drawBin(getRegister(R10));
-		newLine();
-
-		drawString("Registro R11: ");
-		drawBin(getRegister(R11));
-		newLine();
-
-		drawString("Registro R12: ");
-		drawBin(getRegister(R12));
-		newLine();
-
-		drawString("Registro R13: ");
-		drawBin(getRegister(R13));
-		newLine();
-
-		drawString("Registro R14: ");
-		drawBin(getRegister(R14));
-		newLine();
-
-		drawString("Registro R15: ");
-		drawBin(Register(R15));
-		newLine();*/
 }
 
 
