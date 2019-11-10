@@ -51,62 +51,62 @@ void * memcpy(void * destination, const void * source, uint64_t length)
 void printRegisters(){
 		drawString("Registro RAX: ");
 		drawBin(getRegister(RAX));
-		printchar('\n');
+		newLine();
 
 		drawString("Registro RBX: ");
 		drawBin(getRegister(RBX));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro RCX: ");
 		drawBin(getRegister(RCX));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro RDX: ");
 		drawBin(getRegister(RDX));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro RBP: ");
 		drawBin(getRegister(RBP));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro RDI: ");
 		drawBin(getRegister(RDI));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro RSI: ");
 		drawBin(getRegister(RSI));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R8: ");
 		drawBin(getRegister(R8));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R9: ");
 		drawBin(getRegister(R9));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R10: ");
 		drawBin(getRegister(R10));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R11: ");
 		drawBin(getRegister(R11));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R12: ");
 		drawBin(getRegister(R12));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R13: ");
 		drawBin(getRegister(R13));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R14: ");
 		drawBin(getRegister(R14));
-		printChar('\n');
+		newLine();
 
 		drawString("Registro R15: ");
 		drawBin(Register(R15));
-		printChar('\n');
+		newLine();
 }
 */
