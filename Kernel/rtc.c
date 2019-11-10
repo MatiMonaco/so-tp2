@@ -12,26 +12,27 @@ void displayDateTime(){
 void getCurrTime(){
 	char hs[3];
 	intToBase(getCurrHs(),hs,10);
-	uint64_t mins = getCurrMins();
-	uint64_t secs = getCurrSecs();
+	char mins[3];
+	intToBase(getCurrMins(),mins,10);
+	char secs[3];
+	intToBase(getCurrSecs(),secs,10);
 	drawString(hs);
-	/*
 	drawChar(':',0xFFFFFF,0x000000);	
-	drawDec(mins);
+	drawString(mins);
 	drawChar(':',0xFFFFFF,0x000000);	
-	drawDec(secs);	
-	*/
+	drawString(secs);
 }
 
 void getCurrDate(){
-	/*
-	uint64_t day = getCurrDay();
-	uint64_t month = getCurrMonth();
-	uint64_t year = getCurrYear();
-	drawDec(day);
+	char day[3];
+	intToBase(getCurrDay(),day,10);
+	char month[3];
+	intToBase(getCurrMonth(),month,10);
+	char year[3];
+	intToBase(getCurrYear(),year,10);
+	drawString(day);
 	drawChar('/',0xFFFFFF,0x000000);	
-	drawDec(month);
+	drawString(month);
 	drawChar('/',0xFFFFFF,0x000000);	
-	drawDec(year);	
-	*/
+	drawString(year);
 }
