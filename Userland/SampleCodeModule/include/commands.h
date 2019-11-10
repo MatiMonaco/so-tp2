@@ -7,6 +7,7 @@ struct commandStruct{
 	uint64_t id;
 	char* name;
 	char* desc;
+	uint64_t cantArgs;
 	
 };
 #define HELP 0
@@ -19,7 +20,7 @@ struct commandStruct{
 #define ZERODIVEX 7
 
 
-#define COMMAND_MAX_LENGHT 100
+#define MAX_LENGHT 128
 
 void printMemASM(uint64_t address);
 void printMem(uint64_t* address);

@@ -4,43 +4,39 @@
 #include <commands.h>
 
 static void clearBuffer(char * buffer);
-static void scanEntry(char * buffer);
 static void commandDispacher(char* buffer);
 static void commandNotFound();
 static int64_t getCommandId(char * buffer);
 static void help();
 
-static struct commandStruct commands[] = {{EXIT,"exit","Exits shell"},
-										{TIME,"time","Displays current time"},
-										{PRINTMEM,"printmem address","Performs a 32-byte memory dump from the address received as an argument"},
-										{INFOREG,"inforeg","Prints the value of all the registers"},
-										{ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave"},
-										{OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption"},
-										{ZERODIVEX,"zerodivex","Executes Zero Division Interruption"},
-										{0,"",""}};
+static struct commandStruct commands[] = {{EXIT,"exit","Exits shell",0},
+										{TIME,"time","Displays current time",0},
+										{PRINTMEM,"printmem address","Performs a 32-byte memory dump from the address received as an argument",1},
+										{INFOREG,"inforeg","Prints the value of all the registers",0},
+										{ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave",0},
+										{OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption",0},
+										{ZERODIVEX,"zerodivex","Executes Zero Division Interruption",0},
+										{0,"","",0}};
 
 void initShell(){
 
-	char entry[COMMAND_MAX_LENGHT] ={0};
-	char parameter[COMMAND_MAX_LENGHT] = {0};
+	char entry[MAX_LENGHT] ={0};
+
  printf("\nTerminal:\n\nPlease type 'help' to find out about our commands\n\n\n");
  
 	while(1){
 		printf("$> ");
 		clearBuffer(entry);
-		scanf("%s %s",entry,parameter);
-		printf("%s\n",entry);
+		scanf("%s %s",entry,entry2);
+		putchar('\n');
 		//commandDispacher(entry);
 	}
 		
 }
 
 static void commandDispacher(char* buffer){
-	char  command[COMMAND_MAX_LENGHT];
-	
-
-	
-	
+	char  command[MAX_LENGHT];
+	char params[MAX_LENGHT];
 
 	uint64_t id = getCommandId(command);
 	switch(id){

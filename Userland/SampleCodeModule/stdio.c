@@ -12,7 +12,7 @@ char getchar(){
 	char c;
 
 	while(callSyscall(READ,(void*)0,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0) == 0);
-	putchar(c);
+	
 	return c;
 }
 /*
@@ -50,20 +50,68 @@ void printf(const char* format, ...){
       putchar(*format);
     }
   }
-}/*
+}
 
-void scanf(char*buffer){
+int scanf(char*format,...){
 	char c;
+	int j = 0;
+	char buffer[128];
 	while((c = getchar()) != '\n'){
-		*buffer = c;
-		putchar(*buffer);
-		buffer++;
+		buffer[j] = c;
+		putchar(c);
+		j++;
 		
 	}
-	*buffer = '\0';
+	buffer[j] = '\0';
+	//putchar('\n');
+//	printf(buffer);
+	 va_list arg;
+  va_start(arg, format);
+  int i = 0;
+  void * parameter;
+  int parametersLoaded = 0;
+  int number = 0;
+  for(int k = 0; (c = buffer[k]) != '\0';k++){
+ 
+	 if(format[i++] == '%'){
+        parameter = va_arg(arg,void *);
+        switch(format[i]){
+            case 'c' :
+              *(char *)parameter = c;
+              break;
+            case 'd' :
+              do{
+                number *= 10;
+                number += (c - '0');
+		
+              }while((c = buffer[++k]) >= '0' && c <= '9');
 
+              *(int *)parameter = number;
+			   i++;
+              number = 0;
+              break;
+            case 's':
+              do{
+                *(char *)parameter = c;
+                parameter++;
+			
+              }while((c = buffer[++k]) != ' ' && c != '\n');
+			  *(char *)parameter = '\0';
+			  i++;
+              break;
+        }//switch
+        parametersLoaded++;
+
+      }else if(c != format[i]){
+		break;
+	  }
+	  i++;
+	
+  }
+  return parametersLoaded;
 }
-*/
+
+/*
 int scanf(char* format, ...){
   va_list arg;
   va_start(arg, format);
@@ -99,10 +147,10 @@ int scanf(char* format, ...){
                 parameter++;
               }while((c = getchar()) != ' ' && c != '\n');
               break;
-        }
+        }//switch
         parametersLoaded++;
-      }
-      else if(c != format[i]){
+
+      }else if(c != format[i]){
         reading = 0;
         continue;
       }
@@ -111,6 +159,7 @@ int scanf(char* format, ...){
   }
   return parametersLoaded;
 }
+*/
 void perror(const char * buffer){
 	callSyscall(WRITE,(void*)2,(void*)buffer,(void*)strlen(buffer),(void*)0,(void*)0,(void*)0);
 }
