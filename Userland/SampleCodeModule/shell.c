@@ -16,6 +16,7 @@ static struct commandStruct commands[] = {{EXIT,"exit","Exits shell",0},
 										{ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave",0},
 										{OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption",0},
 										{ZERODIVEX,"zerodivex","Executes Zero Division Interruption",0},
+										{HELP,"help","Shows all available commands",0},
 										{0,"","",0}};
 
 void initShell(){
@@ -86,6 +87,7 @@ static void commandDispacher(char* buffer){
 static int64_t getCommandId(char * buffer){
 	
 	for(int i = 0; strcmp(commands[i].name,"") != 0;i++){
+		
 		if(strcmp(commands[i].name,buffer) == 0){
 			return commands[i].id;
 
@@ -96,7 +98,9 @@ static int64_t getCommandId(char * buffer){
 }	
 
 static void help(){
-	
+	for(int i = 0; *commands[i].name != 0;i++){
+		printf("%s   :   %s\n",commands[i].name,commands[i].desc);
+	}
 }
 
 
