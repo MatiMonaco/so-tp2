@@ -27,7 +27,7 @@ void initShell(){
 	while(1){
 		printf("$> ");
 		clearBuffer(entry);
-		scanf("%s %s",entry,entry2);
+		scanf("%s",entry);
 		putchar('\n');
 		//commandDispacher(entry);
 	}
