@@ -70,7 +70,7 @@ void infoReg(){
 		putchar('\n');
 
 		printf("Registro R15: ");
-		printBin(Register(R15));
+		printBin(getRegister(R15));
 		putchar('\n');
 }
 
