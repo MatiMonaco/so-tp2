@@ -101,6 +101,14 @@ void drawBase(uint64_t value, uint32_t base){
 }
 
 
+void swap ( int *str1, int *str2 ) {
+  int tmp;
+  tmp = *str1;
+  *str1 = *str2;
+  *str2 = tmp;
+}
+
+
 void reverse(char str[], int length) 
 { 
     int start = 0; 
@@ -112,6 +120,8 @@ void reverse(char str[], int length)
         end--; 
     } 
 } 
+
+
 
 
 char* intToBase(int num, char* str, int base) 
