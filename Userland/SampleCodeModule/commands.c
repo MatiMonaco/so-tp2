@@ -10,11 +10,11 @@ void  inforeg(){
 */
 
 
-void inforeg(){
+void infoReg(){
 	printf("inforeg:\n");
 }
 
-void printmem(uint32_t address){
+void printMem(uint32_t address){
 	printf("printmem:\n");
 }
 void time(){
