@@ -8,7 +8,7 @@ void  inforeg(){
     return 0;
 }
 */
-static enum Registers{RAX,RBX,RCX,RDX,RBP,RDI,RSI,R8,R9,R10,R11,R12,R13,R14,R15};
+static enum Registers{RAX = 0,RBX,RCX,RDX,RBP,RDI,RSI,R8,R9,R10,R11,R12,R13,R14,R15};
 static const char* regNames[] = {"RAX","RBX","RCX","RDX","RBP","RDI","RSI","R8","R9","R10","R11","R12","R13","R14","R15"};
 
 
@@ -78,7 +78,7 @@ void printMem(uint64_t* address){
 	printf("printmem:\n");
     for(int i = 0; i < 32;i++){
         printf("byte %d : ", i+1);
-        printMenASM(*address++);
+        printMemASM(*address++);
         putchar('\n');
     }
 }
