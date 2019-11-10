@@ -5,5 +5,11 @@ void initRTCc();
 uint64_t getCurrSecs();
 uint64_t getCurrMins();
 uint64_t getCurrHs();
+uint64_t getCurrDay();
+uint64_t getCurrMonth();
+uint64_t getCurrYear();
 
-void GetCurrTime();
+void getCurrTime();
+
+void getCurrDate();
+void displayDateTime();
