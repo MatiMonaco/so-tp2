@@ -78,7 +78,7 @@ void printMem(uint64_t* address){
 	printf("printmem:\n");
     for(int i = 0; i < 32;i++){
         printf("byte %d : ", i+1);
-        printMenASM(*address++);
+        printMemASM(*address++);
         putchar('\n');
     }
 }
