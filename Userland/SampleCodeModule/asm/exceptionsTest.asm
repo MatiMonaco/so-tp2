@@ -1,5 +1,5 @@
-GLOBAL invalid_op_code
-GLOBAL division_by_zero
+GLOBAL invalidOpCode
+GLOBAL divisionByZero
 
 divisionByZero:
 	mov rdx, 5
