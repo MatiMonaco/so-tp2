@@ -11,7 +11,7 @@ static void help();
 
 static struct commandStruct commands[] = {{EXIT,"exit","Exits shell",0},
 										{TIME,"time","Displays current time",0},
-										{PRINTMEM,"printmem address","Performs a 32-byte memory dump from the address received as an argument",1},
+										{PRINTMEM,"printmem","Performs a 32-byte memory dump from the address received as an argument",1},
 										{INFOREG,"inforeg","Prints the value of all the registers",0},
 										{ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave",0},
 										{OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption",0},
