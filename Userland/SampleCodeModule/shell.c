@@ -29,16 +29,16 @@ void initShell(){
 		clearBuffer(entry);
 		scanf("%s",entry);
 		putchar('\n');
-		//commandDispacher(entry);
+		commandDispacher(entry);
 	}
 		
 }
 
 static void commandDispacher(char* buffer){
 	char  command[MAX_LENGHT];
-	char params[MAX_LENGHT];
+	
 
-	uint64_t id = getCommandId(command);
+	uint64_t id = getCommandId(buffer);
 	switch(id){
 
 		case HELP:
