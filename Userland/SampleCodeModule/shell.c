@@ -55,7 +55,7 @@ static void commandDispacher(char* buffer){
 		break;
 
 		case PRINTMEM:
-			
+			printMem((uint64_t*) 0x000000);
 		break;
 
 		case INFOREG:
