@@ -1,6 +1,7 @@
 #ifndef STDIO_H
 #define STDIO_H
 #include <stdarg.h>
+#include <stdint.h>
 //void printf(const char* buffer);
 void printf(const char* format, ...);
 void putchar(char letter);

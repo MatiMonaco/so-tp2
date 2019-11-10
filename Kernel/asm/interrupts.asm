@@ -12,7 +12,8 @@ GLOBAL _irq02Handler
 GLOBAL _irq03Handler
 GLOBAL _irq04Handler
 GLOBAL _irq05Handler
-GLOBAL _exception0Handler
+GLOBAL _exception00Handler
+GLOBAL _exception06Handler
 
 GLOBAL _syscallHandler
 
@@ -140,11 +141,11 @@ _irq05Handler:
 
 
 ;Zero Division Exception
-_exception0Handler:
+_exception00Handler:
 	exceptionHandler 0
 
 ;Invalid Operation Code Exception
-_exception6Handler:
+_exception06Handler:
 	exceptionHandler 6
 
 ; Int 80

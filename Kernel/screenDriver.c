@@ -1,7 +1,7 @@
 #include <video_vm.h>
 #include <screenDriver.h>
 #include <font.h>
-#include <lib.h>
+#include <libc.h>
 #include <stdint.h>
 
 unsigned int x = 0;
