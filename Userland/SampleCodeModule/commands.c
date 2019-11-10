@@ -9,16 +9,16 @@ void  inforeg(){
 */
 
 
-void inforeg(va_list args){
+void inforeg(){
 printf("inforeg:\n");
 }
 
-void printmem(va_list args){
+void printmem(uint32_t address){
 printf("printmem:\n");
 }
-void time(va_list args){
+void time(){
 printf("time:\n");
 }
-void aracnoid(va_list args){
+void aracnoid(){
 printf("aracnoid:\n");
 }
