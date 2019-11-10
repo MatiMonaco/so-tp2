@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <commands.h>
+
 static void clearBuffer(char * buffer);
 static void commandDispacher(char* command);
 static void commandNotFound();
+static void help();
+struct commandStruct commands[] = {{"help",&help},{"inforeg",&inforeg},{"printmem",&printmem},{"aracnoid",&aracnoid},{"time",&time},{0,0}};
 
-static struct commandStruct commands[] = {{"help",&help},{"inforeg",&inforeg},{"printmem",&printmem},{"aracnoid",&aracnoid},{"time",&time},{0,0}};
 
 void initShell(){
 
@@ -31,6 +33,20 @@ static void commandDispacher(char* command){
 	}
 	commandNotFound();
 	
+}
+
+static void help(){
+	printf("\n\n********  Help Menu  ********\n\n");
+  printf("  * clear     :       Clears screen\n");
+  printf("  * invopcode :       Executes Invalid OP Code Interruption\n");
+  printf("  * zerodiv   :       Executes Zero Division Interruption\n");
+  printf("  * exit      :       Exits shell\n");
+  printf("  * time      :       Displays current time\n");
+  printf("  * aracnoid  :       Iniciates aracnoid, press 'space' to leave\n");
+  printf("  * printmem address  :       Performs a 32-byte memory dump from the address received as an argument\n");
+  printf("  * inforeg   :       Prints the value of all the registers\n");
+
+  printf("\n  Any other command will be taken as invalid\n\n");
 }
 
 

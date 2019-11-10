@@ -1,5 +1,6 @@
 #include <commands.h>
 #include <stdio.h>
+
 /*
 void  inforeg(){
     getAllRegisters();
@@ -7,20 +8,17 @@ void  inforeg(){
 }
 */
 
-void help(){
-	printf("help:\n");
-}
 
-void inforeg(){
+void inforeg(va_list args){
 printf("inforeg:\n");
 }
 
-void printmem(){
+void printmem(va_list args){
 printf("printmem:\n");
 }
-void time(){
+void time(va_list args){
 printf("time:\n");
 }
-void aracnoid(){
+void aracnoid(va_list args){
 printf("aracnoid:\n");
 }
