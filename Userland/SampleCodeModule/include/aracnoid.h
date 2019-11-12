@@ -12,8 +12,8 @@ typedef struct GameStruct{
 
 }Game;
 
-void start();
-//GameStruct save();
+void newGame();
+Game save();
 void load(Game *  save);
 
 #endif

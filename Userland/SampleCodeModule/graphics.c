@@ -1,14 +1,11 @@
-#include <stdio.h>
+
 #include <callSyscall.h>
 #include <graphics.h>
 
 
 
-
-void init(){
- SCREEN_WIDTH = getScreenWidth();
- SCREEN_HEIGHT = getScreenHeight();
-}
+static uint64_t SCREEN_HEIGHT;
+static uint64_t SCREEN_WIDTH;
 
 uint64_t drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t color){
 
@@ -16,7 +13,7 @@ uint64_t drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t 
 }
 void clearScreen(){
 	
-	drawRect(0,0,getScreenWidth(),getScreenHeight(),0x000000);
+	drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
 
 }
 
@@ -27,3 +24,8 @@ const uint64_t getScreenHeight(){
 	return callSyscall(HEIGHT,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
 }
 
+
+void init(){
+ SCREEN_WIDTH = getScreenWidth();
+ SCREEN_HEIGHT = getScreenHeight();
+}
