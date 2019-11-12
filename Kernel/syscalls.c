@@ -6,7 +6,7 @@
 #define STDOUT 1
 #define STDERR 2
 
-uint64_t write(uint64_t fd, const char* buffer,uint64_t count){
+uint64_t sys_write(uint64_t fd, const char* buffer,uint64_t count){
     switch(fd){
         case STDOUT:
             
@@ -37,7 +37,7 @@ uint64_t write(uint64_t fd, const char* buffer,uint64_t count){
     return 0;
 }
 
-uint64_t read(uint64_t fd,char * buffer,uint64_t count){
+uint64_t sys_read(uint64_t fd,char * buffer,uint64_t count){
 	switch(fd){
         case STDIN:
 				
@@ -56,4 +56,15 @@ uint64_t read(uint64_t fd,char * buffer,uint64_t count){
     }
     return 1;
 	
+}
+
+uint64_t sys_drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint32_t color){
+	return drawRect(x,y,width,height,color);
+}
+
+uint64_t sys_getHeight(){
+	return getScreenHeight();
+}
+uint64_t sys_getWidth(){
+	return getScreenWidth();
 }

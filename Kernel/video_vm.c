@@ -2,9 +2,9 @@
 #include <video_vm.h>
 #include <font.h>
 
-unsigned int SCREEN_WIDTH = 1024;
-unsigned int SCREEN_HEIGHT = 768;
-unsigned int SCREEN_bPP = 3;
+static unsigned int SCREEN_WIDTH = 1024;
+static unsigned int SCREEN_HEIGHT = 768;
+static unsigned int SCREEN_bPP = 3;
 
 struct vbe_mode_info_structure {
 	uint16_t attributes;		// deprecated, only bit 7 should be of interest to you, and it indicates the mode supports a linear frame buffer.

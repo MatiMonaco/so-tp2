@@ -4,10 +4,10 @@
 #include <lib.h>
 #include <stdint.h>
 
-unsigned int x = 0;
-unsigned int y = 0;
+ unsigned int x = 0;
+ unsigned int y = 0;
 
-static void scrollUp();
+
 char* intToBase(int num, char* str, int base);
 void reverse(char str[], int length);
 void drawDec(uint64_t value);
@@ -15,7 +15,11 @@ void drawHexa(uint64_t value);
 void drawBin(uint64_t value);
 void drawBase(uint64_t value, uint32_t base);
 void swap ( char *str1, char *str2 );
+uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned int height, int color);
+
+
 static void fixScreen();
+static void scrollUp();
 
 void drawChar(char character, int fontColor, int backgroundColor){
 
@@ -90,7 +94,17 @@ void scrollUp(){
 	
 }
 
-
+uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned int height, int color){
+	if(x < 0 || y < 0 || width < 0  || height <0 || width > getScreenWidth() || height > getScreenHeight()){
+		return -1;
+	}
+	
+	for(int i = 0; i< width;i++ ){
+		for(int j = 0; j < height; i++){
+			drawPixel(x,y,color);
+		}
+	}
+}
 
 
 

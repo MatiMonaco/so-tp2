@@ -2,6 +2,9 @@
 #define STDIO_H
 #include <stdarg.h>
 #include <stdint.h>
+
+
+#define MAX_LENGHT 500
 //void printf(const char* buffer);
 void printf(const char* format, ...);
 void putchar(char letter);

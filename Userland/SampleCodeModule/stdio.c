@@ -55,8 +55,8 @@ void printf(const char* format, ...){
 int scanf(char*format,...){
 	char c;
 	int j = 0;
-	char buffer[500];
-	while((c = getchar()) != '\n'){
+	char buffer[MAX_LENGHT];
+	while((c = getchar()) != '\n' && j <MAX_LENGHT){
 		if(c != '\b'){
 			buffer[j] = c;
 			
