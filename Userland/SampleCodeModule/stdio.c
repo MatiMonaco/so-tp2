@@ -62,6 +62,7 @@ int scanf(char*format,...){
 			
 			j++;
 		}else{
+			
 			j--;
 		}
 		putchar(c);

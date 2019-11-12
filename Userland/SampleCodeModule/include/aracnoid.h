@@ -1,6 +1,6 @@
 #ifndef ARACNOID_H
 #define ARACNOID_H
-#include <stdio.h>
+
 #include <graphics.h>
 
 typedef struct GameStruct{

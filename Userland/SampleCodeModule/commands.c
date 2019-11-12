@@ -1,6 +1,7 @@
 #include <commands.h>
 #include <exceptionsTest.h>
 #include <stdio.h>
+#include <aracnoid.h>
 
 /*
 void  inforeg(){
@@ -86,7 +87,7 @@ void time(){
 	printf("time:\n");
 }
 void aracnoid(){
-	printf("aracnoid:\n");
+	newGame();
 }
 
 void invalidopCodeException(){

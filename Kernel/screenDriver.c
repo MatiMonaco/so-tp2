@@ -54,17 +54,19 @@ void newline(){
 }
 
 void deleteChar(){
-	if(y != 0 || x != 0){
+	if(y >= 0){
 		if(x == 0){
 			x = getScreenWidth();
 			y -= CHAR_HEIGHT;
-			drawCharAt(x,y,' ',0xFFFFFF,0x000000);
-		}
-		else{
-			x -= CHAR_WIDTH;
 			
 		}
+		else{
+
+			x -= CHAR_WIDTH;
+		}
+		drawCharAt(x,y,' ',0xFFFFFF,0x000000);
 	}
+
 }
 
 void drawString(const char *string){
@@ -99,9 +101,9 @@ uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned in
 		return -1;
 	}
 	
-	for(int i = 0; i< width;i++ ){
-		for(int j = 0; j < height; i++){
-			drawPixel(x,y,color);
+	for(int i = x; i<  x + width;i++ ){
+		for(int j = y; j < y + height; j++){
+			drawPixel(i,j,color);
 		}
 	}
 }

@@ -7,7 +7,7 @@ uint64_t drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t 
 const uint64_t getScreenHeight();
 const uint64_t getScreenWidth();
 void clearScreen();
-
+void init();
 
 typedef struct rectangleStruct{
 	uint64_t x,y,height,width,color;

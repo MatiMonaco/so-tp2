@@ -19,10 +19,10 @@ char getKeyASCII();
 
 #define CTRL 0
 #define ALT 0
-#define UP 11
-#define RIGHT 0
-#define LEFT 0
-#define DOWN 9
+#define UP 25
+#define RIGHT 26
+#define LEFT 27
+#define DOWN 25
 #define ESC 0
 #define BACKSPACE '\b'
 #define TAB 0

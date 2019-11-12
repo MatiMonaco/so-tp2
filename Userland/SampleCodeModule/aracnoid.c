@@ -1,5 +1,5 @@
 #include <aracnoid.h>
-
+#include <stdio.h>
 static void render();
 static void update();
 static void loadLevel();
@@ -13,20 +13,20 @@ static void movePlayer();
 #define SCREEN_WIDTH getScreenWidth()
 #define SCREEN_HEIGHT getScreenHeight()
 
-#define DEFAULT_RECT_WIDTH 30
-#define DEFAULT_RECT_HEIGHT 15
+#define DEFAULT_RECT_WIDTH  50
+#define DEFAULT_RECT_HEIGHT 25
 #define DEFAULT__PLAYER_X_POS  ((SCREEN_WIDTH / 2) - (DEFAULT_RECT_WIDTH) / 2)
 #define DEFAULT__PLAYER_Y_POS (SCREEN_HEIGHT - DEFAULT_RECT_HEIGHT)
 #define DEFAULT_PLAYER_COLOR 0xFFFFFF
-#define DEFAULT_PLAYER_X_SPEED 5
+#define DEFAULT_PLAYER_X_SPEED 20
 
 
-#define DEFAULT_BALL_RADIUS 10
+#define DEFAULT_BALL_RADIUS 25
 #define DEFAULT_BALL_COLOR 0xFF0000
 #define DEFAULT_BALL_X_POS (DEFAULT__PLAYER_X_POS + (DEFAULT_RECT_WIDTH / 2))
 #define DEFAULT_BALL_Y_POS (DEFAULT__PLAYER_Y_POS - (DEFAULT_BALL_RADIUS / 2))
 #define DEFAULT_BALL_X_SPEED 5
-#define DEFAULT_BALL_Y_SPEED 5
+#define DEFAULT_BALL_Y_SPEED -5
 
 typedef struct PlayerStruct{
 	Rectangle r;
@@ -43,7 +43,7 @@ static Game game;
 static Player player;
 static Ball ball;
 static uint64_t running = 0;
-static const uint8_t RIGHT,LEFT;
+static  uint8_t RIGHT,LEFT;
 
 
 
@@ -61,6 +61,7 @@ void newGame(){
 	ball.c.color = DEFAULT_BALL_COLOR;
 	ball.xSpeed = DEFAULT_BALL_X_SPEED;
 	ball.ySpeed = DEFAULT_BALL_Y_SPEED;
+	init();
 	loadLevel();
 	running = 1;
 	play();
@@ -81,17 +82,28 @@ static void play(){
 }
 
 static void keyHandler(){
-
-
+		char key = getchar();
+		if(key == 'a' || key == 'A'){
+			LEFT = 1;
+			RIGHT = 0;
+		}
+		if(key == 'd' || key == 'D'){
+			RIGHT = 1;
+			LEFT = 0;
+		}
+		if(key == 'r' || key =='R'){
+			newGame();
+		} 
+	
 
 }
 
 static void update(){
-		moveBall();
+	//	moveBall();
 		movePlayer();
-		if(ball.c.y + ball.c.radius >= SCREEN_HEIGHT){
+	/*	if(ball.c.y + ball.c.radius >= SCREEN_HEIGHT){
 			running = 0;
-		}
+		}*/
 		
 		
 }
