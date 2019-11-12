@@ -4,6 +4,7 @@
 
 #define READ 3
 #define WRITE 4
+#define SPEAKER 5 
 #define ERROR -1
 
 uint64_t syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3, void* param4, void* param5, void* param6){
@@ -15,6 +16,13 @@ uint64_t syscallDispatcher(uint64_t id, void* param1, void* param2, void* param3
 		case READ:
 			 return read((uint64_t)param1,(char*) param2,(uint64_t) param3);//
 		break;
+	case SPEAKER:
+		speaker();
+	        break;  
+		    
+		    
+		    
+		    
 		default:
 			return ERROR;
 		break;
