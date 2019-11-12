@@ -13,7 +13,9 @@ typedef struct GameStruct{
 }Game;
 
 void newGame();
+
+/*
 Game save();
 void load(Game *  save);
-
+*/
 #endif
