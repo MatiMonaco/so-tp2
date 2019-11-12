@@ -55,7 +55,7 @@ void printf(const char* format, ...){
 int scanf(char*format,...){
 	char c;
 	int j = 0;
-	char buffer[128];
+	char buffer[500];
 	while((c = getchar()) != '\n'){
 		if(c != '\b'){
 			buffer[j] = c;

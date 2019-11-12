@@ -61,20 +61,20 @@ void drawPixel(unsigned int x, unsigned int y, int color)
     screen[where + 2] = (color >> 16) & 255;  // RED
 }
 
-char * getFrameBuffer(){
+uint32_t getFrameBuffer(){
 	return screenData->framebuffer;
 }
 
 unsigned int getScreenHeight(){
-	return SCREEN_HEIGHT;
+	return screenData->height;
 }
 
 unsigned int getScreenWidth(){
-	return SCREEN_WIDTH;
+	return screenData->width;
 }
 
 unsigned int getScreenBPP(){
-	return SCREEN_bPP;
+	return screenData->bpp / 8;
 }
 void drawCharAt(int x, int y, char character, int fontColor, int backgroundColor){
 	int aux_x = x;

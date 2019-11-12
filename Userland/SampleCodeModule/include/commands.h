@@ -20,7 +20,7 @@ struct commandStruct{
 #define ZERODIVEX 7
 
 
-#define MAX_LENGHT 128
+#define MAX_LENGHT 500
 
 void printMemASM(uint64_t address);
 void printMem(uint64_t* address);

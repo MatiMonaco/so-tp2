@@ -6,6 +6,6 @@ void drawPixel(unsigned int x, unsigned int y, int color);
 unsigned int getScreenHeight();
 unsigned int getScreenWidth();
 void drawCharAt(int x, int y, char character, int fontColor, int backgroundColor);
-char * getFrameBuffer();
+unsigned int getFrameBuffer();
 unsigned int getScreenBPP();
 #endif

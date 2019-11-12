@@ -7,7 +7,7 @@
 unsigned int x = 0;
 unsigned int y = 0;
 
-static void scrollDown();
+static void scrollUp();
 char* intToBase(int num, char* str, int base);
 void reverse(char str[], int length);
 void drawDec(uint64_t value);
@@ -15,17 +15,10 @@ void drawHexa(uint64_t value);
 void drawBin(uint64_t value);
 void drawBase(uint64_t value, uint32_t base);
 void swap ( char *str1, char *str2 );
+static void fixScreen();
 
 void drawChar(char character, int fontColor, int backgroundColor){
-    if(x == getScreenWidth()){
-        if(y == getScreenHeight()){
-            scrollDown();
-        }
-        else{
-            y += CHAR_HEIGHT;
-        }
-		x = 0;
-    }
+
 	if(character == '\n'){
 		newline();
 	}
@@ -36,14 +29,22 @@ void drawChar(char character, int fontColor, int backgroundColor){
     	drawCharAt(x,y,character,fontColor,backgroundColor);
 		x += CHAR_WIDTH;
 	}
+	fixScreen();
+
+}
+static void fixScreen(){
+	if(x >= getScreenWidth()){
+
+		newline();
+	}
+	
 }
 
 void newline(){
-	if(y == getScreenHeight()){
-		scrollDown();
-	}
-	else{
-		y += CHAR_HEIGHT;
+	y += CHAR_HEIGHT;
+	if(y >= getScreenHeight()){
+        scrollUp();
+	
 	}
 	x = 0;
 }
@@ -57,7 +58,7 @@ void deleteChar(){
 		}
 		else{
 			x -= CHAR_WIDTH;
-			drawCharAt(x,y,' ',0xFFFFFF,0x000000);
+			
 		}
 	}
 }
@@ -76,11 +77,17 @@ void drawStringWithColor(const char *string, int fontColor, int backgroundColor)
 	}
 }
 
-void scrollDown(){
-	char* start = getFrameBuffer();
-	char * secondLine = start + (getScreenWidth() * getScreenBPP());
-	int size = getScreenWidth() * (getScreenHeight() - 1) * getScreenBPP();
+void scrollUp(){
+	char *  start = (char * )getFrameBuffer();
+	char *  secondLine = (char * )(getFrameBuffer() + getScreenWidth()*CHAR_HEIGHT*getScreenBPP());
+	uint64_t size = getScreenWidth()*(getScreenHeight()-CHAR_HEIGHT)* getScreenBPP();
+	
 	memcpy(start,secondLine,size);
+	y-=CHAR_HEIGHT;
+	for(int i = 0; i< getScreenWidth(); i+=CHAR_WIDTH){
+		drawCharAt(i,y,' ',0xFFFFFF,0x000000);
+	}
+	
 }
 
 

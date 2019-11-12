@@ -6,7 +6,7 @@ void exceptionDispatcher(int exception_id){
 switch(exception_id)
 	{
 		case ZERO_EXCEPTION_ID: 
-		    drawString("ZERO DIVISION EXCEPTION");
+		    drawChar('Z',0xFFFFFF,0x000000);
                     break;
 	        case INVALID_CODE_ID: 
 	            drawString("INVALID OPERATION EXCEPTION");

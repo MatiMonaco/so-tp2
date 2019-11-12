@@ -3,11 +3,12 @@
     "",
     "\\Kernel",
     "\\Kernel\\asm",
+    "\\Kernel\\include",
     "\\Userland",
     "\\Userland\\SampleCodeModule",
     "\\Userland\\SampleCodeModule\\asm",
     "\\Userland\\SampleCodeModule\\include"
   ],
-  "SelectedNode": "\\Userland\\SampleCodeModule\\include\\commands.h",
+  "SelectedNode": "\\Kernel\\syscalls.c",
   "PreviewInSolutionExplorer": false
 }
