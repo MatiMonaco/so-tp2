@@ -24,28 +24,33 @@ cpuVendor:
 	mov rsp, rbp
 	pop rbp
 	ret
-beepon:
-    push rbp
-    mov rbp, rsp
 
-    mov al, 0xB6
-    out 0x43, al
-    ;Convert the frequency into two eight bit values, then output them to port 42h
-    mov rax, 0
-    mov ax, 3A98h       
-    out 0x42, al
-    mov al, ah
-    out 0x42, al
-    in al, 0x61
-    mov al, 0x03 ;prendo el speaker
-    out 61h, al
+_beep_start:
+	push rbp
+	mov rbp, rsp
 
-    mov rsp, rbp
-    pop rbp
-    ret
-    
-beepoff:
-    in al, 61h
-    mov al, 0x00 ;apago el speaker
-    out 61h, al
-    ret
+	mov al, 0xB6
+	out 43h,al
+
+	mov rbx, rdi
+	mov rax, 0
+	mov ax, bx
+
+	;mov ax, 1193 ;1193180 / nFrequence;
+	out 42h,al
+	mov al,ah
+	out 42h,al
+
+	in al, 61h 
+ 	or al, 03h
+	out 61h,al
+
+	mov rsp, rbp
+	pop rbp
+	ret
+
+_beep_stop:
+  	in al, 61h
+	and al, 0xFC
+	out 61h, al
+  	ret
