@@ -13,7 +13,7 @@ static void movePlayer();
 #define SCREEN_WIDTH getScreenWidth()
 #define SCREEN_HEIGHT getScreenHeight()
 
-#define DEFAULT_RECT_WIDTH  50
+#define DEFAULT_RECT_WIDTH  100
 #define DEFAULT_RECT_HEIGHT 25
 #define DEFAULT__PLAYER_X_POS  ((SCREEN_WIDTH / 2) - (DEFAULT_RECT_WIDTH) / 2)
 #define DEFAULT__PLAYER_Y_POS (SCREEN_HEIGHT - DEFAULT_RECT_HEIGHT)
@@ -75,7 +75,21 @@ static void loadLevel(){
 
 static void play(){
 		while(running){
-			keyHandler();
+		char key;
+			while((key = getchar())){
+						if(key == 'a' || key == 'A'){
+					player.r.x -= player.xSpeed;
+				}else if(key == 'd' || key == 'D'){
+					player.r.x += player.xSpeed;
+				}else if(key == 'r' || key =='R'){
+					newGame();
+				}else{
+					LEFT = 0;
+					RIGHT = 0;
+				}
+			
+			}
+		//	keyHandler();
 			update();
 			render();
 		}
@@ -83,17 +97,7 @@ static void play(){
 
 static void keyHandler(){
 		char key = getchar();
-		if(key == 'a' || key == 'A'){
-			LEFT = 1;
-			RIGHT = 0;
-		}
-		if(key == 'd' || key == 'D'){
-			RIGHT = 1;
-			LEFT = 0;
-		}
-		if(key == 'r' || key =='R'){
-			newGame();
-		} 
+		
 	
 
 }
@@ -138,11 +142,11 @@ static void checkBallCollisions(){
 }
 
 static void movePlayer(){
-	if(LEFT && player.r.x > 0){
+	if(LEFT  && !RIGHT && player.r.x > 0){
 		player.r.x -= player.xSpeed;
 	}
-	if(RIGHT && player.r.x + player.r.width < SCREEN_WIDTH){
-		player.r.x -= player.xSpeed;
+	if(RIGHT && !LEFT && player.r.x + player.r.width < SCREEN_WIDTH){
+		player.r.x += player.xSpeed;
 	}
 }
 

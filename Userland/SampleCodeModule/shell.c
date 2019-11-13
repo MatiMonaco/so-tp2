@@ -37,7 +37,7 @@ void initShell(){
 }
 
 static void commandDispacher(char* buffer){
-	char  command[MAX_LENGHT];
+
 	
 
 	uint64_t id = getCommandId(buffer);

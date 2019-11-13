@@ -6,13 +6,16 @@
 
 
 void putchar(char c){
+	if(c!= 0){
 	callSyscall(WRITE,(void*) 1,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0);
+	}
+	
 }
 char getchar(){
-	char c;
+	char c = 0;
 
-	while(callSyscall(READ,(void*)0,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0) == 0);
-	
+	//while(callSyscall(READ,(void*)0,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0) == 0);
+	callSyscall(READ,(void*)0,(void*)&c,(void*)1,(void*)0,(void*)0,(void*)0);
 	return c;
 }
 /*
@@ -57,15 +60,19 @@ int scanf(char*format,...){
 	int j = 0;
 	char buffer[MAX_LENGHT];
 	while((c = getchar()) != '\n' && j <MAX_LENGHT){
-		if(c != '\b'){
-			buffer[j] = c;
+
+		if(c != 0){
+			if(c != '\b'){
+					buffer[j] = c;
 			
-			j++;
-		}else{
+					j++;
+				}else{
 			
-			j--;
+					j--;
+				}
+				putchar(c);
 		}
-		putchar(c);
+		
 		
 		
 	}
