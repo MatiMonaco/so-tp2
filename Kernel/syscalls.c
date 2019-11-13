@@ -59,6 +59,13 @@ uint64_t sys_read(uint64_t fd,char * buffer,uint64_t count){
 	
 }
 
+
+ sys_speaker(){
+	 speaker();
+ }
+	
+
+
 uint64_t sys_drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t color){
 	return drawRect(x,y,width,height,color);
 }
