@@ -91,6 +91,7 @@ static void play(){
 }
 
 static void keyHandler(char key){
+	/*
 			if(key == 'a' || key == 'A'){
 					LEFT = 1;
 					RIGTH = 0;
@@ -103,7 +104,7 @@ static void keyHandler(char key){
 					RIGHT = 0;
 					LEFT = 0;
 				}
-				
+				*/
 	
 
 }

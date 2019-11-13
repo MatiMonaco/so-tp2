@@ -60,7 +60,7 @@ uint64_t sys_read(uint64_t fd,char * buffer,uint64_t count){
 }
 
 
-void _beep(uint64_t timer){
+void sys_beep(uint64_t timer){
   beep(timer);
 }
 	

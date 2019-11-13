@@ -7,4 +7,5 @@ uint64_t sys_drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint6
 uint64_t sys_getHeight();
 uint64_t sys_getWidth();
 uint64_t sys_sleep(uint64_t millis);
+void sys_beep(uint64_t timer);
 #endif
