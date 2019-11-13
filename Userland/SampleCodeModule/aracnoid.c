@@ -1,13 +1,17 @@
 #include <aracnoid.h>
 #include <stdio.h>
+#include <callSyscall.h>
 static void render();
 static void update();
 static void loadLevel();
 static void play();
-static void keyHandler();
+
+static void keyHandler(char key);
 static void checkBallCollisions();
 static void moveBall();
 static void movePlayer();
+
+static uint64_t sleep(uint64_t ticks);
 
 
 #define SCREEN_WIDTH getScreenWidth()
@@ -76,28 +80,30 @@ static void loadLevel(){
 static void play(){
 		while(running){
 		char key;
-			while((key = getchar())){
-						if(key == 'a' || key == 'A'){
-					player.r.x -= player.xSpeed;
-				}else if(key == 'd' || key == 'D'){
-					player.r.x += player.xSpeed;
-				}else if(key == 'r' || key =='R'){
-					newGame();
-				}else{
-					LEFT = 0;
-					RIGHT = 0;
-				}
-			
+			while((key = getchar()) != 'x'){
+				keyHandler(key);
+				update();
+				render();
+				//sleep(1);
 			}
-		//	keyHandler();
-			update();
-			render();
+			
 		}
 }
 
-static void keyHandler(){
-		char key = getchar();
-		
+static void keyHandler(char key){
+			if(key == 'a' || key == 'A'){
+					LEFT = 1;
+					RIGTH = 0;
+				}else if(key == 'd' || key == 'D'){
+					RIGHT = 1;
+					LEFT = 0;
+				}else if(key == 'r' || key =='R'){
+					newGame();
+				}else{
+					RIGHT = 0;
+					LEFT = 0;
+				}
+				
 	
 
 }
@@ -142,15 +148,18 @@ static void checkBallCollisions(){
 }
 
 static void movePlayer(){
-	if(LEFT  && !RIGHT && player.r.x > 0){
+	if(LEFT && player.r.x > 0){
 		player.r.x -= player.xSpeed;
 	}
-	if(RIGHT && !LEFT && player.r.x + player.r.width < SCREEN_WIDTH){
+	if(RIGHT && player.r.x + player.r.width < SCREEN_WIDTH){
 		player.r.x += player.xSpeed;
 	}
 }
 
+static uint64_t sleep(uint64_t ticks){
+	return callSyscall(SLEEP,(void*)ticks,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
 
+}
 /*
 Game save(){
 

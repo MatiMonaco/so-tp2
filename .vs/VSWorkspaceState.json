@@ -6,9 +6,8 @@
     "\\Kernel\\include",
     "\\Userland",
     "\\Userland\\SampleCodeModule",
-    "\\Userland\\SampleCodeModule\\asm",
     "\\Userland\\SampleCodeModule\\include"
   ],
-  "SelectedNode": "\\Kernel\\syscalls.c",
+  "SelectedNode": "\\Kernel\\screenDriver.c",
   "PreviewInSolutionExplorer": false
 }

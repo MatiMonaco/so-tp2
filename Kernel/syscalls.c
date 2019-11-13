@@ -2,6 +2,7 @@
 #include <syscalls.h>
 #include <kbDriver.h>
 #include <screenDriver.h>
+#include <time.h>
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
@@ -67,4 +68,14 @@ uint64_t sys_getHeight(){
 }
 uint64_t sys_getWidth(){
 	return getScreenWidth();
+}
+
+uint64_t sys_sleep(uint64_t ticks){
+	if(ticks <= 0){
+		return -1;
+	}
+	uint64_t start =ticks_elapsed();
+	while((ticks_elapsed() - start) < ticks);
+	
+	return 1;
 }
