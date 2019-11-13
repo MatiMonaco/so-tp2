@@ -37,9 +37,15 @@ beepon:
     mov al, ah
     out 0x42, al
     in al, 0x61
-    mov al, 0x03
+    mov al, 0x03 ;prendo el speaker
     out 61h, al
 
     mov rsp, rbp
     pop rbp
+    ret
+    
+beepoff:
+    in al, 61h
+    mov al, 0x00 ;apago el speaker
+    out 61h, al
     ret
