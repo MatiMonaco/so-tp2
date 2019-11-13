@@ -60,9 +60,9 @@ uint64_t sys_read(uint64_t fd,char * buffer,uint64_t count){
 }
 
 
- sys_speaker(){
-	 speaker();
- }
+void _beep(uint64_t timer){
+  beep(timer);
+}
 	
 
 
