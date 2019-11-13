@@ -26,7 +26,7 @@ void drawChar(char character, int fontColor, int backgroundColor){
 	if(character == '\n'){
 		newline();
 	}
-	else if(character == '\b'){
+	else if(character == '\b' && (x != 0 && x != 0)){
 		deleteChar();
 	}
 	else{
@@ -56,7 +56,7 @@ void newline(){
 void deleteChar(){
 	if(y >= 0){
 		if(x == 0){
-			x = getScreenWidth();
+			x = getScreenWidth() - CHAR_WIDTH;
 			y -= CHAR_HEIGHT;
 			
 		}
@@ -107,9 +107,6 @@ uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned in
 		}
 	}
 }
-
-
-
 
 
 
