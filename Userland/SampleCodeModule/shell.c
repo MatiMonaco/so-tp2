@@ -5,7 +5,7 @@
 #include <graphics.h>
 
 static void clearBuffer(char * buffer);
-static void commandDispacher(char* buffer);
+static void commandDispacher(char* command,char*parameter);
 static void commandNotFound();
 static int64_t getCommandId(char * buffer);
 static void help();
@@ -22,25 +22,27 @@ static struct commandStruct commands[] = {{EXIT,"exit","Exits shell",0},
 
 void initShell(){
 
-	char entry[MAX_LENGHT] ={0};
+	char command[MAX_LENGHT] ={0};
+	char parameter[MAX_LENGHT] = {0};
 
  printf("\nTerminal:\n\nPlease type 'help' to find out about our commands\n\n\n");
  
 	while(1){
 		printf("$> ");
-		clearBuffer(entry);
-		scanf("%s",entry);
+		clearBuffer(command);
+		clearBuffer(parameter);
+		scanf("%s %s",command,parameter);
 		putchar('\n');
-		commandDispacher(entry);
+		commandDispacher(command,parameter);
 	}
 		
 }
 
-static void commandDispacher(char* buffer){
+static void commandDispacher(char* command,char*parameter){
 
 	
 
-	uint64_t id = getCommandId(buffer);
+	uint64_t id = getCommandId(command);
 	switch(id){
 
 		case HELP:
@@ -56,7 +58,7 @@ static void commandDispacher(char* buffer){
 		break;
 
 		case PRINTMEM:
-			printMem((uint64_t*) 0x000000);
+			printMem(parameter);
 		break;
 
 		case INFOREG:

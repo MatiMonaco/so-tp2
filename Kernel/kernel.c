@@ -8,6 +8,7 @@
 #include <video_vm.h>
 #include <screenDriver.h>
 #include <rtc.h>
+#include <interrupts.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -91,6 +92,7 @@ int main()
 	load_idt();
 	initRTC();
 	displayDateTime();
+	instructionPointerBackup = sampleCodeModuleAddress;
 	((EntryPoint)sampleCodeModuleAddress)();
 	/*ncPrint("[Kernel Main]");
 	ncNewline();

@@ -22,7 +22,7 @@ struct commandStruct{
 
 
 void printMemASM(uint64_t address);
-void printMem(uint64_t* address);
+void printMem(char* address);
 void infoReg();
 void time();
 void aracnoid();

@@ -2,13 +2,8 @@
 #include <exceptionsTest.h>
 #include <stdio.h>
 #include <aracnoid.h>
+#include <callSysCall.h>
 
-/*
-void  inforeg(){
-    getAllRegisters();
-    return 0;
-}
-*/
 static enum Registers{RAX = 0,RBX,RCX,RDX,RBP,RDI,RSI,R8,R9,R10,R11,R12,R13,R14,R15};
 static const char* regNames[] = {"RAX","RBX","RCX","RDX","RBP","RDI","RSI","R8","R9","R10","R11","R12","R13","R14","R15"};
 
@@ -75,16 +70,20 @@ void infoReg(){
 		putchar('\n');
 }
 
-void printMem(uint64_t* address){
+void printMem(char* address){
+    /*
 	printf("printmem:\n");
     for(int i = 0; i < 32;i++){
         printf("byte %d : ", i+1);
         printMemASM(*address++);
         putchar('\n');
     }
+    */
 }
 void time(){
 	printf("time:\n");
+    callSyscall(TIME,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0);
+    putchar('\n');
 }
 void aracnoid(){
 	newGame();

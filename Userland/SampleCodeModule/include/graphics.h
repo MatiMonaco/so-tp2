@@ -6,16 +6,16 @@
 uint64_t drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t color);
 const uint64_t getScreenHeight();
 const uint64_t getScreenWidth();
-void clearScreen();
 void init();
-
+uint64_t drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color);
 typedef struct rectangleStruct{
-	uint64_t x,y,height,width,color;
+	int x,y,height,width,color;
 
 }Rectangle;
 
 typedef struct circleStruct{
-	uint64_t x,y,radius,color;
+	int x,y,color;
+	int radius;
 
 }Circle;
 

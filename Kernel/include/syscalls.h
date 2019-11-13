@@ -8,4 +8,6 @@ uint64_t sys_getHeight();
 uint64_t sys_getWidth();
 uint64_t sys_sleep(uint64_t millis);
 void sys_beep(uint64_t timer);
+uint64_t sys_drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color);
+uint64_t sys_time();
 #endif

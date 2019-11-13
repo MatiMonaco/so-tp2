@@ -3,6 +3,7 @@
 #include <kbDriver.h>
 #include <screenDriver.h>
 #include <time.h>
+#include <rtc.h>
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
@@ -84,5 +85,14 @@ uint64_t sys_sleep(uint64_t ticks){
 	uint64_t start =ticks_elapsed();
 	while((ticks_elapsed() - start) < ticks);
 	
+	return 1;
+}
+
+uint64_t sys_drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color){
+	return drawCircle(x,y,radius,color);
+}
+
+uint64_t sys_time(){
+	displayDateTime();
 	return 1;
 }

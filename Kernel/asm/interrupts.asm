@@ -16,7 +16,7 @@ GLOBAL _exception00Handler
 GLOBAL _exception06Handler
 
 GLOBAL _syscallHandler
-
+GLOBAL instructionPointerBackup
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
 EXTERN syscallDispatcher
@@ -74,6 +74,7 @@ SECTION .text
 %endmacro
 
 %macro exceptionHandler 1
+	mov rsi,[rsp];
 	pushState
 
 	mov rdi, %1 ; pasaje de parametro
@@ -165,3 +166,4 @@ haltcpu:
 
 SECTION .bss
 	aux resq 1
+	instructionPointerBackup resq 1

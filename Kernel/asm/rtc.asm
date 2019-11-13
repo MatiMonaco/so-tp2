@@ -27,7 +27,7 @@ getCurrSecs:
 	mov al, 0x00
 	out 70h, al
 	in al, 71h
-
+	
 	mov rsp, rbp
 	pop rbp
 	ret

@@ -15,7 +15,6 @@ void drawHexa(uint64_t value);
 void drawBin(uint64_t value);
 void drawBase(uint64_t value, uint32_t base);
 void swap ( char *str1, char *str2 );
-uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned int height, int color);
 
 
 static void fixScreen();
@@ -97,7 +96,7 @@ void scrollUp(){
 }
 
 uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned int height, int color){
-	if(x < 0 || y < 0 || width < 0  || height <0 || width > getScreenWidth() || height > getScreenHeight()){
+	if(x < 0 || y < 0 || width < 0  || height <0 || width > getScreenWidth() || height > getScreenHeight() || x > getScreenWidth() || y > getScreenHeight()){
 		return -1;
 	}
 	
@@ -106,11 +105,15 @@ uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned in
 			drawPixel(i,j,color);
 		}
 	}
+	return 1;
 }
 
-
-
-
-
-
-
+uint64_t drawCircle(unsigned int xc, unsigned int yc, int r, int color){
+	for(int i = -r ; i <= r ; i++){
+		for(int j = -r ; j <= r; j++){
+			if(i*i + j*j <= r*r){
+				drawPixel(xc+i,yc+j,color);
+			}
+		}
+	}
+}
