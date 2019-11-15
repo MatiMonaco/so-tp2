@@ -31,8 +31,8 @@ static uint64_t sleep(int ticks);
 #define DEFAULT_BALL_COLOR 0xFFFFFF
 #define DEFAULT_BALL_X_POS (DEFAULT__PLAYER_X_POS + (DEFAULT_RECT_WIDTH / 2))
 #define DEFAULT_BALL_Y_POS (DEFAULT__PLAYER_Y_POS - (2 * DEFAULT_BALL_RADIUS))
-#define DEFAULT_BALL_X_SPEED -7
-#define DEFAULT_BALL_Y_SPEED -7
+#define DEFAULT_BALL_X_SPEED -9
+#define DEFAULT_BALL_Y_SPEED -9
 
 typedef struct PlayerStruct{
 	Rectangle r;
@@ -76,7 +76,7 @@ void newGame(){
 	ball.xSpeed = (int)DEFAULT_BALL_X_SPEED;
 	ball.ySpeed = (int)DEFAULT_BALL_Y_SPEED;
 	init();
-	loadLevel();
+
 	running = 1;
 
 	play();
@@ -97,8 +97,11 @@ static void loadLevel(){
 
 
 static void play(){
-			drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
+
+		drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
+
 		update();
+		loadLevel();
 		while(running){
 		char key;
 			while((key = getchar()) != 'x'){
@@ -170,10 +173,11 @@ static void checkBallCollisions(){
 		for(int j = 0; j < cols; j++){
 				Wall wall = walls[i][j];
 				int hit;
-				if(!wall.hit){
+				if(wall.hit == 0){
 					hit = checkRectCollision(wall.r);
-					if(hit){
+					if(hit == 1){
 						walls[i][j].hit = 1;
+						drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,0x000000);
 					}
 				}
 			
@@ -186,8 +190,10 @@ static void renderWalls(){
 	for(int i = 0; i< rows;i++){
 		for(int j = 0; j < cols; j++){
 				Wall wall = walls[i][j];
-				if(!wall.hit){
+				if(wall.hit == 0){
 					drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
+				}else{
+					drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,0x000000);
 				}
 			
 		}
@@ -198,19 +204,27 @@ static int checkRectCollision(Rectangle rec){
 	int ballX = ball.c.x;
 	int ballY = ball.c.y;
 	int radius = ball.c.radius;
+	//UP AND DOWN
 	if(ballX >= rec.x && ballX <= rec.x + rec.width){
-		if(((ballY + radius) >= rec.y) || ((ballY>= rec.y + rec.height) && (ballY - radius <= rec.y + rec.height) )){
+		int isDown = (ballY + radius >= rec.y + rec.height) && (ballY - radius <= rec.y + rec.height);
+		int isUp =  ballY - radius <= rec.y && ballY + radius >= rec.y ;
+		if(isDown || isUp){
 			ball.ySpeed *=-1;
 			return 1;
 		}
 		
 	}
-	/*if(ballY >= rec.y && ballY <= rec.y + rec.height){
-			if(ballX + radius >= rec.x || ballX - radius <= rec.x + rec.width){
-				ball.xSpeed *=-1;
-				return 1;
-			}
-	}*/
+	//LEFT AND RIGHT
+	if(ballY >= rec.y && ballY <= rec.y + rec.height){
+		int isLeft = (ballX - radius <= rec.x) && (ballX + radius >= rec.x);
+		int isRight = (ballX + radius >= rec.x + rec.width) && (ballX - radius <= rec.x + rec.width);
+		if(isLeft || isRight){
+			ball.xSpeed *=-1;
+			return 1;
+		}
+	
+	}
+	
 	return 0;
 
 
