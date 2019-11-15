@@ -8,6 +8,6 @@
     "\\Userland\\SampleCodeModule",
     "\\Userland\\SampleCodeModule\\include"
   ],
-  "SelectedNode": "\\Kernel\\screenDriver.c",
+  "SelectedNode": "\\Userland\\SampleCodeModule\\aracnoid.c",
   "PreviewInSolutionExplorer": false
 }

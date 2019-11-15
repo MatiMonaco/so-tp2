@@ -2,11 +2,11 @@
 #define ZERO_EXCEPTION_ID 0
 #define INVALID_CODE_ID 6
 
-void exceptionDispatcher(int exception_id){
+void exceptionDispatcher(int exception_id,uint64_t * stackPointer){
 switch(exception_id)
 	{
 		case ZERO_EXCEPTION_ID: 
-		    drawChar('Z',0xFFFFFF,0x000000);
+		    drawString("ZERO EXCEPTION");
                     break;
 	        case INVALID_CODE_ID: 
 	            drawString("INVALID OPERATION EXCEPTION");

@@ -20,6 +20,7 @@ GLOBAL instructionPointerBackup
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
 EXTERN syscallDispatcher
+EXTERN initializeSampleModule
 
 SECTION .text
 
@@ -79,8 +80,9 @@ SECTION .text
 
 	mov rdi, %1 ; pasaje de parametro
 	call exceptionDispatcher
-
+	
 	popState
+	call initializeSampleModule
 	iretq
 %endmacro
 
@@ -166,4 +168,3 @@ haltcpu:
 
 SECTION .bss
 	aux resq 1
-	instructionPointerBackup resq 1

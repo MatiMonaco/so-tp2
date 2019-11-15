@@ -10,14 +10,14 @@ static void commandNotFound();
 static int64_t getCommandId(char * buffer);
 static void help();
 
-static struct commandStruct commands[] = {{EXIT,"exit","Exits shell",0},
-										{TIME,"time","Displays current time",0},
-										{PRINTMEM,"printmem","Performs a 32-byte memory dump from the address received as an argument",1},
-										{INFOREG,"inforeg","Prints the value of all the registers",0},
-										{ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave",0},
-										{OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption",0},
-										{ZERODIVEX,"zerodivex","Executes Zero Division Interruption",0},
-										{HELP,"help","Shows all available commands",0},
+static struct commandStruct commands[] = {{C_EXIT,"exit","Exits shell",0},
+										{C_TIME,"time","Displays current time",0},
+										{C_PRINTMEM,"printmem","Performs a 32-byte memory dump from the address received as an argument",1},
+										{C_INFOREG,"inforeg","Prints the value of all the registers",0},
+										{C_ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave",0},
+										{C_OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption",0},
+										{C_ZERODIVEX,"zerodivex","Executes Zero Division Interruption",0},
+										{C_HELP,"help","Shows all available commands",0},
 										{0,"","",0}};
 
 void initShell(){
@@ -45,36 +45,36 @@ static void commandDispacher(char* command,char*parameter){
 	uint64_t id = getCommandId(command);
 	switch(id){
 
-		case HELP:
+		case C_HELP:
 			help();
 		break;
 
-		case EXIT:
+		case C_EXIT:
 			exit();
 		break;
 
-		case TIME:
+		case C_TIME:
 			time();
 		break;
 
-		case PRINTMEM:
+		case C_PRINTMEM:
 			printMem(parameter);
 		break;
 
-		case INFOREG:
+		case C_INFOREG:
 			infoReg();
 		break;
 
-		case ARACNOID:
+		case C_ARACNOID:
 			aracnoid();
 	
 		break;
 
-		case OPCODEEX:
+		case C_OPCODEEX:
 			invalidopCodeException();
 		break;
 
-		case ZERODIVEX:
+		case C_ZERODIVEX:
 			zeroDivException();
 		break;
 

@@ -3,7 +3,7 @@
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
-#include "idtLoader.h"
+#include <idtLoader.h>
 #include <kbDriver.h>
 #include <video_vm.h>
 #include <screenDriver.h>
@@ -17,12 +17,16 @@ extern uint8_t bss;
 extern uint8_t endOfKernelBinary;
 extern uint8_t endOfKernel;
 
+
+void initializeSampleModule();
+
 static const uint64_t PageSize = 0x1000;
 
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
+
 
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
@@ -86,14 +90,17 @@ void * initializeKernelBinary()
 	return getStackBase();
 }
 
+void initializeSampleModule(){
+((EntryPoint)sampleCodeModuleAddress)();
+}
+
 int main()
 {
 	init_VM_Driver();
 	load_idt();
 	initRTC();
 	displayDateTime();
-	instructionPointerBackup = sampleCodeModuleAddress;
-	((EntryPoint)sampleCodeModuleAddress)();
+	initializeSampleModule();
 	/*ncPrint("[Kernel Main]");
 	ncNewline();
 	GetCurrTime();

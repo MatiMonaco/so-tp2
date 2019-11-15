@@ -8,11 +8,12 @@ static void play();
 
 static void keyHandler(char key);
 static void checkBallCollisions();
+static int checkRectCollision(Rectangle rec);
 static void moveBall();
 static void movePlayer();
-static void clearScreen();
+static void renderWalls();
 
-static uint64_t sleep(uint64_t ticks);
+static uint64_t sleep(int ticks);
 
 
 #define SCREEN_WIDTH getScreenWidth()
@@ -26,12 +27,12 @@ static uint64_t sleep(uint64_t ticks);
 #define DEFAULT_PLAYER_X_SPEED 20
 
 
-#define DEFAULT_BALL_RADIUS 5
+#define DEFAULT_BALL_RADIUS 8
 #define DEFAULT_BALL_COLOR 0xFFFFFF
 #define DEFAULT_BALL_X_POS (DEFAULT__PLAYER_X_POS + (DEFAULT_RECT_WIDTH / 2))
-#define DEFAULT_BALL_Y_POS (DEFAULT__PLAYER_Y_POS - (DEFAULT_BALL_RADIUS))
-#define DEFAULT_BALL_X_SPEED -10
-#define DEFAULT_BALL_Y_SPEED -10
+#define DEFAULT_BALL_Y_POS (DEFAULT__PLAYER_Y_POS - (2 * DEFAULT_BALL_RADIUS))
+#define DEFAULT_BALL_X_SPEED -7
+#define DEFAULT_BALL_Y_SPEED -7
 
 typedef struct PlayerStruct{
 	Rectangle r;
@@ -44,17 +45,20 @@ typedef struct BallStruct{
 	int ySpeed;
 }Ball;
 
+typedef struct WallStruct{
+	Rectangle r;
+	int hit ;
+}Wall;
+
 static Game game;
 static Player player;
 static Ball ball;
 static uint64_t running = 0;
 static  uint8_t RIGHT,LEFT;
+static int rows = 3, cols = 3;
+static Wall walls[3][3];
 
 
-
-static void clearScreen(){
-	drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
-}
 
 
 void newGame(){
@@ -74,25 +78,35 @@ void newGame(){
 	init();
 	loadLevel();
 	running = 1;
-	clearScreen();
+
 	play();
 }
 
 static void loadLevel(){
 
+	uint64_t colors[] = {0XFFFFFF,0xFF1111};
+	for(int i = 0; i < rows; i++){
+		for(int j = 0; j < cols;j++){
+			Rectangle r = {100 + i*200 + 100,100 + j*100 + 100,DEFAULT_RECT_HEIGHT,DEFAULT_RECT_WIDTH,colors[j%2]};
+			Wall w = {r,0};
+			 walls[i][j] = w;
+		}
+	}
 }
 
 
 
 static void play(){
+			drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
+		update();
 		while(running){
 		char key;
-			while((key = getchar()) != 'x' && key != 0){
+			while((key = getchar()) != 'x'){
 				//render();
 				keyHandler(key);
 				update();
-				
-				//sleep(1);
+				renderWalls();
+				sleep(1);
 			}
 			
 		}
@@ -122,20 +136,14 @@ static void keyHandler(char key){
 static void update(){
 		moveBall();
 		movePlayer();
-	/*	if(ball.c.y + ball.c.radius >= SCREEN_HEIGHT){
-			running = 0;
-		}*/
-		
+	
 		
 }
 
-static void render(){
-	//drawRect(player.r.x,player.r.y,player.r.width,player.r.height,player.r.color);
-	drawCircle(ball.c.x, ball.c.y, ball.c.radius, ball.c.color);
-}
+
 
 static void moveBall(){
-		drawCircle(ball.c.x, ball.c.y, ball.c.radius, 0x000000);
+			drawCircle(ball.c.x, ball.c.y, ball.c.radius, 0x000000);
 		if(ball.c.y - ball.c.radius <= 0){
 			ball.c.y = ball.c.radius;
 			ball.ySpeed *= -1;
@@ -156,28 +164,78 @@ static void moveBall(){
 }
 
 static void checkBallCollisions(){
+	
+	checkRectCollision(player.r);
+	for(int i = 0; i< rows;i++){
+		for(int j = 0; j < cols; j++){
+				Wall wall = walls[i][j];
+				int hit;
+				if(!wall.hit){
+					hit = checkRectCollision(wall.r);
+					if(hit){
+						walls[i][j].hit = 1;
+					}
+				}
+			
+		}
+		}
 	return;
+	
+}
+static void renderWalls(){
+	for(int i = 0; i< rows;i++){
+		for(int j = 0; j < cols; j++){
+				Wall wall = walls[i][j];
+				if(!wall.hit){
+					drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
+				}
+			
+		}
+	}
 }
 
+static int checkRectCollision(Rectangle rec){
+	int ballX = ball.c.x;
+	int ballY = ball.c.y;
+	int radius = ball.c.radius;
+	if(ballX >= rec.x && ballX <= rec.x + rec.width){
+		if(((ballY + radius) >= rec.y) || ((ballY>= rec.y + rec.height) && (ballY - radius <= rec.y + rec.height) )){
+			ball.ySpeed *=-1;
+			return 1;
+		}
+		
+	}
+	/*if(ballY >= rec.y && ballY <= rec.y + rec.height){
+			if(ballX + radius >= rec.x || ballX - radius <= rec.x + rec.width){
+				ball.xSpeed *=-1;
+				return 1;
+			}
+	}*/
+	return 0;
+
+
+}
 static void movePlayer(){
 
 
 	if(LEFT && player.r.x >  player.xSpeed){
 		player.r.x -= player.xSpeed;
-		drawRect(player.r.x, player.r.y, player.r.width,player.r.height,player.r.color);
+	
 		int pos = player.r.x + player.r.width;
 		drawRect(pos,player.r.y,player.xSpeed,player.r.height,0x000000);
-	}
+		}
 	if(RIGHT && player.r.x + player.r.width < SCREEN_WIDTH - player.xSpeed){
 		player.r.x += player.xSpeed;
-		drawRect(player.r.x, player.r.y, player.r.width,player.r.height,player.r.color);
-		int pos = player.r.x - player.xSpeed;
+		
+			int pos = player.r.x - player.xSpeed;
 		drawRect(pos,player.r.y,player.xSpeed,player.r.height,0x000000);
+	
 	}
+	drawRect(player.r.x, player.r.y, player.r.width,player.r.height,player.r.color);
 
 }
 
-static uint64_t sleep(uint64_t ticks){
+static uint64_t sleep(int ticks){
 	return callSyscall(SLEEP,(void*)ticks,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
 
 }

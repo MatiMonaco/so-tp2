@@ -96,9 +96,7 @@ void scrollUp(){
 }
 
 uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned int height, int color){
-	if(x < 0 || y < 0 || width < 0  || height <0 || width > getScreenWidth() || height > getScreenHeight() || x > getScreenWidth() || y > getScreenHeight()){
-		return -1;
-	}
+	
 	
 	for(int i = x; i<  x + width;i++ ){
 		for(int j = y; j < y + height; j++){
@@ -108,7 +106,11 @@ uint64_t drawRect(unsigned int x, unsigned int y,unsigned int width, unsigned in
 	return 1;
 }
 
+
 uint64_t drawCircle(unsigned int xc, unsigned int yc, int r, int color){
+if(x < 0 || y < 0|| x > getScreenWidth() || y > getScreenHeight()  || r < 0  ){
+		return 0;
+	}
 	for(int i = -r ; i <= r ; i++){
 		for(int j = -r ; j <= r; j++){
 			if(i*i + j*j <= r*r){
@@ -116,4 +118,5 @@ uint64_t drawCircle(unsigned int xc, unsigned int yc, int r, int color){
 			}
 		}
 	}
+	return 1;
 }

@@ -10,14 +10,14 @@ struct commandStruct{
 	uint64_t cantArgs;
 	
 };
-#define HELP 0
-#define EXIT 1
-#define TIME 2
-#define PRINTMEM 3
-#define INFOREG 4
-#define ARACNOID 5
-#define OPCODEEX 6
-#define ZERODIVEX 7
+#define C_HELP 0
+#define C_EXIT 1
+#define C_TIME 2
+#define C_PRINTMEM 3
+#define C_INFOREG 4
+#define C_ARACNOID 5
+#define C_OPCODEEX 6
+#define C_ZERODIVEX 7
 
 
 

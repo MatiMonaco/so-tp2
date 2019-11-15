@@ -4,6 +4,7 @@
 #include <screenDriver.h>
 #include <time.h>
 #include <rtc.h>
+#include <lib.h>
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
@@ -78,13 +79,14 @@ uint64_t sys_getWidth(){
 	return getScreenWidth();
 }
 
-uint64_t sys_sleep(uint64_t ticks){
+uint64_t sys_sleep(int ticks){
 	if(ticks <= 0){
-		return -1;
+		return 0;
 	}
-	uint64_t start =ticks_elapsed();
-	while((ticks_elapsed() - start) < ticks);
-	
+	_sti();
+	int start = ticks_elapsed();
+	int end = ticks + start;
+	while(ticks_elapsed() < end);
 	return 1;
 }
 
