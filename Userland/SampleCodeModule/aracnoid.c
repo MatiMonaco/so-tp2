@@ -29,7 +29,7 @@ static uint64_t sleep(uint64_t ticks);
 #define DEFAULT_BALL_COLOR 0xFFFFFF
 #define DEFAULT_BALL_X_POS (DEFAULT__PLAYER_X_POS + (DEFAULT_RECT_WIDTH / 2))
 #define DEFAULT_BALL_Y_POS (DEFAULT__PLAYER_Y_POS - (2 * DEFAULT_BALL_RADIUS))
-#define DEFAULT_BALL_X_SPEED -9
+#define DEFAULT_BALL_X_SPEED 9
 #define DEFAULT_BALL_Y_SPEED -9
 
 #define WALL_ROWS  5
@@ -58,8 +58,8 @@ static Player player;
 static Ball ball;
 static uint64_t running = 0;
 static  uint8_t RIGHT,LEFT;
-static int rows = 3, cols = 3;
-static Wall walls[3][3];
+
+static Wall walls[WALL_COLUMNS][WALL_ROWS];
 
 
 
@@ -172,8 +172,8 @@ static void moveBall(){
 static void checkBallCollisions(){
 	
 	checkRectCollision(player.r);
-	for(int i = 0; i< rows;i++){
-		for(int j = 0; j < cols; j++){
+	for(int i = 0; i< WALL_ROWS;i++){
+		for(int j = 0; j < WALL_COLUMNS; j++){
 				Wall wall = walls[i][j];
 				int hit;
 				if(wall.hit == 0){
