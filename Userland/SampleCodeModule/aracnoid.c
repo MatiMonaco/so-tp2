@@ -1,7 +1,6 @@
 #include <aracnoid.h>
 #include <stdio.h>
 #include <callSyscall.h>
-static void render();
 static void update();
 static void loadLevel();
 static void play();
@@ -11,9 +10,8 @@ static void checkBallCollisions();
 static int checkRectCollision(Rectangle rec);
 static void moveBall();
 static void movePlayer();
-static void renderWalls();
 
-static uint64_t sleep(int ticks);
+static uint64_t sleep(uint64_t ticks);
 
 
 #define SCREEN_WIDTH getScreenWidth()
@@ -34,8 +32,8 @@ static uint64_t sleep(int ticks);
 #define DEFAULT_BALL_X_SPEED -9
 #define DEFAULT_BALL_Y_SPEED -9
 
-#define WALL_ROWS  10
-#define WALL_COLUMNS 8
+#define WALL_ROWS  5
+#define WALL_COLUMNS 5
 #define DEFAULT_WALL_WIDTH 50
 #define DEFAULT_WALL_HEIGHT 20
 
@@ -90,11 +88,12 @@ void newGame(){
 static void loadLevel(){
 	drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
 	uint64_t colors[] = {0XFFFFFF,0xFF1111};
-	for(int i = 0; i < WALL_ROWS; i++){
-		for(int j = 0; j < WALL_COLUMNS;j++){
-			Rectangle r = {100 + i*200 + 100,100 + j*100 + 100,DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[j%2]};
-			Wall w = {r,0};
-			 walls[i][j] = w;
+	for(int i = 0; i < WALL_COLUMNS; i++){
+		for(int j = 0; j < WALL_ROWS;j++){
+			Rectangle r = {100 + i*(DEFAULT_WALL_WIDTH + 50) + 100,50 + j*(DEFAULT_WALL_HEIGHT + 50),DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[j%2]};
+			Wall wall = {r,0};
+			 walls[i][j] = wall;
+			 drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
 		}
 	}
 	update();
@@ -102,17 +101,17 @@ static void loadLevel(){
 
 
 
+
 static void play(){
 		
 		loadLevel();
-
 		while(running){
 		char key;
 			while((key = getchar()) != 'x'){
 				//render();
 				keyHandler(key);
 				update();
-				//renderWalls();
+				
 				sleep(1);
 			}
 			
@@ -190,19 +189,7 @@ static void checkBallCollisions(){
 	return;
 	
 }
-static void renderWalls(){
-	for(int i = 0; i< rows;i++){
-		for(int j = 0; j < cols; j++){
-				Wall wall = walls[i][j];
-				if(wall.hit == 0){
-					drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
-				}else{
-					drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,0x000000);
-				}
-			
-		}
-	}
-}
+
 
 static int checkRectCollision(Rectangle rec){
 	int ballX = ball.c.x;
@@ -253,7 +240,7 @@ static void movePlayer(){
 
 }
 
-static uint64_t sleep(int ticks){
+static uint64_t sleep(uint64_t ticks){
 	return callSyscall(SLEEP,(void*)ticks,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
 
 }
