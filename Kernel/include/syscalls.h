@@ -11,4 +11,5 @@ void sys_beep(uint64_t timer);
 uint64_t sys_drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color);
 uint64_t sys_time();
 uint64_t sys_clear();
+uint64_t sys_seconds_elapsed();
 #endif

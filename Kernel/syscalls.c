@@ -103,3 +103,7 @@ uint64_t sys_clear(){
 	clear();
 	return 1;
 }
+
+uint64_t sys_seconds_elapsed(){
+	return seconds_elapsed();
+}

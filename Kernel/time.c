@@ -1,5 +1,4 @@
 #include <time.h>
-#include <naiveConsole.h>
 #include <screenDriver.h>
 static unsigned long ticks = 0;
 static int lastsec = 0;
