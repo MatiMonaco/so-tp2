@@ -72,17 +72,13 @@ void infoReg(){
 }
 
 void printMem(char* address){
-	printf("entre");
-    int dir = atoi(address);
+    uint64_t dir = atoi(address);
 	printf("printmem:\n");
-	printDec(dir);
-	/*
-    for(int i = 0; i < 32;i++){
+    for(int i = 0; i < 32;i++,dir++){
         printf("byte %d : ", i+1);
-        printMemASM(*address++);
+        printMemASM(dir);
         putchar('\n');
     }
-	*/
 }
 void time(){
     callSyscall(TIME,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0);

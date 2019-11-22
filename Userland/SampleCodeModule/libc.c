@@ -62,7 +62,7 @@ void reverse(char str[], int length)
     } 
 } 
 
-int atoi(char* s){
+uint64_t atoi(char* s){
     char c = *s++;
     int num = 0;
     if(c == '0' && (*s == 'x' || *s == 'X')){
@@ -76,8 +76,9 @@ int atoi(char* s){
                 num += (*s - 'A' + 10);
             }
             else{
-                num += *s;
+                num += (*s - '0');
             }
+            s++;
         }
     }
     return num;

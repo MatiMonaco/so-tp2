@@ -58,7 +58,7 @@ static void commandDispacher(char* command,char*parameter){
 		break;
 
 		case C_PRINTMEM:
-			printMem("0xFF");
+			printMem(parameter);
 		break;
 
 		case C_INFOREG:
