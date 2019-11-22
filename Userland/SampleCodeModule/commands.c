@@ -97,3 +97,7 @@ void zeroDivException(){
 }
 void exit(){
 }
+
+void clear(){
+    callSyscall(CLEAR,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0);
+}

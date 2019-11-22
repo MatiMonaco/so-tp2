@@ -12,6 +12,7 @@
 #define SLEEP 7
 #define DRAW_CIRCLE 8
 #define TIME 9
+#define CLEAR 10
 #define ERROR -1
 
 uint64_t callSyscall(uint64_t id,void* param1,void* param2,void* param3,void* param4,void* param5,void* param6);

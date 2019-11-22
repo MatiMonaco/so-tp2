@@ -120,3 +120,17 @@ if(x < 0 || y < 0|| x > getScreenWidth() || y > getScreenHeight()  || r < 0  ){
 	}
 	return 1;
 }
+
+void clear(){
+	int i = 0,j;
+	while(i < getScreenHeight()){
+		j = 0;
+		while(j < getScreenWidth()){
+			drawCharAt(j,i,' ',0xFFFFFF,0x000000);
+			j += CHAR_WIDTH;
+		}
+		i += CHAR_HEIGHT;
+	}
+	x = 0;
+	y = 0;
+}

@@ -98,3 +98,8 @@ uint64_t sys_time(){
 	displayDateTime();
 	return 1;
 }
+
+uint64_t sys_clear(){
+	clear();
+	return 1;
+}

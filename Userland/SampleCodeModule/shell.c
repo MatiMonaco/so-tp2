@@ -18,6 +18,7 @@ static struct commandStruct commands[] = {{C_EXIT,"exit","Exits shell",0},
 										{C_OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption",0},
 										{C_ZERODIVEX,"zerodivex","Executes Zero Division Interruption",0},
 										{C_HELP,"help","Shows all available commands",0},
+										{C_CLEAR,"clear","Clears the screen"},
 										{0,"","",0}};
 
 void initShell(){
@@ -76,6 +77,10 @@ static void commandDispacher(char* command,char*parameter){
 
 		case C_ZERODIVEX:
 			zeroDivException();
+		break;
+
+		case C_CLEAR:
+			clear();
 		break;
 
 		default:
