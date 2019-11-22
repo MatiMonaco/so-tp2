@@ -21,19 +21,19 @@ static uint64_t sleep(uint64_t ticks);
 #define DEFAULT_RECT_HEIGHT 25
 #define DEFAULT__PLAYER_X_POS  ((SCREEN_WIDTH / 2) - (DEFAULT_RECT_WIDTH) / 2)
 #define DEFAULT__PLAYER_Y_POS (SCREEN_HEIGHT - DEFAULT_RECT_HEIGHT)
-#define DEFAULT_PLAYER_COLOR 0xFFFFFF
+#define DEFAULT_PLAYER_COLOR 0xF7DE52
 #define DEFAULT_PLAYER_X_SPEED 20
 
 
-#define DEFAULT_BALL_RADIUS 8
-#define DEFAULT_BALL_COLOR 0xFFFFFF
+#define DEFAULT_BALL_RADIUS 7
+#define DEFAULT_BALL_COLOR 0x22CC1A
 #define DEFAULT_BALL_X_POS (DEFAULT__PLAYER_X_POS + (DEFAULT_RECT_WIDTH / 2))
 #define DEFAULT_BALL_Y_POS (DEFAULT__PLAYER_Y_POS - (2 * DEFAULT_BALL_RADIUS))
 #define DEFAULT_BALL_X_SPEED 9
 #define DEFAULT_BALL_Y_SPEED -9
 
 #define WALL_ROWS  5
-#define WALL_COLUMNS 5
+#define WALL_COLUMNS 10
 #define DEFAULT_WALL_WIDTH 50
 #define DEFAULT_WALL_HEIGHT 20
 
@@ -87,10 +87,10 @@ void newGame(){
 
 static void loadLevel(){
 	drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
-	uint64_t colors[] = {0XFFFFFF,0xFF1111};
+	uint64_t colors[] = {0xB0AC9E,0xC93913};
 	for(int i = 0; i < WALL_COLUMNS; i++){
 		for(int j = 0; j < WALL_ROWS;j++){
-			Rectangle r = {100 + i*(DEFAULT_WALL_WIDTH + 50) + 100,50 + j*(DEFAULT_WALL_HEIGHT + 50),DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[j%2]};
+			Rectangle r = {100 + j*(DEFAULT_WALL_WIDTH + 50) + 100,50 + i*(DEFAULT_WALL_HEIGHT + 25),DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[j%2]};
 			Wall wall = {r,0};
 			 walls[i][j] = wall;
 			 drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
@@ -172,8 +172,8 @@ static void moveBall(){
 static void checkBallCollisions(){
 	
 	checkRectCollision(player.r);
-	for(int i = 0; i< WALL_ROWS;i++){
-		for(int j = 0; j < WALL_COLUMNS; j++){
+	for(int i = 0; i< WALL_COLUMNS;i++){
+		for(int j = 0; j < WALL_ROWS; j++){
 				Wall wall = walls[i][j];
 				int hit;
 				if(wall.hit == 0){
