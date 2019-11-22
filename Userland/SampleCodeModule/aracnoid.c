@@ -34,6 +34,11 @@ static uint64_t sleep(int ticks);
 #define DEFAULT_BALL_X_SPEED -9
 #define DEFAULT_BALL_Y_SPEED -9
 
+#define WALL_ROWS  10
+#define WALL_COLUMNS 8
+#define DEFAULT_WALL_WIDTH 50
+#define DEFAULT_WALL_HEIGHT 20
+
 typedef struct PlayerStruct{
 	Rectangle r;
 	int xSpeed;
@@ -75,7 +80,7 @@ void newGame(){
 	ball.c.color = DEFAULT_BALL_COLOR;
 	ball.xSpeed = (int)DEFAULT_BALL_X_SPEED;
 	ball.ySpeed = (int)DEFAULT_BALL_Y_SPEED;
-	init();
+	loadLevel();
 
 	running = 1;
 
@@ -83,32 +88,31 @@ void newGame(){
 }
 
 static void loadLevel(){
-
+	drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
 	uint64_t colors[] = {0XFFFFFF,0xFF1111};
-	for(int i = 0; i < rows; i++){
-		for(int j = 0; j < cols;j++){
-			Rectangle r = {100 + i*200 + 100,100 + j*100 + 100,DEFAULT_RECT_HEIGHT,DEFAULT_RECT_WIDTH,colors[j%2]};
+	for(int i = 0; i < WALL_ROWS; i++){
+		for(int j = 0; j < WALL_COLUMNS;j++){
+			Rectangle r = {100 + i*200 + 100,100 + j*100 + 100,DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[j%2]};
 			Wall w = {r,0};
 			 walls[i][j] = w;
 		}
 	}
+	update();
 }
 
 
 
 static void play(){
-
-		drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
-
-		update();
+		
 		loadLevel();
+
 		while(running){
 		char key;
 			while((key = getchar()) != 'x'){
 				//render();
 				keyHandler(key);
 				update();
-				renderWalls();
+				//renderWalls();
 				sleep(1);
 			}
 			
