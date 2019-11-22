@@ -4,5 +4,5 @@
 char* intToBase(int num, char* str, int base);
 void reverse(char str[], int length);
 void swap ( char *str1, char *str2 );
-
+int atoi(char* s);
 #endif

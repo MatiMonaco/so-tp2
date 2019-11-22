@@ -61,3 +61,24 @@ void reverse(char str[], int length)
         end--; 
     } 
 } 
+
+int atoi(char* s){
+    char c = *s++;
+    int num = 0;
+    if(c == '0' && (*s == 'x' || *s == 'X')){
+        s++;
+        while(*s != 0){
+            num *= 16;
+            if(*s >= 'a' && *s <= 'f'){
+                num += (*s - 'a' + 10);
+            }
+            else if(*s >= 'A' && *s <= 'F'){
+                num += (*s - 'A' + 10);
+            }
+            else{
+                num += *s;
+            }
+        }
+    }
+    return num;
+}
