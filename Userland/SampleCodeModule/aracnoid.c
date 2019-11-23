@@ -73,6 +73,7 @@ static Game game ;
 static Player player;
 static Ball ball;
 static int velInc = 1;
+static int savedGame = 0;
 
 
 static Wall walls[WALL_ROWS][WALL_COLUMNS];
@@ -138,11 +139,12 @@ void save(){
 					game.walls[i][j]= walls[i][j];
 				}
 		}
+		savedGame = 1;
 }
 
 void load(){
 	
-
+	if(savedGame){
 		player = game.player;
 		ball = game.ball;
 		
@@ -154,13 +156,13 @@ void load(){
 				}
 		}
 		loadLevel();
-
+		}
 	
 
 }
 
 uint64_t hasSavedGame(){
-	return 0;
+	return savedGame;
 	
 }
 
@@ -213,6 +215,7 @@ static void play(){
 				clearScreen();
 		}else{
 			save();
+			clearScreen();
 		}
 
 		
