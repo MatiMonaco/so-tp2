@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <callSyscall.h>
 
-uint64_t seconds(){
+uint64_t getSeconds(){
 	return callSyscall(SECONDS_ELAPSED,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
 }
 

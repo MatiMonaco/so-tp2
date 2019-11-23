@@ -82,6 +82,7 @@ SECTION .text
 	call exceptionDispatcher
 	
 	popState
+	sti
 	call initializeSampleModule
 	iretq
 %endmacro

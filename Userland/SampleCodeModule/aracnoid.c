@@ -1,6 +1,7 @@
 #include <aracnoid.h>
 #include <stdio.h>
 #include <callSyscall.h>
+#include <timer.h>
 static void update();
 static void loadLevel();
 static void play();
@@ -10,8 +11,6 @@ static void checkBallCollisions();
 static int checkRectCollision(Rectangle rec);
 static void moveBall();
 static void movePlayer();
-
-static uint64_t sleep(uint64_t ticks);
 
 
 #define SCREEN_WIDTH getScreenWidth()
@@ -29,12 +28,15 @@ static uint64_t sleep(uint64_t ticks);
 #define DEFAULT_BALL_COLOR 0x22CC1A
 #define DEFAULT_BALL_X_POS (DEFAULT__PLAYER_X_POS + (DEFAULT_RECT_WIDTH / 2))
 #define DEFAULT_BALL_Y_POS (DEFAULT__PLAYER_Y_POS - (2 * DEFAULT_BALL_RADIUS))
-#define DEFAULT_BALL_X_SPEED 9
-#define DEFAULT_BALL_Y_SPEED -9
+#define DEFAULT_BALL_X_SPEED 8
+#define DEFAULT_BALL_Y_SPEED 8
 
-#define WALL_ROWS  5
-#define WALL_COLUMNS 10
-#define DEFAULT_WALL_WIDTH 50
+#define HARD_WALL 0xC93913
+#define NORMAL_WALL 0xB0AC9E
+
+#define WALL_ROWS  12
+#define WALL_COLUMNS 12
+#define DEFAULT_WALL_WIDTH 54
 #define DEFAULT_WALL_HEIGHT 20
 
 typedef struct PlayerStruct{
@@ -46,21 +48,27 @@ typedef struct BallStruct{
 	Circle c;
 	int xSpeed;
 	int ySpeed;
+	int xDir;
+	int yDir;
 }Ball;
 
 typedef struct WallStruct{
 	Rectangle r;
-	int hit ;
+	int hit;
 }Wall;
 
 static Game game;
 static Player player;
 static Ball ball;
+static int velInc = 1;
 static uint64_t running = 0;
 static  uint8_t RIGHT,LEFT;
 
-static Wall walls[WALL_COLUMNS][WALL_ROWS];
+static Wall walls[WALL_ROWS][WALL_COLUMNS];
 
+static uint64_t score;
+static uint64_t startTime;
+static uint64_t speedTimer;
 
 
 
@@ -78,6 +86,12 @@ void newGame(){
 	ball.c.color = DEFAULT_BALL_COLOR;
 	ball.xSpeed = (int)DEFAULT_BALL_X_SPEED;
 	ball.ySpeed = (int)DEFAULT_BALL_Y_SPEED;
+	ball.xDir = -1;
+	ball.yDir = -1;
+
+	
+	score = 0;
+	
 	loadLevel();
 
 	running = 1;
@@ -87,16 +101,27 @@ void newGame(){
 
 static void loadLevel(){
 	drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
-	uint64_t colors[] = {0xB0AC9E,0xC93913};
-	for(int i = 0; i < WALL_COLUMNS; i++){
-		for(int j = 0; j < WALL_ROWS;j++){
-			Rectangle r = {100 + j*(DEFAULT_WALL_WIDTH + 50) + 100,50 + i*(DEFAULT_WALL_HEIGHT + 25),DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[j%2]};
-			Wall wall = {r,0};
-			 walls[i][j] = wall;
-			 drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
-		}
+	uint64_t colors[] = {NORMAL_WALL,HARD_WALL};
+	int k = 0;
+	for(int i = 0; i < 19; i++){
+			if(i % 3 != 0){
+				for(int j = 0; j < WALL_ROWS;j++){
+					Rectangle r = {i*(DEFAULT_WALL_WIDTH),100 + j*(DEFAULT_WALL_HEIGHT + 5),DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[(i+j)%2]};
+					Wall wall = {r,0};
+					 walls[k][j] = wall;
+					 drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
+				}
+				k++;
+			}	
+			
+			
+		
+		
 	}
+
 	update();
+	startTime = getSeconds();
+	speedTimer = getSeconds();
 }
 
 
@@ -105,6 +130,7 @@ static void loadLevel(){
 static void play(){
 		
 		loadLevel();
+		
 		while(running){
 		char key;
 			while((key = getchar()) != 'x'){
@@ -117,6 +143,11 @@ static void play(){
 			
 		}
 }
+/*
+static uint64_t getTime(){
+	return getSeconds() - startTime;
+}*/
+
 
 static void keyHandler(char key){
 	
@@ -140,9 +171,14 @@ static void keyHandler(char key){
 }
 
 static void update(){
+		if(getSeconds() - speedTimer >= 10){
+			ball.xSpeed += velInc;
+			ball.ySpeed += velInc;
+			speedTimer = getSeconds();
+		}
 		moveBall();
 		movePlayer();
-	
+		
 		
 }
 
@@ -152,18 +188,18 @@ static void moveBall(){
 			drawCircle(ball.c.x, ball.c.y, ball.c.radius, 0x000000);
 		if(ball.c.y - ball.c.radius <= 0){
 			ball.c.y = ball.c.radius;
-			ball.ySpeed *= -1;
+			ball.yDir *= -1;
 		}
 		if(ball.c.x - ball.c.radius <= 0){
 			ball.c.x = ball.c.radius;
-			ball.xSpeed *=-1;
-		}else if(ball.c.x + ball.c.radius > SCREEN_WIDTH){
+			ball.xDir *=-1;
+		}else if(ball.c.x + ball.c.radius >= SCREEN_WIDTH){
 			ball.c.x = SCREEN_WIDTH - ball.c.radius;
-			ball.xSpeed *=-1;
+			ball.xDir *=-1;
 		}
 		checkBallCollisions();
-		ball.c.x += ball.xSpeed;
-		ball.c.y += ball.ySpeed;
+		ball.c.x += ball.xDir * ball.xSpeed;
+		ball.c.y += ball.yDir * ball.ySpeed;
 		drawCircle(ball.c.x, ball.c.y, ball.c.radius, ball.c.color);
 
 		
@@ -172,14 +208,15 @@ static void moveBall(){
 static void checkBallCollisions(){
 	
 	checkRectCollision(player.r);
-	for(int i = 0; i< WALL_COLUMNS;i++){
-		for(int j = 0; j < WALL_ROWS; j++){
+	for(int i = 0; i< WALL_ROWS;i++){
+		for(int j = 0; j < WALL_COLUMNS; j++){
 				Wall wall = walls[i][j];
 				int hit;
 				if(wall.hit == 0){
 					hit = checkRectCollision(wall.r);
 					if(hit == 1){
 						walls[i][j].hit = 1;
+						score++;
 						drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,0x000000);
 					}
 				}
@@ -200,7 +237,7 @@ static int checkRectCollision(Rectangle rec){
 		int isDown = (ballY + radius >= rec.y + rec.height) && (ballY - radius <= rec.y + rec.height);
 		int isUp =  ballY - radius <= rec.y && ballY + radius >= rec.y ;
 		if(isDown || isUp){
-			ball.ySpeed *=-1;
+			ball.yDir *=-1;
 			return 1;
 		}
 		
@@ -210,7 +247,7 @@ static int checkRectCollision(Rectangle rec){
 		int isLeft = (ballX - radius <= rec.x) && (ballX + radius >= rec.x);
 		int isRight = (ballX + radius >= rec.x + rec.width) && (ballX - radius <= rec.x + rec.width);
 		if(isLeft || isRight){
-			ball.xSpeed *=-1;
+			ball.xDir *=-1;
 			return 1;
 		}
 	
@@ -240,10 +277,6 @@ static void movePlayer(){
 
 }
 
-static uint64_t sleep(uint64_t ticks){
-	return callSyscall(SLEEP,(void*)ticks,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
-
-}
 /*
 Game save(){
 
