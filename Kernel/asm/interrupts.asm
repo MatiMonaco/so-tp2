@@ -75,10 +75,11 @@ SECTION .text
 %endmacro
 
 %macro exceptionHandler 1
-	mov rsi,[rsp];
+	mov rsi,rsp     ; direccion en la que ocurrio la excepcion
 	pushState
 
 	mov rdi, %1 ; pasaje de parametro
+	mov rdx, rsp   ; direccion del stack pointer para obtener los registros
 	call exceptionDispatcher
 	
 	popState
