@@ -7,16 +7,6 @@
  unsigned int x = 0;
  unsigned int y = 0;
 
-
-char* intToBase(int num, char* str, int base);
-void reverse(char str[], int length);
-void drawDec(uint64_t value);
-void drawHexa(uint64_t value);
-void drawBin(uint64_t value);
-void drawBase(uint64_t value, uint32_t base);
-void swap ( char *str1, char *str2 );
-
-
 static void fixScreen();
 static void scrollUp();
 

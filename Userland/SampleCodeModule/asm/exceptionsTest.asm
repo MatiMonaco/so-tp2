@@ -9,5 +9,5 @@ divisionByZero:
 	ret
 
 invalidOpCode:
-	OwO
+	ud2
 	ret
