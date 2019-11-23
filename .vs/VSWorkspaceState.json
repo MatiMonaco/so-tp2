@@ -4,10 +4,8 @@
     "\\Kernel",
     "\\Kernel\\asm",
     "\\Kernel\\include",
-    "\\Userland",
-    "\\Userland\\SampleCodeModule",
-    "\\Userland\\SampleCodeModule\\include"
+    "\\Userland\\SampleCodeModule"
   ],
-  "SelectedNode": "\\Userland\\SampleCodeModule\\aracnoid.c",
+  "SelectedNode": "\\Kernel\\time.c",
   "PreviewInSolutionExplorer": false
 }

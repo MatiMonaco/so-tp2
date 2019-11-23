@@ -22,6 +22,10 @@ uint64_t drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color){
 	return callSyscall(DRAW_CIRCLE,(void*)x,(void*)y,(void*)radius,(void*)color,(void*)0,(void*)0);
 }
 
+uint64_t clearScreen(){
+	return callSyscall(CLEAR,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
+}
+
 void init(){
  SCREEN_WIDTH = getScreenWidth();
  SCREEN_HEIGHT = getScreenHeight();

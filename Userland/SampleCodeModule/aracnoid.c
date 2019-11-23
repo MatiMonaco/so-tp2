@@ -13,6 +13,7 @@ static void moveBall();
 static void movePlayer();
 
 
+
 #define SCREEN_WIDTH getScreenWidth()
 #define SCREEN_HEIGHT getScreenHeight()
 
@@ -39,6 +40,7 @@ static void movePlayer();
 #define DEFAULT_WALL_WIDTH 54
 #define DEFAULT_WALL_HEIGHT 20
 
+
 typedef struct PlayerStruct{
 	Rectangle r;
 	int xSpeed;
@@ -57,19 +59,29 @@ typedef struct WallStruct{
 	int hit;
 }Wall;
 
-static Game game;
+typedef struct GameStruct{
+	Player  player;
+	Ball ball;
+	Wall  walls[WALL_ROWS][WALL_COLUMNS];
+	uint64_t gameTimer;
+	uint64_t speedTimer;
+}Game;
+
+
+
+static Game game ;
 static Player player;
 static Ball ball;
 static int velInc = 1;
-static uint64_t running = 0;
-static  uint8_t RIGHT,LEFT;
+
 
 static Wall walls[WALL_ROWS][WALL_COLUMNS];
 
 static uint64_t score;
-static uint64_t startTime;
+static uint64_t gameTimer;
 static uint64_t speedTimer;
-
+static uint64_t gameOver = 0;
+static  uint8_t RIGHT,LEFT;
 
 
 void newGame(){
@@ -89,18 +101,6 @@ void newGame(){
 	ball.xDir = -1;
 	ball.yDir = -1;
 
-	
-	score = 0;
-	
-	loadLevel();
-
-	running = 1;
-
-	play();
-}
-
-static void loadLevel(){
-	drawRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT,0x000000);
 	uint64_t colors[] = {NORMAL_WALL,HARD_WALL};
 	int k = 0;
 	for(int i = 0; i < 19; i++){
@@ -109,44 +109,124 @@ static void loadLevel(){
 					Rectangle r = {i*(DEFAULT_WALL_WIDTH),100 + j*(DEFAULT_WALL_HEIGHT + 5),DEFAULT_WALL_HEIGHT,DEFAULT_WALL_WIDTH,colors[(i+j)%2]};
 					Wall wall = {r,0};
 					 walls[k][j] = wall;
-					 drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
+					
 				}
 				k++;
 			}	
-			
-			
-		
-		
+
 	}
 
-	update();
-	startTime = getSeconds();
-	speedTimer = getSeconds();
+
+	init();
+
+	score = 0;
+	gameTimer = 0;
+	speedTimer = 0;
+	loadLevel();
+
+
 }
+
+
+void save(){
+	game.player = player;
+	game.ball = ball;
+	game.gameTimer = gameTimer;
+	game.speedTimer = speedTimer;
+		for(int i = 0; i < 19; i++){
+			for(int j = 0; j < WALL_ROWS;j++){
+					game.walls[i][j]= walls[i][j];
+				}
+		}
+}
+
+void load(){
+	
+
+		player = game.player;
+		ball = game.ball;
+		
+		gameTimer = game.gameTimer;
+		speedTimer = game.speedTimer;
+		for(int i = 0; i < 19; i++){
+			for(int j = 0; j < WALL_ROWS;j++){
+					walls[i][j] = game.walls[i][j];
+				}
+		}
+		loadLevel();
+
+	
+
+}
+
+uint64_t hasSavedGame(){
+	return 0;
+	
+}
+
+
+static void loadLevel(){
+	clearScreen();
+	for(int i = 0; i < 19; i++){
+		for(int j = 0; j < WALL_ROWS;j++){
+			Wall wall = walls[i][j];
+			if(!wall.hit){
+				drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,wall.r.color);
+			}
+			
+		}
+	}
+	drawCircle(ball.c.x, ball.c.y, ball.c.radius, ball.c.color);
+	drawRect(player.r.x, player.r.y, player.r.width,player.r.height,player.r.color);	
+	play();
+}
+
 
 
 
 
 static void play(){
-		
-		loadLevel();
-		
-		while(running){
+		gameOver = 0;
+
+		uint64_t startTime = getSeconds();
+
 		char key;
-			while((key = getchar()) != 'x'){
-				//render();
-				keyHandler(key);
-				update();
-				
-				sleep(1);
+		while(!gameOver && !((key=getchar()) == 'g' || key == 'G') ){
+		
+			keyHandler(key);
+			update();
+			sleep(1);
+			if(getSeconds()- startTime == 1){
+				startTime = getSeconds();
+				gameTimer++;
+				speedTimer++;
+				if(speedTimer >= 15){
+					ball.xSpeed += velInc;
+					ball.ySpeed += velInc;
+					speedTimer = 0;
+				}
 			}
 			
 		}
+		
+		if(gameOver){
+				clearScreen();
+		}else{
+			save();
+		}
+
+		
+			
 }
-/*
-static uint64_t getTime(){
-	return getSeconds() - startTime;
-}*/
+
+
+static void update(){
+	
+		
+		
+		moveBall();
+		movePlayer();
+}
 
 
 static void keyHandler(char key){
@@ -170,18 +250,6 @@ static void keyHandler(char key){
 
 }
 
-static void update(){
-		if(getSeconds() - speedTimer >= 10){
-			ball.xSpeed += velInc;
-			ball.ySpeed += velInc;
-			speedTimer = getSeconds();
-		}
-		moveBall();
-		movePlayer();
-		
-		
-}
-
 
 
 static void moveBall(){
@@ -196,6 +264,9 @@ static void moveBall(){
 		}else if(ball.c.x + ball.c.radius >= SCREEN_WIDTH){
 			ball.c.x = SCREEN_WIDTH - ball.c.radius;
 			ball.xDir *=-1;
+		}else if(ball.c.y >= SCREEN_HEIGHT){
+			gameOver = 1;
+			return;
 		}
 		checkBallCollisions();
 		ball.c.x += ball.xDir * ball.xSpeed;
@@ -222,8 +293,8 @@ static void checkBallCollisions(){
 				}
 			
 		}
-		}
-	return;
+	}
+
 	
 }
 
@@ -277,16 +348,9 @@ static void movePlayer(){
 
 }
 
-/*
-Game save(){
 
-	return  game;
-}
 
-void load(Game *  save){
-	return;
-}
-*/
+
 
 
 

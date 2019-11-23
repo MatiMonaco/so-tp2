@@ -3,19 +3,11 @@
 
 #include <graphics.h>
 
-typedef struct GameStruct{
-	Rectangle  player;
-	Circle ball;
-	uint64_t time;
-	uint64_t xspeed,yspeed;
-
-
-}Game;
 
 void newGame();
+void save();
+void load();
+uint64_t hasSavedGame();
 
-/*
-Game save();
-void load(Game *  save);
-*/
+
 #endif
