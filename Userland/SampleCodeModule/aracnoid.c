@@ -73,7 +73,7 @@ static Game game ;
 static Player player;
 static Ball ball;
 static int velInc = 1;
-static int savedGame = 0;
+static uint64_t savedGame = 0;
 
 
 static Wall walls[WALL_ROWS][WALL_COLUMNS];
@@ -214,8 +214,9 @@ static void play(){
 		if(gameOver){
 				clearScreen();
 		}else{
-			save();
 			clearScreen();
+			save();
+			
 		}
 
 		

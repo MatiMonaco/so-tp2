@@ -87,9 +87,17 @@ void time(){
 }
 void aracnoid(){
 	if(hasSavedGame()){
+		printf("Do you want to load your previous game? y/n");
+		char key;
+		while((key = getchar()) != 'y' && key != 'n'){
+			if(key == 'y'){
+				load();
+			}
+		}
 		load();
 	}else{
-	newGame();
+	
+		newGame();
 	}
 	
 }
