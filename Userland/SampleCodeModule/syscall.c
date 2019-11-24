@@ -1,5 +1,5 @@
 
-#include <syscall.h>
+#include <syscall_dispatcher.h>
 
 void sys_write(char * string, int size){
   callSyscall((uint64_t) WRITE, 1, (uint64_t) string, (uint64_t)size, 0, 0);
