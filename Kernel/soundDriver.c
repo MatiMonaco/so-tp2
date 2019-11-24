@@ -1,10 +1,12 @@
 #include <soundDriver.h>
 #include <time.h>
-//#include <beep.h>
 
-void beep(int timer){
+void beep(int time){
   activateBeep();
-  newTimer(timer, deactivateBeep);
+  int end = ticks_elapsed() + 2;
+  while(ticks_elapsed() < end);
+  deactivateBeep();
+  //newTimer(timer, deactivateBeep);
 }
 
 void activateBeep(){

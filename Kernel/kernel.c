@@ -9,6 +9,7 @@
 #include <screenDriver.h>
 #include <rtc.h>
 #include <interrupts.h>
+#include <soundDriver.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -99,7 +100,9 @@ int main()
 	init_VM_Driver();
 	load_idt();
 	initRTC();
+	init_sound();
 	displayDateTime();
+	beep(1);
 	initializeSampleModule();
 	/*ncPrint("[Kernel Main]");
 	ncNewline();
