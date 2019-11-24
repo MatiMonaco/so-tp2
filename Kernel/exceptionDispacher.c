@@ -1,4 +1,4 @@
-#include <screenDriver.h>
+#include <stdout.h>
 #include <lib.h>
 #define ZERO_EXCEPTION_ID 0
 #define INVALID_CODE_ID 6

@@ -1,5 +1,4 @@
 #include <kbDriver.h>
-#include <screenDriver.h>
 static uint64_t isPressed(uint8_t scanCode);
 static void addKeyToBuffer(char ascii);
 static void checkCapslock(char* ascii);

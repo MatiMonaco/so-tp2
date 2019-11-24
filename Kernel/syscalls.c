@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <syscalls.h>
 #include <kbDriver.h>
-#include <screenDriver.h>
+#include <stdout.h>
 #include <video_vm.h>
 #include <time.h>
 #include <rtc.h>

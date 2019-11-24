@@ -6,7 +6,7 @@
 #include <idtLoader.h>
 #include <kbDriver.h>
 #include <video_vm.h>
-#include <screenDriver.h>
+#include <stdout.h>
 #include <rtc.h>
 #include <interrupts.h>
 #include <soundDriver.h>

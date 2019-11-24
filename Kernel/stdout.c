@@ -1,8 +1,9 @@
 #include <video_vm.h>
+#include <stdout.h>
 #include <font.h>
 #include <lib.h>
 #include <stdint.h>
-/*
+
  unsigned int x = 0;
  unsigned int y = 0;
 
@@ -85,4 +86,20 @@ void scrollUp(){
 	}
 	
 }
-*/
+
+
+
+
+void clear(){
+	int i = 0,j;
+	while(i < getScreenHeight()){
+		j = 0;
+		while(j < getScreenWidth()){
+			drawCharAt(j,i,' ',0xFFFFFF,0x000000);
+			j += CHAR_WIDTH;
+		}
+		i += CHAR_HEIGHT;
+	}
+	x = 0;
+	y = 0;
+}

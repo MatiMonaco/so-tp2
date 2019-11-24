@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <rtc.h>
-#include <screenDriver.h>
+#include <stdout.h>
 #include <lib.h>
 
 void displayDateTime(){

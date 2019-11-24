@@ -1,5 +1,5 @@
 #include <time.h>
-#include <screenDriver.h>
+#include <stdout.h>
 static unsigned long ticks = 0;
 static int lastsec = 0;
 
