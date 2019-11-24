@@ -225,7 +225,7 @@ static void play(){
 				speedTimer++;
 				if(speedTimer >= 5){
 					beep(1,1000);
-					beep(1,1000);
+					beep(2,1000);
 					ball.xSpeed += velInc;
 					ball.ySpeed += velInc;
 					speedTimer = 0;
@@ -241,9 +241,9 @@ static void play(){
 		
 				drawText("YOU WON!", 480,5 + CHAR_HEIGHT,WHITE,BLACK);
 				beep(1,1000);
-				beep(2,200);
-				beep(1,1000);
-				beep(10,3000);
+				beep(2,800);
+				beep(1,700);
+				beep(10,500);
 			
 		}else if(gameOver == 2){
 				char finalScore[5];
