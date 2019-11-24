@@ -13,7 +13,7 @@ static void help();
 static struct commandStruct commands[] = {{C_TIME,"time","Displays current time",0},
 										{C_PRINTMEM,"printmem","Performs a 32-byte memory dump from the address received as an argument",1},
 										{C_INFOREG,"inforeg","Prints the value of all the registers",0},
-										{C_ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave",0},
+										{C_ARACNOID,"aracnoid","Iniciates aracnoid, press F1 to save game",0},
 										{C_OPCODEEX,"opcodeex","Executes Invalid OP Code Interruption",0},
 										{C_ZERODIVEX,"zerodivex","Executes Zero Division Interruption",0},
 										{C_HELP,"help","Shows all available commands",0},

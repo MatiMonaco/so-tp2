@@ -75,8 +75,8 @@ void drawStringWithColor(const char *string, int fontColor, int backgroundColor)
 }
 
 void scrollUp(){
-	char *  start = (char * )getFrameBuffer();
-	char *  secondLine = (char * )(getFrameBuffer() + getScreenWidth()*CHAR_HEIGHT*getScreenBPP());
+	char *  start = getFrameBuffer();
+	char *  secondLine =(getFrameBuffer() + getScreenWidth()*CHAR_HEIGHT*getScreenBPP());
 	uint64_t size = getScreenWidth()*(getScreenHeight()-CHAR_HEIGHT)* getScreenBPP();
 	
 	memcpy(start,secondLine,size);

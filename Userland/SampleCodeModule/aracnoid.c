@@ -48,6 +48,9 @@ static void checkWin();
 #define BLACK 0x000000
 #define WHITE 0xffffff
 
+#define WIN 1
+#define LOST 2
+
 
 typedef struct PlayerStruct{
 	Rectangle r;
@@ -201,8 +204,8 @@ static void loadLevel(){
 
 
 static void checkWin(){
-	if(score == 1){
-		gameOver = 1;
+	if(score == WALL_COLUMNS * WALL_ROWS){
+		gameOver = WIN;
 	}
 }
 
@@ -211,7 +214,7 @@ static void play(){
 	
 		gameOver = 0;
 		
-		
+		drawText("Press Space to throw de ball",340, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
 
 		char key;
 		while(!gameOver && !((key=getchar()) == SAVE_KEY) && !(key == RESTART_KEY) ){
@@ -223,7 +226,7 @@ static void play(){
 				startTime = getSeconds();
 				gameTimer++;
 				speedTimer++;
-				if(speedTimer >= 5){
+				if(speedTimer >= 15){
 					beep(1,1000);
 					beep(2,1000);
 					ball.xSpeed += velInc;
@@ -236,35 +239,44 @@ static void play(){
 			
 			
 		}
+		if(gameOver){
+			if(gameOver == WIN){
+						drawText("YOU WON!", 480,5 + CHAR_HEIGHT,WHITE,BLACK);
+						beep(1,1000);
+						beep(2,800);
+						beep(1,700);
+						beep(10,500);
 			
-		if(gameOver == 1){
+			}else{
+				
+						char finalScore[5];
+						intToBase(score,finalScore,10);
+						drawText("YOU LOST! Final Score was ", 400,5 + CHAR_HEIGHT,WHITE,BLACK);
+						drawText(finalScore, 400 + 26 * CHAR_WIDTH, 5 + CHAR_HEIGHT,WHITE,BLACK);
+						beep(1,2000);
+						beep(2,3000);
+						beep(1,4000);
+						beep(10,5000);
 		
-				drawText("YOU WON!", 480,5 + CHAR_HEIGHT,WHITE,BLACK);
-				beep(1,1000);
-				beep(2,800);
-				beep(1,700);
-				beep(10,500);
 			
-		}else if(gameOver == 2){
-				char finalScore[5];
-				intToBase(score,finalScore,10);
-				drawText("YOU LOST! Final Score was ", 400,5 + CHAR_HEIGHT,WHITE,BLACK);
-				drawText(finalScore, 400 + 26 * CHAR_WIDTH, 5 + CHAR_HEIGHT,WHITE,BLACK);
-				beep(1,2000);
-				beep(2,3000);
-				beep(1,4000);
-				beep(10,5000);
-			
+			}
+
+			drawText("Press Enter to return to terminal or R to restart",320, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
+			char c;
+			while((c = getchar()) != '\n'){
+				if(c == RESTART_KEY){
+					newGame();
+					break;
+				}
+			}
+
 		}else if(key == SAVE_KEY){
 			clearScreen();
 			save();
 		}else{
 			newGame();
 		}
-		
-		drawText("Press Enter to return to terminal",390, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
-			char c;
-			while((c = getchar()) != '\n');
+	
 			clearScreen();
 }
 
@@ -297,6 +309,7 @@ static void throwBall(){
 	}
 	ball.yDir = -1;
 	ball.thrown = 1;
+	drawRect(0, 0, SCREEN_WIDTH,100,BLACK);
 	startTime = getSeconds();
 }
 
@@ -345,7 +358,7 @@ static void moveBall(){
 				ball.c.x = SCREEN_WIDTH - ball.c.radius;
 				ball.xDir *=-1;
 			}else if(ball.c.y >= SCREEN_HEIGHT){
-				gameOver = 2;
+				gameOver = LOST;
 				return;
 			}
 			checkBallCollisions();
@@ -361,6 +374,7 @@ static void moveBall(){
 static void checkBallCollisions(){
 	
 	if(checkRectCollision(player.r)){
+		drawRect(player.r.x, player.r.y, player.r.width,player.r.height,player.r.color);
 		beep(1,3000);
 	}
 	for(int i = 0; i< WALL_ROWS;i++){
