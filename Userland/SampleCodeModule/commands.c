@@ -104,6 +104,12 @@ void aracnoid(){
 	
 }
 
+void make_beep(){
+	sys_beep();
+}
+
+
+
 void invalidopCodeException(){
 	invalidOpCode();
 }
