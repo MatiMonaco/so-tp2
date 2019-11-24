@@ -33,9 +33,15 @@ beepasm:
     ret
 
 unbeepasm:
+    push rbp
+    mov rbp, rsp
+
     in al, 0x61
     and al, 0xFC; apago los bits para apagar el beep.
     out 0x61, al
+    
+    mov rsp, rbp
+    pop rbp
     ret
 
 set_frequencyASM:
