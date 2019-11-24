@@ -72,7 +72,7 @@ typedef struct GameStruct{
 static Game game ;
 static Player player;
 static Ball ball;
-static int velInc = 1;
+static int velInc = 3;
 static uint64_t savedGame = 0;
 
 
