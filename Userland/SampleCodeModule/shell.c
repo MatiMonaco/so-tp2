@@ -131,7 +131,7 @@ void shutdown(){
 
 void play_aracnoid(){
 	print_f("Starting the game \n");
-	init_game();
+	init();
 }
 
 void show_time(){
