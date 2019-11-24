@@ -6,6 +6,7 @@
 #include <time.h>
 #include <rtc.h>
 #include <lib.h>
+#include <soundDriver.h>
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2

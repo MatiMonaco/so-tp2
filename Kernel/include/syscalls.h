@@ -14,6 +14,7 @@ uint64_t sys_drawPixel(int64_t x, int64_t y, uint64_t color);
 uint64_t sys_clear();
 uint64_t sys_drawChar(int64_t x, int64_t y, char character, uint64_t fontColor,uint64_t backgroundColor);
 
+void _sti();
 /*
 
 uint64_t sys_drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t color);
