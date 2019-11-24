@@ -103,30 +103,6 @@ int main()
 	init_sound();
 	displayDateTime();
 	initializeSampleModule();
-	/*ncPrint("[Kernel Main]");
-	ncNewline();
-	GetCurrTime();
-	ncNewline();
-	ncPrint("  Sample code module at 0x");
-	ncPrintHex((uint64_t)sampleCodeModuleAddress);
-	ncNewline();
-	ncPrint("  Calling the sample code module returned: ");
-	ncPrintHex();
-	ncNewline();
-	ncNewline();
-
-	ncPrint("  Sample data module at 0x");
-	ncPrintHex((uint64_t)sampleDataModuleAddress);
-	ncNewline();
-	ncPrint("  Sample data module contents: ");
-	ncPrint((char*)sampleDataModuleAddress);
-	ncNewline();
-
-	ncPrint("[Finished]");
-
-	ncClear();
-	ncPrintWithColor("Arquitectura de Computadoras",0xf2);
-	ncNewline();
-	*/
+	
 	return 0;
 }

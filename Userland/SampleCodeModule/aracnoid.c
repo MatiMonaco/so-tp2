@@ -14,6 +14,7 @@ static void moveBall();
 static void movePlayer();
 static void printTime();
 static void throwBall();
+static void checkWin();
 
 #define SCREEN_WIDTH getScreenWidth()
 #define SCREEN_HEIGHT getScreenHeight()
@@ -199,7 +200,11 @@ static void loadLevel(){
 }
 
 
-
+static void checkWin(){
+	if(score == 1){
+		gameOver = 1;
+	}
+}
 
 
 static void play(){
@@ -218,8 +223,9 @@ static void play(){
 				startTime = getSeconds();
 				gameTimer++;
 				speedTimer++;
-				if(speedTimer >= 15){
-					beep(1);
+				if(speedTimer >= 5){
+					beep(1,1000);
+					beep(1,1000);
 					ball.xSpeed += velInc;
 					ball.ySpeed += velInc;
 					speedTimer = 0;
@@ -230,30 +236,34 @@ static void play(){
 			
 			
 		}
+			
+		if(gameOver == 1){
 		
-		if(gameOver){
-			uint64_t center = (getScreenWidth() - CHAR_WIDTH)/2;
-			char c;
-			if(score == WALL_ROWS * WALL_COLUMNS){
 				drawText("YOU WON!", 480,5 + CHAR_HEIGHT,WHITE,BLACK);
-			}
-			else{
+				beep(1,1000);
+				beep(2,200);
+				beep(1,1000);
+				beep(10,3000);
+			
+		}else if(gameOver == 2){
 				char finalScore[5];
 				intToBase(score,finalScore,10);
 				drawText("YOU LOST! Final Score was ", 400,5 + CHAR_HEIGHT,WHITE,BLACK);
 				drawText(finalScore, 400 + 26 * CHAR_WIDTH, 5 + CHAR_HEIGHT,WHITE,BLACK);
-			}
-			drawText("Press Enter to return to terminal",390, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
-
-			while((c = getchar()) != '\n');
-			clearScreen();
+				beep(1,600);
+				beep(10,300);
+			
 		}else if(key == SAVE_KEY){
 			clearScreen();
 			save();
-			
 		}else{
 			newGame();
-		}		
+		}
+		
+		drawText("Press Enter to return to terminal",390, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
+			char c;
+			while((c = getchar()) != '\n');
+			clearScreen();
 }
 
 static void printTime(){
@@ -268,6 +278,7 @@ static void printTime(){
 static void update(){
 		movePlayer();
 		moveBall();
+		checkWin();
 
 	
 }
@@ -332,7 +343,7 @@ static void moveBall(){
 				ball.c.x = SCREEN_WIDTH - ball.c.radius;
 				ball.xDir *=-1;
 			}else if(ball.c.y >= SCREEN_HEIGHT){
-				gameOver = 1;
+				gameOver = 2;
 				return;
 			}
 			checkBallCollisions();
@@ -347,7 +358,9 @@ static void moveBall(){
 
 static void checkBallCollisions(){
 	
-	checkRectCollision(player.r);
+	if(checkRectCollision(player.r)){
+		beep(1,3000);
+	}
 	for(int i = 0; i< WALL_ROWS;i++){
 		for(int j = 0; j < WALL_COLUMNS; j++){
 				Wall wall = walls[i][j];
@@ -378,7 +391,7 @@ static int checkRectCollision(Rectangle rec){
 		int isDown = (ballY + radius >= rec.y + rec.height) && (ballY - radius <= rec.y + rec.height);
 		int isUp =  ballY - radius <= rec.y && ballY + radius >= rec.y ;
 		if(isDown || isUp){
-		//	beep(1);
+		
 			ball.yDir *=-1;
 			return 1;
 		}
@@ -389,7 +402,7 @@ static int checkRectCollision(Rectangle rec){
 		int isLeft = (ballX - radius <= rec.x) && (ballX + radius >= rec.x);
 		int isRight = (ballX + radius >= rec.x + rec.width) && (ballX - radius <= rec.x + rec.width);
 		if(isLeft || isRight){
-		//	beep(1);
+		
 			ball.xDir *=-1;
 			return 1;
 		}

@@ -96,7 +96,7 @@ void keyboardHandler(){
 		char ascii = -1;
 		if(hasKeysToRead()){
 			ascii = buffer[readIndex++];
-		//	drawChar(ascii,0xFF0000,0X000000);
+	
 		}
 		return ascii;
 

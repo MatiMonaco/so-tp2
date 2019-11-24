@@ -26,7 +26,6 @@ void initShell(){
 	char parameter[MAX_LENGHT] = {0};
 
  printf("\nTerminal:\n\nPlease type 'help' to find out about our commands\n\n\n");
-	//printf("height: %d width: %d",getScreenHeight(),getScreenWidth());
 	while(1){
 	
 		printf("$> ");
