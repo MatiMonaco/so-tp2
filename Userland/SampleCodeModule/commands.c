@@ -86,10 +86,12 @@ void printMem(char* address){
     	}
 	}
 }
+
 void time(){
     callSyscall(TIME,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0);
     putchar('\n');
 }
+
 void aracnoid(){
 	if(hasSavedGame()){
 
@@ -117,8 +119,6 @@ void invalidopCodeException(){
 
 void zeroDivException(){
 	divisionByZero();
-}
-void exit(){
 }
 
 void clear(){

@@ -11,14 +11,13 @@ struct commandStruct{
 	
 };
 #define C_HELP 0
-#define C_EXIT 1
-#define C_TIME 2
-#define C_PRINTMEM 3
-#define C_INFOREG 4
-#define C_ARACNOID 5
-#define C_OPCODEEX 6
-#define C_ZERODIVEX 7
-#define C_CLEAR 8
+#define C_TIME 1
+#define C_PRINTMEM 2
+#define C_INFOREG 3
+#define C_ARACNOID 4
+#define C_OPCODEEX 5
+#define C_ZERODIVEX 6
+#define C_CLEAR 7
 
 
 void printMemASM(uint64_t address);
