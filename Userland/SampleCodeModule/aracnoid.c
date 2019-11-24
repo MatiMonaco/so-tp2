@@ -20,9 +20,9 @@ static void printTime();
 #define SCREEN_HEIGHT getScreenHeight()
 
 #define DEFAULT_RECT_WIDTH  100
-#define DEFAULT_RECT_HEIGHT 25
+#define DEFAULT_RECT_HEIGHT 15
 #define DEFAULT__PLAYER_X_POS  ((SCREEN_WIDTH / 2) - (DEFAULT_RECT_WIDTH) / 2)
-#define DEFAULT__PLAYER_Y_POS (SCREEN_HEIGHT - DEFAULT_RECT_HEIGHT)
+#define DEFAULT__PLAYER_Y_POS (SCREEN_HEIGHT - DEFAULT_RECT_HEIGHT) - 10
 #define DEFAULT_PLAYER_COLOR 0xF7DE52
 #define DEFAULT_PLAYER_X_SPEED 20
 
@@ -229,15 +229,15 @@ static void play(){
 			uint64_t center = (getScreenWidth() - CHAR_WIDTH)/2;
 			char c;
 			if(score == WALL_ROWS * WALL_COLUMNS){
-				drawText("YOU WON!", 480,5 + CHAR_HEIGHT,0xffffff,0x000000);
+				drawText("YOU WON!", 480,5,0xffffff,0x000000);
 			}
 			else{
 				char finalScore[5];
 				intToBase(score,finalScore,10);
-				drawText("YOU LOST! Final Score was ", 400,5 + CHAR_HEIGHT,0xffffff,0x000000);
-				drawText(finalScore, 400 + 26 * CHAR_WIDTH, 5 + CHAR_HEIGHT,0xffffff,0x000000);
+				drawText("YOU LOST! Final Score was ", 400,5,0xffffff,0x000000);
+				drawText(finalScore, 400 + 26 * CHAR_WIDTH, 5,0xffffff,0x000000);
 			}
-			drawText("Press Enter to return to terminal",390, 5 + 2*CHAR_HEIGHT,0xffffff,0x000000);
+			drawText("Press Enter to return to terminal",390, 5 + CHAR_HEIGHT,0xffffff,0x000000);
 
 			while((c = getchar()) != '\n');
 			clearScreen();
