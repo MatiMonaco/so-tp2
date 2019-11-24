@@ -1,7 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-void beep(int time);
+void beep(uint64_t time);
 
 
 #endif
