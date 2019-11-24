@@ -3,8 +3,8 @@
 
 void beep(int time){
   activateBeep();
-  int end = seconds_elapsed() + 1;
-  while(seconds_elapsed() < end);
+  int end = ticks_elapsed() + 2;
+  while(ticks_elapsed() < end);
   deactivateBeep();
   //newTimer(timer, deactivateBeep);
 }

@@ -6,11 +6,11 @@ init_sound:
 
     push rbp
     mov rbp, rsp
-    
+
     mov rax,0;    seteo el registro de rax todo en 0.
     mov al, 182; preparo al speaker para realizar el beep.
     out 0x43, al
-    mov ax, 9121; cargo la frecuencia.
+    mov ax, 4560; cargo la frecuencia.
     out 0x42, al; envio la parte baja del byte
     mov al, ah
     out 0x42, al; envio la parte alta
