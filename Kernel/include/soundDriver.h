@@ -2,7 +2,7 @@
 
 int beepasm();
 int unbeepasm();
-void beep(int timer);
+void beep(int ticks);
 void activateBeep();
 void deactivateBeep();
 
