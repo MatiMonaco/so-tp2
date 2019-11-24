@@ -33,3 +33,11 @@ void newTimer(int ticks, void (*callback)()){
 int seconds_elapsed() {
 	return ticks / 18;
 }
+
+void time_wait(int n_ticks){
+	_sti();
+	int goal_ticks = ticks + n_ticks;
+	while(ticks < goal_ticks){
+		_hlt();
+	}
+}
