@@ -16,3 +16,7 @@ void activateBeep(){
 void deactivateBeep(){
   unbeepasm();
 }
+
+void set_frequency(int frequency){
+  set_frequencyASM(1193180 / frequency);
+}

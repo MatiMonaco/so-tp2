@@ -1,6 +1,7 @@
 GLOBAL beepasm
 GLOBAL unbeepasm
 GLOBAL init_sound
+GLOBAL set_frequencyASM
 
 init_sound:
 
@@ -35,4 +36,18 @@ unbeepasm:
     in al, 0x61
     and al, 0xFC; apago los bits para apagar el beep.
     out 0x61, al
+    ret
+
+set_frequencyASM:
+
+    push rbp
+    mov rbp, rsp
+
+    mov ax, dx; cargo la frecuencia.
+    out 0x42, al; envio la parte baja del byte
+    mov al, ah
+    out 0x42, al; envio la parte alta
+
+    mov rsp, rbp
+    pop rbp
     ret
