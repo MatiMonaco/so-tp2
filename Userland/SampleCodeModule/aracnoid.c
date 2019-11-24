@@ -250,8 +250,10 @@ static void play(){
 				intToBase(score,finalScore,10);
 				drawText("YOU LOST! Final Score was ", 400,5 + CHAR_HEIGHT,WHITE,BLACK);
 				drawText(finalScore, 400 + 26 * CHAR_WIDTH, 5 + CHAR_HEIGHT,WHITE,BLACK);
-				beep(1,600);
-				beep(10,300);
+				beep(1,2000);
+				beep(2,3000);
+				beep(1,4000);
+				beep(10,5000);
 			
 		}else if(key == SAVE_KEY){
 			clearScreen();
