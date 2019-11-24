@@ -1,3 +1,9 @@
+
+
+#include <stdint.h>
+#include <call_int_80.h>
+
+
 #define WIDTH 1
 #define HEIGHT 2
 #define READ 3
@@ -10,3 +16,8 @@
 #define CLEAR 10
 #define SECONDS_ELAPSED 11
 #define ERROR -1
+
+void sys_write(char * string, int size);
+char sys_read(char * string, int size);
+void sys_beep(void);
+void sys_new_line(void);
