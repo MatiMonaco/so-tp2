@@ -2,6 +2,7 @@
 #include <syscalls.h>
 #include <kbDriver.h>
 #include <screenDriver.h>
+#include <video_vm.h>
 #include <time.h>
 #include <rtc.h>
 #include <lib.h>
@@ -72,10 +73,17 @@ uint64_t sys_beep(uint64_t timer){
 	
 
 
+
+/*
+uint64_t sys_drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color){
+	return drawCircle(x,y,radius,color);
+}
+
+
 uint64_t sys_drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t color){
 	return drawRect(x,y,width,height,color);
 }
-
+*/
 uint64_t sys_getHeight(){
 	return getScreenHeight();
 }
@@ -94,9 +102,6 @@ uint64_t sys_sleep(int ticks){
 	return 1;
 }
 
-uint64_t sys_drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color){
-	return drawCircle(x,y,radius,color);
-}
 
 uint64_t sys_time(){
 	displayDateTime();
@@ -110,4 +115,22 @@ uint64_t sys_clear(){
 
 uint64_t sys_seconds_elapsed(){
 	return seconds_elapsed();
+}
+
+
+uint64_t sys_drawPixel(int64_t x, int64_t y, uint64_t color){
+
+	if(x < 0 || y < 0|| x > getScreenWidth() || y > getScreenHeight()){
+		return 0;
+	}
+	drawPixel(x,y,color);
+	return 1;
+}
+
+uint64_t sys_drawChar(int64_t x, int64_t y, char character, uint64_t fontColor,uint64_t backgroundColor){
+	if(x < 0 || y < 0|| x > getScreenWidth() || y > getScreenHeight()){
+		return 0;
+	}
+	drawCharAt(x,y,character,fontColor,backgroundColor);
+	return 1;
 }

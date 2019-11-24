@@ -52,7 +52,7 @@ void init_VM_Driver() {
 	SCREEN_WIDTH = screenData->width;
 }
 
-void drawPixel(unsigned int x, unsigned int y, int color)
+void drawPixel(unsigned int x, unsigned int y,unsigned int color)
 {
     char* screen = screenData->framebuffer; 
     unsigned where = (x + y*SCREEN_WIDTH) * SCREEN_bPP;
@@ -76,7 +76,7 @@ unsigned int getScreenWidth(){
 unsigned int getScreenBPP(){
 	return screenData->bpp / 8;
 }
-void drawCharAt(int x, int y, char character, int fontColor, int backgroundColor){
+void drawCharAt(int x, int y, char character, unsigned int fontColor,unsigned int backgroundColor){
 	int aux_x = x;
 	int aux_y = y;
 	char bitIsPresent;

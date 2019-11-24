@@ -3,6 +3,7 @@
 #include <callSyscall.h>
 #include <timer.h>
 #include <soundModule.h>
+#include <libc.h>
 static void update();
 static void loadLevel();
 static void play();
@@ -12,7 +13,7 @@ static void checkBallCollisions();
 static int checkRectCollision(Rectangle rec);
 static void moveBall();
 static void movePlayer();
-
+static void printTime();
 
 
 #define SCREEN_WIDTH getScreenWidth()
@@ -195,16 +196,16 @@ static void loadLevel(){
 static void play(){
 		gameOver = 0;
 		
-		uint64_t startTime = getSeconds();
+		uint64_t oldTime = getSeconds();
 
 		char key;
 		while(!gameOver && !((key=getchar()) == SAVE_KEY) && !(key == RESTART_KEY) ){
 		
 			keyHandler(key);
-			update();
-			sleep(1);
-			if(getSeconds()- startTime == 1){
-				startTime = getSeconds();
+			update(oldTime);
+			if(getSeconds()- oldTime == 1){
+				
+				oldTime = getSeconds();
 				gameTimer++;
 				speedTimer++;
 				if(speedTimer >= 15){
@@ -214,6 +215,9 @@ static void play(){
 					speedTimer = 0;
 				}
 			}
+			printTime();
+			sleep(1);
+			
 			
 		}
 		
@@ -225,19 +229,24 @@ static void play(){
 			
 		}else{
 			newGame();
-		}
+		}		
+}
 
-		
-			
+static void printTime(){
+	char time[5];
+	intToBase(gameTimer,time,10);
+	drawText("Time: ",5,5,0xffffff,0x000000);
+	drawText(time,5 + 6*CHAR_WIDTH ,5,0xffffff,0x000000);
+
 }
 
 
-static void update(){
+static void update(uint64_t oldTime){
+		
 	
-		
-		
 		moveBall();
 		movePlayer();
+	
 }
 
 
