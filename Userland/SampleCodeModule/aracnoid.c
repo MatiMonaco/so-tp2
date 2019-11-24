@@ -194,7 +194,7 @@ static void play(){
 		uint64_t startTime = getSeconds();
 
 		char key;
-		while(!gameOver && !((key=getchar()) == 180) ){
+		while(!gameOver && !((key=getchar()) == 112) ){
 		
 			keyHandler(key);
 			update();

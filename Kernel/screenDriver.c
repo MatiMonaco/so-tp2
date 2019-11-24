@@ -16,7 +16,8 @@ void drawChar(char character, int fontColor, int backgroundColor){
 	if(character == '\n'){
 		newline();
 	}
-	else if(character == '\b' && y != 0){
+	else if(character == '\b' && (y > 0 || (y== 0 && x> 0))){
+	
 		deleteChar();
 	}
 	else{
