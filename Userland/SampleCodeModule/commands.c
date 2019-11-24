@@ -73,13 +73,18 @@ void infoReg(){
 }
 
 void printMem(char* address){
-    uint64_t dir = atoi(address);
-	printf("printmem:\n");
-    for(int i = 0; i < 32;i++,dir++){
-        printf("byte %d : ", i+1);
-        printMemASM(dir);
-        putchar('\n');
-    }
+	if(*address == 0){
+		perror("No address specified\n");
+	}
+	else{
+    	uint64_t dir = atoi(address);
+		printf("printmem:\n");
+    	for(int i = 0; i < 32;i++,dir++){
+    	    printf("byte %d : ", i+1);
+    	    printMemASM(dir);
+    	    putchar('\n');
+    	}
+	}
 }
 void time(){
     callSyscall(TIME,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0,(void*) 0);

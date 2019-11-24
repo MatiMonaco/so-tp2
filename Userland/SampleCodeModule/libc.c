@@ -81,5 +81,13 @@ uint64_t atoi(char* s){
             s++;
         }
     }
+    else{
+        num += (c - '0');
+        while(*s != 0){
+            num *= 10;
+            num += (*s - '0');
+            s++;
+        }
+    }
     return num;
 }
