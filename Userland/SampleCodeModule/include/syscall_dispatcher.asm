@@ -1,7 +1,9 @@
 
+#ifndef _SYSCALL_H
+#define _SYSCALL_H
 
 #include <stdint.h>
-#include <call_int_80.h>
+#include <callSyscall.h>
 
 
 #define WIDTH 1
