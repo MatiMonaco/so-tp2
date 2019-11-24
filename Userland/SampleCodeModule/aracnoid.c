@@ -41,6 +41,9 @@ static void movePlayer();
 #define DEFAULT_WALL_WIDTH 54
 #define DEFAULT_WALL_HEIGHT 20
 
+#define SAVE_KEY 112 //F1
+#define RESTART_KEY 'r'
+
 
 typedef struct PlayerStruct{
 	Rectangle r;
@@ -124,6 +127,7 @@ void newGame(){
 	score = 0;
 	gameTimer = 0;
 	speedTimer = 0;
+	savedGame = 0;
 	loadLevel();
 
 
@@ -157,7 +161,7 @@ void load(){
 				}
 		}
 		loadLevel();
-		}
+	}
 	
 
 }
@@ -194,7 +198,7 @@ static void play(){
 		uint64_t startTime = getSeconds();
 
 		char key;
-		while(!gameOver && !((key=getchar()) == 112) ){
+		while(!gameOver && !((key=getchar()) == SAVE_KEY) && !(key == RESTART_KEY) ){
 		
 			keyHandler(key);
 			update();
@@ -204,8 +208,6 @@ static void play(){
 				gameTimer++;
 				speedTimer++;
 				if(speedTimer >= 15){
-					beep(1);
-					beep(2);
 					beep(1);
 					ball.xSpeed += velInc;
 					ball.ySpeed += velInc;
@@ -217,10 +219,12 @@ static void play(){
 		
 		if(gameOver){
 				clearScreen();
-		}else{
+		}else if(key == SAVE_KEY){
 			clearScreen();
 			save();
 			
+		}else{
+			newGame();
 		}
 
 		
@@ -266,10 +270,10 @@ static void moveBall(){
 			ball.c.y = ball.c.radius;
 			ball.yDir *= -1;
 		}
-		if(ball.c.x - ball.c.radius <= 0){
+		if(ball.c.x - ball.c.radius <= 0 && ball.c.y +ball.c.radius <= SCREEN_HEIGHT - player.r.height){
 			ball.c.x = ball.c.radius;
 			ball.xDir *=-1;
-		}else if(ball.c.x + ball.c.radius >= SCREEN_WIDTH){
+		}else if(ball.c.x + ball.c.radius >= SCREEN_WIDTH && ball.c.y + ball.c.radius <= SCREEN_HEIGHT - player.r.height){
 			ball.c.x = SCREEN_WIDTH - ball.c.radius;
 			ball.xDir *=-1;
 		}else if(ball.c.y >= SCREEN_HEIGHT){

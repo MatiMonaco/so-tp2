@@ -98,8 +98,10 @@ void aracnoid(){
 		while((key = getchar()) != 'y' || key != 'n'){
 			if(key == 'y'){
 				load();
+				break;
 			}else if(key == 'n'){
 				newGame();
+				break;
 			}
 		}
 	}else{

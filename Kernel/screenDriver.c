@@ -62,10 +62,9 @@ void deleteChar(){
 }
 
 void drawString(const char *string){
-	while(*string != '\0'){
-		drawChar(*string,0xFFFFFF,0x000000);
-		string++;
-	}
+	
+	drawStringWithColor(string,0xFFFFFF,0x000000);
+
 }
 
 void drawStringWithColor(const char *string, int fontColor, int backgroundColor){
