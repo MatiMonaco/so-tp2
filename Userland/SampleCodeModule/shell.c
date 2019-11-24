@@ -119,29 +119,6 @@ static void commandNotFound(){
 }
 
 
-void invalid_command(){
-	print_f("Invalid command \n");
-}
-
-void shutdown(){
-	print_f("Thank you, powering off \n");
-	sys_sleep(10);
-	sys_clear_console();
-}
-
-void play_aracnoid(){
-	print_f("Starting the game \n");
-	init_game();
-}
-
-void show_time(){
-	print_time();
-}
-
-
-void make_beep(){
-	sys_beep();
-}
 
 static void clearBuffer(char * buffer){
 	while(*buffer){

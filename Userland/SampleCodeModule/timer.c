@@ -9,7 +9,7 @@ uint64_t getSeconds(){
 uint64_t sleep(uint64_t ticks){
 	return callSyscall(SLEEP,(void*)ticks,(void*)0,(void*)0,(void*)0,(void*)0,(void*)0);
 }
-
+/*
 tm get_time(){
   tm time;
   time.seconds=sys_time(SECONDS_SELECTOR);
@@ -21,3 +21,4 @@ tm get_time(){
   print_time(time);
   return time;
 }
+*/

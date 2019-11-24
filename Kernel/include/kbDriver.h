@@ -23,7 +23,7 @@ char getKeyASCII();
 #define RIGHT 26
 #define LEFT 27
 #define DOWN 25
-#define ESC 0
+#define ESC 180
 #define BACKSPACE '\b'
 #define TAB 0
 #define ENTER '\n'

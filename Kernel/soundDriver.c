@@ -1,8 +1,9 @@
 #include <soundDriver.h>
 #include <time.h>
 
-void beep(int ticks){
+void beep(uint64_t ticks){
   activateBeep();
+  	_sti();
   int end = ticks_elapsed() + ticks;
   while(ticks_elapsed() < end);
   deactivateBeep();

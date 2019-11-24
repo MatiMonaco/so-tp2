@@ -1,3 +1,4 @@
+/*
 #include <sound2.h>
 
 
@@ -29,3 +30,4 @@ void beep() {
   time_wait(10);
   soundOff();
 }
+*/

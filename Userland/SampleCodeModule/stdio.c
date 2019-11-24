@@ -2,7 +2,7 @@
 #include <string.h>
 #include <libc.h>
 #include <callSyscall.h>
-
+#include <soundModule.h>
 
 
 void putchar(char c){
@@ -60,21 +60,25 @@ int scanf(char*format,...){
 	int j = 0;
 	char buffer[MAX_LENGHT];
 	while((c = getchar()) != '\n' && j <MAX_LENGHT){
-
+		
 		if(c != 0){
 			if(c != '\b'){
 					buffer[j] = c;
-			
+					putchar(c);
+				
 					j++;
-				}else{
-			
+			}else{
+				if(j > 0){
 					j--;
+					putchar(c);
+				}else{
+					beep(1);
 				}
-				putchar(c);
+					
+			}
+				
 		}
-		
-		
-		
+			
 	}
 	buffer[j] = '\0';
 	//putchar('\n');

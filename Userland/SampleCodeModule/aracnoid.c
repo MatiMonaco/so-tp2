@@ -73,7 +73,7 @@ typedef struct GameStruct{
 static Game game ;
 static Player player;
 static Ball ball;
-static int velInc = 3;
+static int velInc = 1;
 static uint64_t savedGame = 0;
 
 
@@ -190,11 +190,11 @@ static void loadLevel(){
 
 static void play(){
 		gameOver = 0;
-
+		
 		uint64_t startTime = getSeconds();
 
 		char key;
-		while(!gameOver && !((key=getchar()) == 'g' || key == 'G') ){
+		while(!gameOver && !((key=getchar()) == 180) ){
 		
 			keyHandler(key);
 			update();
@@ -204,6 +204,9 @@ static void play(){
 				gameTimer++;
 				speedTimer++;
 				if(speedTimer >= 15){
+					beep(1);
+					beep(2);
+					beep(1);
 					ball.xSpeed += velInc;
 					ball.ySpeed += velInc;
 					speedTimer = 0;
@@ -314,7 +317,7 @@ static int checkRectCollision(Rectangle rec){
 		int isDown = (ballY + radius >= rec.y + rec.height) && (ballY - radius <= rec.y + rec.height);
 		int isUp =  ballY - radius <= rec.y && ballY + radius >= rec.y ;
 		if(isDown || isUp){
-			beep(5);
+		//	beep(1);
 			ball.yDir *=-1;
 			return 1;
 		}
@@ -325,7 +328,7 @@ static int checkRectCollision(Rectangle rec){
 		int isLeft = (ballX - radius <= rec.x) && (ballX + radius >= rec.x);
 		int isRight = (ballX + radius >= rec.x + rec.width) && (ballX - radius <= rec.x + rec.width);
 		if(isLeft || isRight){
-			beep(5);
+		//	beep(1);
 			ball.xDir *=-1;
 			return 1;
 		}

@@ -2,7 +2,7 @@
 
 int beepasm();
 int unbeepasm();
-void beep(int ticks);
+void beep(uint64_t ticks);
 void activateBeep();
 void deactivateBeep();
 void set_frequency(int frequency);

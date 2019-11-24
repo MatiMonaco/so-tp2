@@ -7,6 +7,7 @@
  unsigned int x = 0;
  unsigned int y = 0;
 
+
 static void fixScreen();
 static void scrollUp();
 
@@ -15,7 +16,7 @@ void drawChar(char character, int fontColor, int backgroundColor){
 	if(character == '\n'){
 		newline();
 	}
-	else if(character == '\b' && (x != 0 && x != 0)){
+	else if(character == '\b' && y != 0){
 		deleteChar();
 	}
 	else{
@@ -40,6 +41,7 @@ void newline(){
 	
 	}
 	x = 0;
+	
 }
 
 void deleteChar(){
