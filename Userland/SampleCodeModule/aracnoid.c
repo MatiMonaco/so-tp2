@@ -70,6 +70,7 @@ typedef struct GameStruct{
 	Wall  walls[WALL_ROWS][WALL_COLUMNS];
 	uint64_t gameTimer;
 	uint64_t speedTimer;
+	uint64_t score;
 }Game;
 
 
@@ -140,6 +141,7 @@ void save(){
 	game.ball = ball;
 	game.gameTimer = gameTimer;
 	game.speedTimer = speedTimer;
+	game.score = score;
 		for(int i = 0; i < 19; i++){
 			for(int j = 0; j < WALL_ROWS;j++){
 					game.walls[i][j]= walls[i][j];
@@ -156,6 +158,7 @@ void load(){
 		
 		gameTimer = game.gameTimer;
 		speedTimer = game.speedTimer;
+		score = game.score;
 		for(int i = 0; i < 19; i++){
 			for(int j = 0; j < WALL_ROWS;j++){
 					walls[i][j] = game.walls[i][j];
@@ -194,6 +197,7 @@ static void loadLevel(){
 
 
 static void play(){
+	
 		gameOver = 0;
 		
 		uint64_t oldTime = getSeconds();
@@ -222,7 +226,21 @@ static void play(){
 		}
 		
 		if(gameOver){
-				clearScreen();
+			uint64_t center = (getScreenWidth() - CHAR_WIDTH)/2;
+			char c;
+			if(score == WALL_ROWS * WALL_COLUMNS){
+				drawText("YOU WON!", 480,5 + CHAR_HEIGHT,0xffffff,0x000000);
+			}
+			else{
+				char finalScore[5];
+				intToBase(score,finalScore,10);
+				drawText("YOU LOST! Final Score was ", 400,5 + CHAR_HEIGHT,0xffffff,0x000000);
+				drawText(finalScore, 400 + 26 * CHAR_WIDTH, 5 + CHAR_HEIGHT,0xffffff,0x000000);
+			}
+			drawText("Press Enter to return to terminal",390, 5 + 2*CHAR_HEIGHT,0xffffff,0x000000);
+
+			while((c = getchar()) != '\n');
+			clearScreen();
 		}else if(key == SAVE_KEY){
 			clearScreen();
 			save();

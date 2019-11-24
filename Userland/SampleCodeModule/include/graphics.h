@@ -2,7 +2,7 @@
 #define GRAPHICS_H
 #include <stdint.h>
 #define CHAR_WIDTH 8
-
+#define CHAR_HEIGHT 16
 uint64_t drawRect(int64_t x,int64_t y,uint64_t width,uint64_t height,int64_t color);
 const uint64_t getScreenHeight();
 const uint64_t getScreenWidth();
