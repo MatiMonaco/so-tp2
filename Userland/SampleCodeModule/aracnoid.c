@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <callSyscall.h>
 #include <timer.h>
+#include <soundModule.h>
 static void update();
 static void loadLevel();
 static void play();
@@ -290,6 +291,7 @@ static void checkBallCollisions(){
 				if(wall.hit == 0){
 					hit = checkRectCollision(wall.r);
 					if(hit == 1){
+						
 						walls[i][j].hit = 1;
 						score++;
 						drawRect(wall.r.x, wall.r.y, wall.r.width,wall.r.height,0x000000);
@@ -312,6 +314,7 @@ static int checkRectCollision(Rectangle rec){
 		int isDown = (ballY + radius >= rec.y + rec.height) && (ballY - radius <= rec.y + rec.height);
 		int isUp =  ballY - radius <= rec.y && ballY + radius >= rec.y ;
 		if(isDown || isUp){
+			beep(5);
 			ball.yDir *=-1;
 			return 1;
 		}
@@ -322,6 +325,7 @@ static int checkRectCollision(Rectangle rec){
 		int isLeft = (ballX - radius <= rec.x) && (ballX + radius >= rec.x);
 		int isRight = (ballX + radius >= rec.x + rec.width) && (ballX - radius <= rec.x + rec.width);
 		if(isLeft || isRight){
+			beep(5);
 			ball.xDir *=-1;
 			return 1;
 		}
