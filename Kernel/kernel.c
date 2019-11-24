@@ -102,7 +102,6 @@ int main()
 	initRTC();
 	init_sound();
 	displayDateTime();
-	beep(1);
 	initializeSampleModule();
 	/*ncPrint("[Kernel Main]");
 	ncNewline();
