@@ -41,13 +41,11 @@ void sys_reset_cursor(){
 
 
 void sys_new_line(){
-	_call_int_80((uint64_t) NEW_LINE, 0, 0, 0, 0, 0);
+	callSyscall((uint64_t) NEW_LINE, 0, 0, 0, 0, 0);
 }
 
-void sys_sleep(int ticks){
-  _call_int_80((uint64_t) SLEEP,(uint64_t) ticks,0,0,0,0);
-}
+
 
 void sys_beep(){
-  _call_int_80(BEEP,0,0,0,0,0);
+  callSyscall(BEEP,0,0,0,0,0);
 }
