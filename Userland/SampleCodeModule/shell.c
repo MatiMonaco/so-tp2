@@ -10,8 +10,7 @@ static void commandNotFound();
 static int64_t getCommandId(char * buffer);
 static void help();
 
-static struct commandStruct commands[] = {{C_EXIT,"exit","Exits shell",0},
-										{C_TIME,"time","Displays current time",0},
+static struct commandStruct commands[] = {{C_TIME,"time","Displays current time",0},
 										{C_PRINTMEM,"printmem","Performs a 32-byte memory dump from the address received as an argument",1},
 										{C_INFOREG,"inforeg","Prints the value of all the registers",0},
 										{C_ARACNOID,"aracnoid","Iniciates aracnoid, press 'space' to leave",0},
@@ -49,10 +48,6 @@ static void commandDispacher(char* command,char*parameter){
 
 		case C_HELP:
 			help();
-		break;
-
-		case C_EXIT:
-			exit();
 		break;
 
 		case C_TIME:
