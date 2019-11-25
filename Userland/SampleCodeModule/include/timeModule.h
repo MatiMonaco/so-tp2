@@ -1,3 +1,7 @@
+
+
+#ifndef TIME_MODULE_H
+#define TIME_MODULE_H
 #include <stdint.h>
 uint64_t getSeconds();
 uint64_t sleep(uint64_t ticks);
@@ -21,3 +25,4 @@ typedef struct{
 
 void print_time();
 tm get_time();
+#endif

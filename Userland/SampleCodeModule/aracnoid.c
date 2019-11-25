@@ -1,7 +1,7 @@
 #include <aracnoid.h>
 #include <stdio.h>
 #include <callSyscall.h>
-#include <timer.h>
+#include <timeModule.h>
 #include <soundModule.h>
 #include <libc.h>
 static void update();
