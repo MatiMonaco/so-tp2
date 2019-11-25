@@ -62,6 +62,7 @@ void reverse(char str[], int length)
     } 
 } 
 
+// convierte string en hexadecimal o decimal a numero
 uint64_t atoi(char* s){
     char c = *s++;
     int num = 0;
