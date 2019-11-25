@@ -69,7 +69,7 @@ int scanf(char*format,...){
 					j--;
 					putchar(c);
 				}else{
-					beep(1,1);
+					beep(1,2000);
 				}
 					
 			}
