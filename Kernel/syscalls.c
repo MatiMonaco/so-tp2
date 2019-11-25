@@ -71,19 +71,6 @@ uint64_t sys_beep(uint64_t timer,int64_t frequency){
   	return 1;
 }
 	
-
-
-
-/*
-uint64_t sys_drawCircle(uint64_t x,uint64_t y,uint64_t radius,uint64_t color){
-	return drawCircle(x,y,radius,color);
-}
-
-
-uint64_t sys_drawRect(uint64_t x,uint64_t y,uint64_t width,uint64_t height,uint64_t color){
-	return drawRect(x,y,width,height,color);
-}
-*/
 uint64_t sys_getHeight(){
 	return getScreenHeight();
 }
