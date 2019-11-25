@@ -138,9 +138,10 @@ void newGame(){
 	gameTimer = 0;
 	speedTimer = 0;
 	savedGame = 0;
+	
 	loadLevel();
-
-
+	drawText("Press Space to throw de ball",340, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
+	play();
 }
 
 
@@ -175,6 +176,7 @@ void load(){
 				}
 		}
 		loadLevel();
+		play();
 	}
 	
 
@@ -199,7 +201,7 @@ static void loadLevel(){
 	}
 	drawCircle(ball.c.x, ball.c.y, ball.c.radius, ball.c.color);
 	drawRect(player.r.x, player.r.y, player.r.width,player.r.height,player.r.color);	
-	play();
+	
 }
 
 
@@ -214,7 +216,7 @@ static void play(){
 	
 		gameOver = 0;
 		
-		drawText("Press Space to throw de ball",340, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
+		
 
 		char key;
 		while(!gameOver && !((key=getchar()) == SAVE_KEY) && !(key == RESTART_KEY) ){
@@ -240,6 +242,7 @@ static void play(){
 			
 		}
 		if(gameOver){
+
 			if(gameOver == WIN){
 						drawText("YOU WON!", 480,5 + CHAR_HEIGHT,WHITE,BLACK);
 						beep(1,1000);
@@ -260,7 +263,7 @@ static void play(){
 		
 			
 			}
-
+			savedGame = 0;
 			drawText("Press Enter to return to terminal or R to restart",320, 5 + 2*CHAR_HEIGHT,WHITE,BLACK);
 			char c;
 			while((c = getchar()) != '\n'){
