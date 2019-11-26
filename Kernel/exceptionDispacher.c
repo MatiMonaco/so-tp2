@@ -24,16 +24,16 @@ void exceptionDispatcher(int exception_id,uint64_t * instructionPointer, uint64_
 
 void printRegisters(uint64_t * instructionPointer, uint64_t * stackPointer){
 	char* registers[] = {"R15","R14","R13","R12","R11","R10","R9","R8","RSI","RDI","RBP","RDX","RCX","RBX","RAX"};
-	char IP[65];
-	intToBase(*instructionPointer,IP,2);
+	char IP[10];
+	intToBase(*instructionPointer,IP,16);
 	drawString("instruction Pointer: ");
 	drawString(IP);
 	drawChar('\n',0xffffff,0x000000);
-	char reg[65];
+	char reg[10];
 	for(int i = 14; i >= 0; i--){
 		drawString(registers[i]);
 		drawString(" : ");
-		intToBase(*(stackPointer + i),reg,2);
+		intToBase(*(stackPointer + i),reg,16);
 		drawString(reg);
 		drawChar('\n',0xffffff,0x000000);
 	}

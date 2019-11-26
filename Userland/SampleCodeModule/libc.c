@@ -8,6 +8,10 @@ char* intToBase(int num, char* str, int base)
     /* Handle 0 explicitely, otherwise empty string is printed for 0 */
     if (num == 0) 
     { 
+        if(base == 16){
+            str[i++] = '0';
+            str[i++] = 'x';
+        }
         str[i++] = '0'; 
         str[i] = '\0'; 
         return str; 
@@ -33,6 +37,11 @@ char* intToBase(int num, char* str, int base)
     if (isNegative) 
         str[i++] = '-'; 
   
+      // If base = 16 append 0x
+    if (base == 16){
+        str[i++] = 'x';
+        str[i++] = '0';
+    }
     str[i] = '\0'; // Append string terminator 
   
     // Reverse the string 

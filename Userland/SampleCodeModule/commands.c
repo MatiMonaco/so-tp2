@@ -9,63 +9,63 @@
 
 void infoReg(){
 		printf("Registro RAX: ");
-		printBin(getRegister(RAX));
+		printHexa(getRegister(RAX));
 		putchar('\n');
 
 		printf("Registro RBX: ");
-		printBin(getRegister(RBX));
+		printHexa(getRegister(RBX));
 		putchar('\n');
 
 		printf("Registro RCX: ");
-		printBin(getRegister(RCX));
+		printHexa(getRegister(RCX));
 		putchar('\n');
 
 		printf("Registro RDX: ");
-		printBin(getRegister(RDX));
+		printHexa(getRegister(RDX));
 		putchar('\n');
 
 		printf("Registro RBP: ");
-		printBin(getRegister(RBP));
+		printHexa(getRegister(RBP));
 		putchar('\n');
 
 		printf("Registro RDI: ");
-		printBin(getRegister(RDI));
+		printHexa(getRegister(RDI));
 		putchar('\n');
 
 		printf("Registro RSI: ");
-		printBin(getRegister(RSI));
+		printHexa(getRegister(RSI));
 		putchar('\n');
 
 		printf("Registro R8: ");
-		printBin(getRegister(R8));
+		printHexa(getRegister(R8));
 		putchar('\n');
 
 		printf("Registro R9: ");
-		printBin(getRegister(R9));
+		printHexa(getRegister(R9));
 		putchar('\n');
 
 		printf("Registro R10: ");
-		printBin(getRegister(R10));
+		printHexa(getRegister(R10));
 		putchar('\n');
 
 		printf("Registro R11: ");
-		printBin(getRegister(R11));
+		printHexa(getRegister(R11));
 		putchar('\n');
 
 		printf("Registro R12: ");
-		printBin(getRegister(R12));
+		printHexa(getRegister(R12));
 		putchar('\n');
 
 		printf("Registro R13: ");
-		printBin(getRegister(R13));
+		printHexa(getRegister(R13));
 		putchar('\n');
 
 		printf("Registro R14: ");
-		printBin(getRegister(R14));
+		printHexa(getRegister(R14));
 		putchar('\n');
 
 		printf("Registro R15: ");
-		printBin(getRegister(R15));
+		printHexa(getRegister(R15));
 		putchar('\n');
 }
 

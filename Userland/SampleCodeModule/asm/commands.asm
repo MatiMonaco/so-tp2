@@ -1,7 +1,7 @@
 GLOBAL printMemASM
 GLOBAL getRegister
 
-EXTERN printBin
+EXTERN printHexa
 section .text:
 		
 
@@ -116,7 +116,7 @@ printMemASM:
 	mov al,byte[rdi]
 	mov rdi,0
 	mov dil,al
-	call printBin
+	call printHexa
 
 	mov rsp,rbp
 	pop rbp
